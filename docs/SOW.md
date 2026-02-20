@@ -10,16 +10,16 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Statement of Work (SOW) defines the scope, deliverables, milestones, roles, and responsibilities for the Hamza Boss - Solis project.
+This Statement of Work (SOW) defines the scope, deliverables, milestones, responsibilities, and processes for the development of the Solis project for Hamza Boss.
 
 ### 1.2 Background
-The project aims to develop a secure, scalable software platform for aerospace & defense industry client Hamza Boss, hosted on AWS, with an initial budget of $50,000.
+The project aims to develop a secure, scalable aerospace industry platform within a budget of $50,000, addressing core operational needs.
 
 ### 1.3 Objectives
 
-- Establish project scope and requirements
-- Provision AWS infrastructure
-- Deliver core project management features
+- Deliver a secure, functional web-based system supporting aerospace workflows
+- Ensure compliance with security standards
+- Complete within the agreed budget
 
 ## 2. Scope of Work
 
@@ -27,71 +27,61 @@ The project aims to develop a secure, scalable software platform for aerospace &
 
 | Item | Description |
 |------|-------------|
-| Requirements clarification sessions | Initial meetings to define detailed scope |
-| AWS infrastructure setup | Provision and configure cloud environment |
-| Development of project management tools | Scope, milestones, reporting features |
+| User authentication and role management | Implement secure login and role-based permissions |
+| Data security and backup | Encrypt data and perform daily backups |
+| Workflow management | Enable task creation, assignment, and tracking |
 
 ### 2.2 Out of Scope
 
 | Item | Reason |
 |------|--------|
-| Third-party system integrations | Not included in initial scope |
-| Long-term maintenance and support | Post-deployment activities |
+| Hardware procurement | Client provides existing infrastructure |
+| Long-term maintenance and support | Post-deployment support is outside current scope |
 
 ### 2.3 Assumptions
 
-- Client will provide detailed requirements in a timely manner
-- AWS environment will be available and accessible
+- Client will provide necessary access and data
+- Requirements will be clarified during planning
 
 ## 3. Deliverables
 
 | ID | Deliverable | Description | Phase |
 |----|-------------|-------------|-------|
-| D-001 | Project Management Platform | A web-based platform for project scope, milestones, and tracking | mvp |
-| D-002 | AWS Infrastructure Setup | Provisioned and configured AWS environment for deployment | mvp |
-| D-003 | Status Reporting System | Automated reporting system for project updates | phase2 |
+| D-001 | System Design Document | Detailed architecture and technical specifications | mvp |
+| D-002 | Developed System | Fully functional web application with core features | mvp |
+| D-003 | Deployment & User Training | System deployment and user onboarding | - |
 
 ### 3.1 Acceptance Criteria
 
-**D-001: Project Management Platform**
-- Functionality aligns with specifications
-- User acceptance testing completed
+**D-001: System Design Document**
+- Reviewed and approved by client
 
-**D-002: AWS Infrastructure Setup**
-- Environment is accessible and secure
-- Documentation provided
+**D-002: Developed System**
+- Successful testing and client acceptance
 
-**D-003: Status Reporting System**
-- Reports generated correctly
-- Scheduled reports delivered
+**D-003: Deployment & User Training**
+- Deployment completed
+- Training sessions conducted
 
 ## 4. Milestones
 
-### M-001: Requirements Finalization
+### M-001: Design Approval
 
-**Description:** Completion of initial requirements gathering and scope agreement
-
-**Associated Deliverables:**
-- D-001
-- D-002
-
-### M-002: Infrastructure Deployment
-
-**Description:** AWS environment provisioned and tested
-
-**Associated Deliverables:**
-- D-002
-
-### M-003: Initial System Delivery
-
-**Description:** Core project management platform deployed and operational
+**Description:** Client reviews and approves system design document
 
 **Associated Deliverables:**
 - D-001
 
-### M-004: Reporting System Deployment
+### M-002: Development Completion
 
-**Description:** Automated reporting system deployed and tested
+**Description:** Core system features developed and internally tested
+
+**Associated Deliverables:**
+- D-002
+
+### M-003: Deployment and Acceptance
+
+**Description:** System deployed in production and accepted by client
 
 **Associated Deliverables:**
 - D-003
@@ -100,15 +90,15 @@ The project aims to develop a secure, scalable software platform for aerospace &
 
 ### 5.1 Provider Responsibilities
 
-- Develop and deploy project management tools
-- Provision and configure AWS environment
-- Provide documentation and support during deployment
+- Design system architecture
+- Develop core functionalities
+- Conduct testing and deployment
 
 ### 5.2 Client Responsibilities
 
-- Provide detailed requirements and feedback
-- Review and approve deliverables
-- Ensure timely communication
+- Provide access and data
+- Review deliverables
+- Approve milestones
 
 ## 6. Communication Plan
 
@@ -116,23 +106,22 @@ The project aims to develop a secure, scalable software platform for aerospace &
 
 | Type | Frequency | Participants |
 |------|-----------|--------------|
-| Kickoff | Once | Hamza Farooq, Muhammad Hanan Asghar |
-| Status Updates | Bi-weekly | Project team, Client |
-| Review | At milestones | All stakeholders |
+| Status Update | Bi-weekly | Hamza Farooq, Hamza Boss |
+| Design Review | At milestone completion | Client, Development team |
 
 ### 6.2 Reporting
 Progress reports via email and project management tools
 
 ### 6.3 Escalation Process
-Issues escalated to project manager and client contacts as needed
+Issues escalated to project sponsor if unresolved within 3 days
 
 ## 7. Change Management
 
 ### 7.1 Change Request Process
-Formal change requests must be submitted in writing and approved by both parties
+All change requests must be documented and approved by both parties before implementation
 
 ### 7.2 Impact Assessment
-All change requests will be analyzed for scope, schedule, and cost impact before approval
+Assess impact on scope, schedule, and budget before approval
 
 ---
 
