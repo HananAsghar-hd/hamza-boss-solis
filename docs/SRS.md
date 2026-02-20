@@ -1,4 +1,4 @@
-# Software Requirements Specification
+# Software Requirements Specification - Solis Platform
 
 **Project:** Hamza Boss - Solis
 **Version:** 1.0
@@ -10,173 +10,554 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document provides a detailed technical specification for the development of the Solis project, ensuring clear understanding of functional and non-functional requirements for the development team.
+This Software Requirements Specification (SRS) document provides a comprehensive technical specification for the Solis platform, a custom software solution designed for Hamza Boss, an aerospace and defense organization. This document serves as the primary reference for the development team and establishes the technical foundation for system design, implementation, and testing.
 
 ### 1.2 Scope
-The scope includes the development of a secure, scalable software system tailored for the aerospace and defense industry, supporting core workflows, user management, data security, and performance features within a budget of $50,000.
+Solis is an enterprise-grade web-based platform designed to support aerospace and defense industry workflows for a mid-sized organization of 45 employees. The system will provide secure, compliant, and scalable functionality within a budget constraint of $50,000 AUD. The platform will be delivered in phases, with an MVP focusing on core functionality and subsequent phases adding advanced features and integrations.
 
 ### 1.3 Definitions, Acronyms, and Abbreviations
 
 | Term | Definition |
 |------|------------|
-| MVP | Minimum Viable Product, the initial version with core functionalities. |
-| Stakeholder | Any individual or organization with an interest in the project, including clients, users, and sponsors. |
+| Solis | The name of the software platform being developed for Hamza Boss |
+| MVP | Minimum Viable Product - the initial release containing core functionality |
+| Aerospace and Defense Workflows | Industry-specific processes including project management, compliance tracking, document management, and resource allocation |
+| RBAC | Role-Based Access Control - security model that restricts system access based on user roles |
+| AES-256 | Advanced Encryption Standard with 256-bit key length, industry standard for data encryption |
+| API | Application Programming Interface - set of protocols for building and integrating application software |
+| SaaS | Software as a Service - cloud-based software delivery model |
 
 ### 1.4 References
 
-- Project Requirements Analysis Document
-- Industry Best Practices for Aerospace Software Development
+- Australian Privacy Principles (APP)
+- ISO/IEC 27001 Information Security Management
+- OWASP Top 10 Security Risks
+- Web Content Accessibility Guidelines (WCAG) 2.1
+- Australian Government Information Security Manual (ISM)
 
 ### 1.5 Overview
-This specification outlines the system's overall architecture, detailed functional requirements, external interfaces, and non-functional constraints to guide development and ensure alignment with project goals.
+This document is organized into sections covering overall system description, specific system features, external interface requirements, and non-functional requirements. Each functional requirement includes detailed acceptance criteria, inputs, processing logic, and expected outputs to guide implementation and testing.
 
 ## 2. Overall Description
 
 ### 2.1 Product Perspective
-The system will be a standalone web-based application designed to integrate with existing client infrastructure if needed, supporting aerospace and defense workflows with secure data management.
+Solis is a new, standalone web-based platform designed specifically for Hamza Boss's aerospace and defense operations. The system will be built using modern cloud-native architecture and will integrate with existing tools (potentially including ClickUp) to enhance rather than replace current workflows. The platform will be hosted on enterprise-grade cloud infrastructure (AWS/Azure) to ensure security, scalability, and compliance with industry standards.
 
 ### 2.2 Product Functions
 
-- User authentication and authorization
-- Role-based access control
-- Secure data storage and backup
-- Workflow management tailored for aerospace projects
-- Reporting and audit trail capabilities
+- Secure user authentication and role-based access control
+- Project and workflow management tailored for aerospace and defense operations
+- Document management with version control and compliance tracking
+- Resource allocation and capacity planning
+- Reporting and analytics dashboard
+- Audit logging and compliance reporting
+- Integration capabilities with third-party tools
+- Notification and communication system
+- Data export and backup functionality
 
 ### 2.3 User Classes and Characteristics
 
-**End Users**
-- Description: Personnel within the client organization who will use the system for daily operations.
+**System Administrator**
+- Description: IT personnel responsible for system configuration and user management
 - Characteristics:
-  - Tech-savvy
-  - Requires secure access
+  - Technical proficiency with enterprise software
+  - Understanding of security and compliance requirements
+  - Authority to manage user access and system settings
+  - Estimated 1-2 users
 
-**Administrators**
-- Description: Personnel responsible for system configuration, user management, and maintenance.
+**Project Manager**
+- Description: Personnel managing aerospace and defense projects
 - Characteristics:
-  - Technical expertise
-  - Access to all system features
+  - Moderate technical proficiency
+  - Deep understanding of aerospace/defense workflows
+  - Need for comprehensive project visibility and reporting
+  - Estimated 5-8 users
+
+**Engineer/Technical Staff**
+- Description: Software engineers and technical personnel executing project work
+- Characteristics:
+  - High technical proficiency
+  - Need for efficient task management and collaboration tools
+  - Focus on execution rather than administration
+  - Estimated 25-30 users
+
+**Management/Executive**
+- Description: Leadership requiring high-level visibility and reporting
+- Characteristics:
+  - Varying technical proficiency
+  - Need for executive dashboards and KPI tracking
+  - Focus on strategic decision-making
+  - Estimated 3-5 users
+
+**Compliance Officer**
+- Description: Personnel responsible for regulatory compliance and auditing
+- Characteristics:
+  - Understanding of aerospace/defense regulations
+  - Need for audit trails and compliance reporting
+  - Focus on risk management and documentation
+  - Estimated 2-3 users
 
 ### 2.4 Operating Environment
-The system will operate as a web application accessible via modern browsers on desktops and tablets. Backend services will run on cloud infrastructure supporting scalability and security.
+Solis will operate as a cloud-based SaaS application accessible via modern web browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+). The system will be hosted on enterprise cloud infrastructure (AWS or Azure) in Australian data centers to ensure data sovereignty. The platform will be responsive and accessible from desktop computers, tablets, and mobile devices. Minimum client requirements: 8GB RAM, stable internet connection (5+ Mbps), modern web browser with JavaScript enabled.
 
 ### 2.5 Design and Implementation Constraints
 
-- No specific technology stack constraints are mandated
-- Must support up to 100 concurrent users initially
+- Budget constraint of $50,000 AUD limits scope to MVP plus essential features
+- Must use cloud-native architecture for cost-effectiveness and scalability
+- Must comply with Australian data protection and privacy laws
+- Must implement industry-standard security practices for aerospace/defense sector
+- Must be accessible via web browsers without requiring client-side installations
+- Development timeline must accommodate budget constraints
+- Must use open-source or cost-effective licensed technologies where possible
+- Must design for future scalability to 90+ users without major refactoring
 
 ### 2.6 Assumptions and Dependencies
 
-- Client will provide necessary access and data for development
-- Potential integration with existing client systems will be minimal or as specified
+- Hamza Farooq has authority to approve requirements and design decisions
+- Client will provide timely feedback during development iterations
+- Client has existing internet infrastructure capable of supporting cloud-based application
+- No specialized aerospace/defense certifications (ITAR, EAR) are required for MVP
+- Client will provide test data and participate in user acceptance testing
+- Standard business hours support (9 AM - 5 PM AEST) is sufficient
+- Client will handle end-user training using provided documentation and materials
+- Third-party API access (e.g., ClickUp) will be available if integration is required
+- Client has internal IT resources for basic user support post-deployment
 
 ## 3. System Features
 
-### 3.1 SF-001: User Authentication and Role Management
+### 3.1 SF-001: User Authentication and Authorization
 
-**Description:** Implement secure login, user registration, and role-based permissions.
+**Description:** Secure user authentication system with role-based access control (RBAC) to ensure only authorized personnel can access sensitive aerospace and defense information.
 **Priority:** high
 
 **Functional Requirements:**
 
-**FR-001**: The system shall authenticate users via username and password, supporting multi-factor authentication.
-- *Inputs:* User credentials
-- *Processing:* Verify credentials against stored user data, enforce MFA if enabled
-- *Outputs:* Access granted or denied message
+**FR-001**: System shall provide secure user login with email and password
+- *Inputs:* User email address, password, optional two-factor authentication code
+- *Processing:* Validate credentials against encrypted database, verify 2FA if enabled, create secure session token, log authentication attempt
+- *Outputs:* Authentication success/failure, session token, user profile data, redirect to dashboard
 - *Acceptance Criteria:*
-  - Users can log in with valid credentials
-  - Invalid login attempts are limited and logged
+  - User can successfully log in with valid credentials
+  - Invalid credentials display appropriate error message
+  - Account locks after 5 failed login attempts
+  - Session expires after 8 hours of inactivity
+  - All authentication attempts are logged with timestamp and IP address
 
-**FR-002**: The system shall assign roles to users with specific permissions.
-- *Inputs:* User role assignment data
-- *Processing:* Assign permissions based on role definitions
-- *Outputs:* User role and permission set
+**FR-002**: System shall support role-based access control with predefined roles
+- *Inputs:* User role assignment, requested resource/action
+- *Processing:* Check user role permissions against requested resource, enforce access rules, log access attempts
+- *Outputs:* Access granted/denied, appropriate error message if denied
 - *Acceptance Criteria:*
-  - Roles can be created, modified, and assigned
-  - Permissions restrict access appropriately
+  - System supports minimum 5 distinct roles: Admin, Project Manager, Engineer, Executive, Compliance Officer
+  - Each role has clearly defined permissions
+  - Users can only access features and data permitted by their role
+  - Administrators can modify role permissions
+  - Permission changes take effect immediately
 
-### 3.2 SF-002: Data Security and Backup
+**FR-003**: System shall provide password reset functionality
+- *Inputs:* User email address
+- *Processing:* Validate email exists, generate secure reset token, send email with reset link, validate token on reset page
+- *Outputs:* Password reset email, password update confirmation
+- *Acceptance Criteria:*
+  - User receives password reset email within 2 minutes
+  - Reset link expires after 1 hour
+  - New password must meet complexity requirements (12+ characters, mixed case, numbers, special characters)
+  - User receives confirmation email after successful password reset
+  - Old password cannot be reused
 
-**Description:** Ensure data is stored securely with regular backups and recovery options.
+### 3.2 SF-002: Project Management Dashboard
+
+**Description:** Centralized dashboard for managing aerospace and defense projects with real-time visibility into project status, tasks, resources, and timelines.
 **Priority:** high
 
 **Functional Requirements:**
 
-**FR-003**: All sensitive data shall be encrypted at rest and in transit.
-- *Inputs:* User data, system data
-- *Processing:* Apply encryption protocols (e.g., TLS, AES)
-- *Outputs:* Encrypted data storage and transmission
+**FR-004**: System shall provide project creation and configuration capabilities
+- *Inputs:* Project name, description, start date, end date, assigned team members, project type, priority level
+- *Processing:* Validate inputs, create project record, assign unique project ID, initialize project workspace, notify team members
+- *Outputs:* Project created confirmation, project ID, project dashboard access
 - *Acceptance Criteria:*
-  - Encryption standards comply with industry best practices
-  - Data breaches are mitigated
+  - Project manager can create new project in under 2 minutes
+  - All required fields are validated before submission
+  - Project ID is automatically generated and unique
+  - Team members receive notification within 5 minutes of assignment
+  - Project appears in relevant dashboards immediately
 
-**FR-004**: The system shall perform daily backups and support data recovery.
-- *Inputs:* Backup schedule and data snapshots
-- *Processing:* Automate backup process, store backups securely
-- *Outputs:* Restored data upon request
+**FR-005**: System shall display real-time project status dashboard
+- *Inputs:* User role, selected filters (date range, project type, status)
+- *Processing:* Query project data, aggregate metrics, apply role-based filtering, format for display
+- *Outputs:* Dashboard with project list, status indicators, key metrics, visual charts
 - *Acceptance Criteria:*
-  - Backups are completed successfully daily
-  - Data can be restored within acceptable timeframes
+  - Dashboard loads within 3 seconds
+  - Shows active projects, completed projects, and overdue tasks
+  - Displays key metrics: total projects, completion rate, resource utilization
+  - Visual indicators (red/yellow/green) for project health
+  - Data refreshes automatically every 5 minutes
 
-### 3.3 SF-003: Workflow Management
+**FR-006**: System shall support task creation and assignment within projects
+- *Inputs:* Task name, description, assignee, due date, priority, estimated hours, dependencies
+- *Processing:* Validate inputs, create task record, link to project, notify assignee, update project timeline
+- *Outputs:* Task created confirmation, task ID, updated project view
+- *Acceptance Criteria:*
+  - Tasks can be created and assigned in under 1 minute
+  - Assignee receives notification immediately
+  - Task appears in assignee's task list within 30 seconds
+  - Dependencies prevent task completion until prerequisites are met
+  - Task status can be updated by assignee or project manager
 
-**Description:** Support aerospace-specific workflows for project management and task tracking.
+### 3.3 SF-003: Document Management System
+
+**Description:** Secure document repository with version control, access controls, and compliance tracking for aerospace and defense documentation.
+**Priority:** high
+
+**Functional Requirements:**
+
+**FR-007**: System shall support secure document upload and storage
+- *Inputs:* Document file, document metadata (title, description, category, classification level), access permissions
+- *Processing:* Validate file type and size, scan for malware, encrypt file, store in secure repository, create metadata record, apply access controls
+- *Outputs:* Upload confirmation, document ID, document access URL
+- *Acceptance Criteria:*
+  - Supports common file types: PDF, DOCX, XLSX, PNG, JPG (max 50MB per file)
+  - Upload completes within 30 seconds for files under 10MB
+  - All files are encrypted at rest using AES-256
+  - Document metadata is searchable immediately after upload
+  - Access controls are enforced on all document access attempts
+
+**FR-008**: System shall maintain document version history
+- *Inputs:* Updated document file, version notes
+- *Processing:* Create new version record, preserve previous version, update metadata, notify relevant users
+- *Outputs:* New version confirmation, version history display, change notification
+- *Acceptance Criteria:*
+  - All previous versions are retained and accessible
+  - Version history shows date, user, and change notes
+  - Users can view and download any previous version
+  - Current version is clearly indicated
+  - Version comparison feature available for text documents
+
+**FR-009**: System shall provide document search and filtering
+- *Inputs:* Search query, filters (date range, document type, category, owner)
+- *Processing:* Search document metadata and content, apply filters, rank results by relevance, apply access controls
+- *Outputs:* Filtered and sorted document list with previews
+- *Acceptance Criteria:*
+  - Search returns results within 2 seconds
+  - Full-text search available for PDF and DOCX files
+  - Results respect user access permissions
+  - Advanced filters available for date, type, category, and owner
+  - Search supports Boolean operators (AND, OR, NOT)
+
+### 3.4 SF-004: Resource Management
+
+**Description:** Resource allocation and capacity planning tools to optimize team utilization and project staffing.
 **Priority:** medium
 
 **Functional Requirements:**
 
-**FR-005**: Users shall be able to create, assign, and track tasks within projects.
-- *Inputs:* Task details, user assignments
-- *Processing:* Create task records, notify assignees, update status
-- *Outputs:* Updated task status and notifications
+**FR-010**: System shall track resource allocation across projects
+- *Inputs:* Resource assignments, time allocations, availability calendars
+- *Processing:* Calculate total allocation per resource, identify over-allocation, generate utilization reports
+- *Outputs:* Resource allocation dashboard, utilization metrics, over-allocation warnings
 - *Acceptance Criteria:*
-  - Tasks can be created with required fields
-  - Status updates are reflected in real-time
+  - Shows resource allocation as percentage of capacity
+  - Identifies resources allocated over 100% capacity
+  - Displays allocation across multiple projects simultaneously
+  - Updates in real-time as assignments change
+  - Supports weekly and monthly views
+
+**FR-011**: System shall provide capacity planning tools
+- *Inputs:* Project requirements, resource skills, availability constraints
+- *Processing:* Match requirements to available resources, calculate capacity gaps, suggest optimal assignments
+- *Outputs:* Capacity planning report, resource recommendations, gap analysis
+- *Acceptance Criteria:*
+  - Identifies skill gaps for upcoming projects
+  - Shows available capacity by role and skill set
+  - Provides what-if scenario planning
+  - Generates capacity reports for 3-month planning horizon
+  - Highlights resource conflicts and bottlenecks
+
+### 3.5 SF-005: Reporting and Analytics
+
+**Description:** Comprehensive reporting and analytics capabilities for project performance, resource utilization, and compliance tracking.
+**Priority:** medium
+
+**Functional Requirements:**
+
+**FR-012**: System shall generate standard project reports
+- *Inputs:* Report type selection, date range, filters
+- *Processing:* Query relevant data, aggregate metrics, format report, apply visualizations
+- *Outputs:* Formatted report (PDF/Excel), interactive dashboard, email delivery option
+- *Acceptance Criteria:*
+  - Supports minimum 10 standard report types
+  - Reports generate within 10 seconds for typical data volumes
+  - Export available in PDF and Excel formats
+  - Reports can be scheduled for automatic generation
+  - Visual charts and graphs included in reports
+
+**FR-013**: System shall provide executive dashboard with KPIs
+- *Inputs:* User role, selected time period
+- *Processing:* Calculate KPIs, aggregate data across projects, format for executive view
+- *Outputs:* Executive dashboard with key metrics, trend charts, status summaries
+- *Acceptance Criteria:*
+  - Dashboard displays 8-12 key performance indicators
+  - Shows trends over time with visual charts
+  - Provides drill-down capability to detailed data
+  - Updates automatically with latest data
+  - Customizable to show role-relevant metrics
+
+### 3.6 SF-006: Compliance and Audit Logging
+
+**Description:** Comprehensive audit logging and compliance tracking to meet aerospace and defense industry requirements.
+**Priority:** high
+
+**Functional Requirements:**
+
+**FR-014**: System shall log all user actions and system events
+- *Inputs:* User action, system event, timestamp, user ID, IP address, affected resources
+- *Processing:* Capture event details, encrypt log entry, store in tamper-proof log database, index for searching
+- *Outputs:* Audit log entry, searchable audit trail
+- *Acceptance Criteria:*
+  - All user authentication attempts are logged
+  - All data access and modifications are logged
+  - All administrative actions are logged
+  - Logs include timestamp, user, action, and affected resources
+  - Logs are retained for minimum 7 years
+  - Logs are tamper-proof and encrypted
+
+**FR-015**: System shall provide compliance reporting capabilities
+- *Inputs:* Report type, date range, compliance framework
+- *Processing:* Query audit logs, aggregate compliance metrics, identify gaps, format report
+- *Outputs:* Compliance report, gap analysis, remediation recommendations
+- *Acceptance Criteria:*
+  - Generates audit trail reports for specified time periods
+  - Identifies potential compliance violations
+  - Supports export for external auditors
+  - Shows user access patterns and anomalies
+  - Provides evidence for compliance certifications
+
+### 3.7 SF-007: Notification System
+
+**Description:** Configurable notification system to keep users informed of important events and updates.
+**Priority:** medium
+
+**Functional Requirements:**
+
+**FR-016**: System shall send email notifications for key events
+- *Inputs:* Event trigger, recipient list, notification template, priority level
+- *Processing:* Detect event, identify recipients based on roles and preferences, format notification, send via email
+- *Outputs:* Email notification, in-app notification badge
+- *Acceptance Criteria:*
+  - Notifications sent within 5 minutes of triggering event
+  - Users can configure notification preferences
+  - Supports notifications for: task assignments, due dates, project updates, document changes
+  - Email templates are professional and branded
+  - Users can opt-out of non-critical notifications
+
+**FR-017**: System shall provide in-app notification center
+- *Inputs:* User ID, notification filters
+- *Processing:* Retrieve user notifications, mark read/unread status, apply filters, sort by date
+- *Outputs:* Notification list, unread count badge, notification details
+- *Acceptance Criteria:*
+  - Notification center accessible from all pages
+  - Shows unread count badge on icon
+  - Notifications can be marked as read/unread
+  - Notifications retained for 90 days
+  - Supports filtering by type and date
+
+### 3.8 SF-008: Integration Framework
+
+**Description:** API and integration capabilities to connect with third-party tools and systems.
+**Priority:** low
+
+**Functional Requirements:**
+
+**FR-018**: System shall provide RESTful API for external integrations
+- *Inputs:* API request with authentication token, request parameters
+- *Processing:* Validate authentication, authorize request, process request, format response
+- *Outputs:* JSON response with requested data or operation result
+- *Acceptance Criteria:*
+  - API supports CRUD operations for key entities
+  - API uses OAuth 2.0 for authentication
+  - API responses follow REST conventions
+  - API documentation available via Swagger/OpenAPI
+  - Rate limiting implemented (1000 requests/hour per client)
+
+**FR-019**: System shall support ClickUp integration (Phase 2)
+- *Inputs:* ClickUp API credentials, sync configuration
+- *Processing:* Authenticate with ClickUp API, sync tasks and projects bidirectionally, handle conflicts
+- *Outputs:* Synchronized tasks, sync status report, error notifications
+- *Acceptance Criteria:*
+  - Tasks sync from ClickUp to Solis automatically
+  - Updates in Solis reflect in ClickUp within 5 minutes
+  - Conflict resolution rules are configurable
+  - Sync errors are logged and reported
+  - Manual sync trigger available
+
+### 3.9 SF-009: User Profile Management
+
+**Description:** User profile management capabilities for maintaining user information and preferences.
+**Priority:** medium
+
+**Functional Requirements:**
+
+**FR-020**: System shall allow users to manage their profiles
+- *Inputs:* Profile updates (name, email, phone, avatar, preferences)
+- *Processing:* Validate inputs, update user record, refresh session data, log changes
+- *Outputs:* Profile update confirmation, updated profile display
+- *Acceptance Criteria:*
+  - Users can update their own profile information
+  - Email changes require verification
+  - Profile photo upload supported (max 5MB, JPG/PNG)
+  - Notification preferences are configurable
+  - Changes are reflected immediately across the system
+
+### 3.10 SF-010: Data Export and Backup
+
+**Description:** Data export capabilities and automated backup functionality for business continuity.
+**Priority:** medium
+
+**Functional Requirements:**
+
+**FR-021**: System shall support data export in multiple formats
+- *Inputs:* Export request, data selection, format preference (CSV, Excel, PDF)
+- *Processing:* Query selected data, format according to export type, generate file, provide download link
+- *Outputs:* Downloadable export file, export completion notification
+- *Acceptance Criteria:*
+  - Supports export of projects, tasks, documents metadata, and reports
+  - Export formats: CSV, Excel, PDF
+  - Large exports processed asynchronously with email notification
+  - Export includes all visible data based on user permissions
+  - Export history tracked for audit purposes
+
+**FR-022**: System shall perform automated daily backups
+- *Inputs:* Scheduled backup trigger
+- *Processing:* Create full database backup, encrypt backup file, store in redundant locations, verify backup integrity
+- *Outputs:* Backup completion log, backup verification report
+- *Acceptance Criteria:*
+  - Automated backups run daily at 2 AM AEST
+  - Backups encrypted using AES-256
+  - Backups stored in geographically redundant locations
+  - Backup retention: daily for 30 days, weekly for 90 days
+  - Backup integrity verified automatically
+  - Restore capability tested quarterly
 
 ## 4. External Interface Requirements
 
 ### 4.1 User Interfaces
 
-- Responsive web interface accessible via modern browsers
+- Web-based responsive interface accessible via modern browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+- Dashboard-style layout with navigation sidebar and main content area
+- Consistent design system following Material Design or similar modern UI framework
+- Mobile-responsive design supporting tablets and smartphones (minimum 768px width)
+- Accessibility compliance with WCAG 2.1 Level AA standards
+- Dark mode support for reduced eye strain
+- Customizable dashboard widgets and layouts per user role
+- Contextual help and tooltips throughout the interface
+- Breadcrumb navigation for deep page hierarchies
+- Keyboard shortcuts for power users
 
 ### 4.2 Hardware Interfaces
 
-- No specific hardware interfaces; cloud-based backend
+- No specialized hardware interfaces required
+- Standard computer hardware (desktop, laptop, tablet) with modern web browser
+- Minimum client specifications: 8GB RAM, dual-core processor, 1920x1080 display recommended
+- Stable internet connection required (minimum 5 Mbps recommended)
+- Webcam and microphone optional for future video conferencing features
 
 ### 4.3 Software Interfaces
 
-- **Client's existing systems**: Potential integration points with client infrastructure, details to be clarified
+- **Cloud Infrastructure (AWS/Azure)**: Hosting platform providing compute, storage, and networking services. System will use managed services for database (RDS/Azure SQL), object storage (S3/Blob Storage), and application hosting (EC2/App Service).
+- **Email Service (SendGrid/AWS SES)**: SMTP service for sending transactional emails including notifications, password resets, and reports. API integration for reliable email delivery with tracking.
+- **Authentication Service**: OAuth 2.0 / OpenID Connect for secure authentication. May integrate with Azure AD or similar enterprise identity provider if required.
+- **ClickUp API (Phase 2)**: RESTful API integration for bidirectional task and project synchronization. Requires ClickUp API credentials and webhook configuration.
+- **Document Storage Service**: Cloud object storage (S3/Azure Blob) for secure document storage with encryption at rest and versioning capabilities.
+- **Monitoring and Logging Service**: Application performance monitoring (APM) and centralized logging using CloudWatch/Azure Monitor or similar service for system health tracking.
 
 ### 4.4 Communications Interfaces
 
-- HTTPS for secure communication
-- REST API for integrations
+- HTTPS (TLS 1.3) for all client-server communications
+- RESTful API over HTTPS for external integrations
+- WebSocket connections for real-time notifications and updates
+- SMTP over TLS for email communications
+- OAuth 2.0 for API authentication
+- JSON format for API request/response payloads
+- Webhook support for event-driven integrations
 
 ## 5. Non-Functional Requirements
 
 ### 5.1 Performance
 
-- Page load time shall be under 3 seconds under typical load
+- Page load time: 95% of pages load within 3 seconds on standard broadband connection
+- API response time: 95% of API calls respond within 500ms
+- Database query performance: 95% of queries complete within 100ms
+- Concurrent users: System supports 50 concurrent users without performance degradation
+- Search performance: Search results return within 2 seconds for typical queries
+- Report generation: Standard reports generate within 10 seconds
+- File upload: Documents up to 10MB upload within 30 seconds
+- Dashboard refresh: Real-time data updates within 5 seconds of change
 
 ### 5.2 Security
 
-- System shall comply with ISO 27001 standards
+- All data encrypted in transit using TLS 1.3
+- All data encrypted at rest using AES-256
+- Password complexity requirements: minimum 12 characters, mixed case, numbers, special characters
+- Multi-factor authentication available for all users
+- Session timeout after 8 hours of inactivity
+- Account lockout after 5 failed login attempts
+- Role-based access control (RBAC) enforced on all resources
+- SQL injection prevention through parameterized queries
+- Cross-site scripting (XSS) prevention through input sanitization
+- Cross-site request forgery (CSRF) protection on all forms
+- Regular security scanning and vulnerability assessments
+- Compliance with OWASP Top 10 security best practices
+- Secure API authentication using OAuth 2.0
+- Audit logging of all security-relevant events
+- Data backup encryption using AES-256
 
 ### 5.3 Reliability
 
-- System shall have 99.9% uptime
+- System uptime: 99.5% availability during business hours (9 AM - 5 PM AEST, Monday-Friday)
+- Mean time between failures (MTBF): 720 hours minimum
+- Mean time to recovery (MTTR): 4 hours maximum for critical issues
+- Automated health checks every 5 minutes
+- Graceful degradation: System remains partially functional during component failures
+- Data integrity: Zero data loss during normal operations
+- Transaction rollback on failure to maintain data consistency
+- Automated failover for critical components
+- Regular backup verification and restore testing
 
 ### 5.4 Availability
 
-- System shall be accessible 24/7 with minimal downtime
+- System available 99.5% during business hours (9 AM - 5 PM AEST, Monday-Friday)
+- Planned maintenance windows: Maximum 4 hours per month, scheduled outside business hours
+- Unplanned downtime: Maximum 2 hours per month
+- Disaster recovery: System recoverable within 24 hours of catastrophic failure
+- Backup retention: 30 days daily, 90 days weekly
+- Geographic redundancy: Data replicated across multiple availability zones
+- Load balancing for high availability
+- Database replication for failover capability
 
 ### 5.5 Maintainability
 
-- Codebase shall follow best practices for maintainability and be well-documented
+- Modular architecture enabling independent component updates
+- Comprehensive API documentation using OpenAPI/Swagger
+- Code documentation following industry standards
+- Automated testing with minimum 80% code coverage
+- Continuous integration/continuous deployment (CI/CD) pipeline
+- Version control using Git with branching strategy
+- Centralized logging for troubleshooting
+- Configuration management for environment-specific settings
+- Database migration scripts for schema changes
+- Monitoring dashboards for system health visibility
 
 ### 5.6 Portability
 
-- The system shall support deployment on cloud infrastructure with minimal configuration changes
+- Browser-based access eliminates client-side installation requirements
+- Cloud-agnostic architecture enabling migration between AWS and Azure
+- Containerized deployment using Docker for consistency across environments
+- Database abstraction layer enabling database platform changes
+- API-first design enabling integration with various systems
+- Standards-based authentication (OAuth 2.0) for identity provider flexibility
+- Responsive design supporting various screen sizes and devices
+- Export capabilities in standard formats (CSV, Excel, PDF)
 
 ---
 
