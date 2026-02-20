@@ -8,11 +8,11 @@
 
 ## Project Overview
 
-**Technology Summary:** React.js frontend, Python FastAPI backend, PostgreSQL, Redis, Docker, Kubernetes on AWS, CI/CD via GitHub Actions, monitoring with CloudWatch and Prometheus, logging with ELK Stack.
+**Technology Summary:** Full-stack aerospace workflow management system utilizing Python (FastAPI), React.js, AWS cloud infrastructure, and modern DevOps practices.
 
 **Complexity Level:** high
 
-**Recommended Team Size:** 4-6 developers
+**Recommended Team Size:** 5-8 developers
 
 ## Required Skills
 
@@ -20,39 +20,37 @@
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| React.js | intermediate to advanced | critical | Building rich, responsive UI components |
-| Material-UI | intermediate | important | UI component library |
+| React.js | intermediate to advanced | critical | Core UI framework, Redux for state management, Material-UI for components |
 
 ### Backend
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| Python (FastAPI) | intermediate to advanced | critical | API development, async support |
-| SQLAlchemy | intermediate | important | ORM for PostgreSQL |
-| Pydantic | intermediate | important | Data validation |
+| Python (FastAPI) | intermediate to advanced | critical | Asynchronous support, JWT auth, ORM with SQLAlchemy |
 
 ### Database
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| PostgreSQL | intermediate | critical | Relational database management |
-| Redis | intermediate | important | Caching layer |
+| PostgreSQL | intermediate | critical | Relational database, supports complex queries |
+| Redis | intermediate | important | Caching, session management |
+| Elasticsearch (optional) | basic to intermediate | nice-to-have | Advanced search capabilities in future phases |
 
 ### DevOps
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| Docker | intermediate | important | Containerization for development and deployment |
-| Kubernetes (EKS) | intermediate | critical | Orchestration and deployment |
+| Docker | intermediate | important | Containerization for local and CI/CD environments |
+| Kubernetes (EKS) | basic to intermediate | critical | Orchestration of microservices |
 | GitHub Actions | intermediate | critical | CI/CD pipelines |
-| Monitoring & Logging (CloudWatch, Prometheus, ELK) | basic to intermediate | important | Operational visibility |
+| Monitoring & Logging | basic | important | AWS CloudWatch, ELK Stack, Prometheus/Grafana |
 
 ### Soft Skills
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
 | Communication | - | critical | Clear documentation and team collaboration |
-| Problem-solving | - | critical | Troubleshooting and debugging |
+| Problem Solving | - | critical | Troubleshooting and debugging |
 
 ## Team Composition
 
@@ -60,56 +58,56 @@
 
 | Role | Count | Key Skills | Seniority |
 |------|-------|------------|-----------|
-| Tech Lead | 1 | Architecture, Code review, Technical decisions | Senior |
-| Frontend Developer | 2 | React.js, Material-UI, Testing | Mid/Senior |
-| Backend Developer | 2 | FastAPI, Python, SQLAlchemy, PostgreSQL | Mid/Senior |
-| DevOps Engineer | 1 | Kubernetes, Docker, CI/CD, Monitoring | Mid/Senior |
+| Tech Lead | 1 | Architecture, Code review, Security best practices | Senior/Staff |
+| Backend Developer | 2 | FastAPI, Python, Database, Security | Mid/Senior |
+| Frontend Developer | 2 | React.js, Redux, UI/UX | Mid/Senior |
+| DevOps Engineer | 1 | Kubernetes, CI/CD, Monitoring | Mid/Senior |
 | QA Engineer | 1 | Test automation, Manual testing | Mid |
 
 ### Optional Roles
 
-- **Security Specialist** (1) - For security audits and compliance
+- **Security Specialist** (1) - For advanced security audits
   - Key Skills: Security best practices, Vulnerability assessment
 
 ## Skill Development
 
 ### Learning Resources
 
-**React:**
+**React.js:**
 - Official React docs
 - React patterns course
 
-**Kubernetes:**
-- Kubernetes.io tutorials
-- Cloud native courses
+**FastAPI:**
+- FastAPI official docs
+- Async Python tutorials
 
-**AWS:**
-- AWS Training and Certification
+**Kubernetes:**
+- Kubernetes official docs
+- EKS tutorials
 
 ### Recommended Certifications
 
 | Certification | Relevance |
 |---------------|-----------|
 | AWS Certified Solutions Architect | Cloud infrastructure and architecture |
-| Certified Kubernetes Administrator (CKA) | Container orchestration |
+| Certified Kubernetes Administrator (CKA) | Kubernetes management |
 
 ## Knowledge Transfer
 
-**Onboarding Duration:** 1-2 weeks
+**Onboarding Duration:** 2-3 weeks
 
 ### Key Areas
 
 - Codebase walkthrough
-- Architecture overview
-- Deployment pipeline
-- Operational procedures
+- Architecture and infrastructure overview
+- Development and deployment workflows
+- Security practices
 
 ### Documentation to Review
 
-- Architecture documents
-- API specs
-- CI/CD setup guides
-- Security policies
+- Architecture diagrams
+- API documentation
+- Onboarding and setup guides
 
 ---
 
