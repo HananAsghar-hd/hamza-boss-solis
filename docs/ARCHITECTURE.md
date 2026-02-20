@@ -1,4 +1,4 @@
-# Technical Architecture Document
+# Technical Architecture Document - Solis Platform
 
 **Project:** Hamza Boss - Solis
 **Version:** 1.0
@@ -23,245 +23,525 @@
 
 ## Executive Summary
 
-The proposed architecture for Solis is a scalable, secure, and maintainable web-based platform leveraging cloud infrastructure. It adopts a microservices style to ensure flexibility, scalability, and isolated security boundaries, supporting aerospace-specific workflows with role-based access and data security.
+Solis will be built as a modern, cloud-native web application using a monolithic architecture for the MVP to optimize development speed and cost-effectiveness within the $50,000 AUD budget. The system will leverage AWS cloud services for hosting, with a React frontend, Django REST Framework backend, and PostgreSQL database. This architecture provides a solid foundation for the current 45-user organization while being designed to scale to 90+ users without major refactoring. Security and compliance are built into every layer, with comprehensive audit logging, encryption, and role-based access control meeting aerospace and defense industry standards.
 
 ### Key Decisions
-- Use cloud-native services (AWS) for scalability and security
-- Implement microservices architecture for modularity and scalability
-- Choose React for frontend for responsiveness and developer productivity
-- Use Python with FastAPI for backend APIs for performance and rapid development
+- Monolithic architecture for MVP to reduce complexity and development time while maintaining clear module boundaries for future microservices migration
+- AWS as cloud provider for mature services, strong security features, and Australian data center availability ensuring data sovereignty
+- Django REST Framework for rapid development, built-in security features, excellent ORM, and strong ecosystem for enterprise applications
+- React for frontend to provide modern, responsive UI with component reusability and strong developer ecosystem
+- PostgreSQL for reliability, ACID compliance, advanced features, and excellent performance for structured data
+- Docker containerization for consistent deployment across environments and future scalability options
 
 ### Technology Highlights
-- React.js for frontend UI
-- FastAPI (Python) for backend API services
-- PostgreSQL for relational data storage
-- Redis for caching and session management
-- AWS cloud services (EC2, RDS, S3, CloudFront)
-- OAuth2 with JWT for authentication
-- Kubernetes for container orchestration
+- React 18 with TypeScript for type-safe, maintainable frontend code
+- Django 4.2 LTS with Django REST Framework for robust, secure backend API
+- PostgreSQL 15 for enterprise-grade data storage with full ACID compliance
+- AWS ECS Fargate for serverless container orchestration reducing operational overhead
+- Redis for session management and caching to optimize performance
+- AWS S3 for secure, scalable document storage with versioning
+- GitHub Actions for CI/CD automation ensuring code quality and rapid deployment
 
 ## System Architecture
 
-**Architecture Style:** microservices
+**Architecture Style:** monolithic
 
 ### Architecture Overview
 
-The system comprises a frontend web application communicating via RESTful APIs with multiple backend microservices hosted on Kubernetes clusters. Data is stored in PostgreSQL, with Redis used for caching and session management. External integrations occur via secure REST APIs, and the system is deployed on AWS cloud infrastructure with CDN and storage services.
+The system follows a three-tier architecture: (1) Presentation Layer - React SPA served via CloudFront CDN, communicating with backend via REST API over HTTPS; (2) Application Layer - Django application running in ECS Fargate containers behind Application Load Balancer, handling business logic, authentication, and API endpoints; (3) Data Layer - PostgreSQL RDS for structured data, Redis ElastiCache for sessions/caching, S3 for document storage. All components reside in AWS VPC with private subnets for databases and public subnets for load balancers. CloudWatch provides monitoring and logging across all layers. The architecture uses AWS Secrets Manager for credential management and AWS Certificate Manager for SSL/TLS certificates.
 
 ### System Components
 
-#### Frontend Web Application
+#### Frontend Application (React SPA)
 
-**Purpose:** Provide user interface for end-users and administrators
+**Purpose:** User interface providing all client-side functionality
 
 **Responsibilities:**
-- Render UI
-- Handle user interactions
-- Communicate with backend APIs
+- Render responsive UI for all user roles and features
+- Handle user interactions and form validations
+- Communicate with backend API via REST calls
+- Manage client-side state and routing
+- Display real-time notifications and updates
+- Implement role-based UI rendering
 
-**Technologies:** React.js, TypeScript, Redux
+**Technologies:** React 18, TypeScript, Material-UI (MUI) component library, React Router for navigation, Axios for API calls, React Query for data fetching and caching, Formik for form management, Chart.js for data visualization
+
+#### API Gateway / Load Balancer
+
+**Purpose:** Route incoming requests and provide SSL termination
+
+**Responsibilities:**
+- SSL/TLS termination
+- Request routing to backend containers
+- Health checks for backend instances
+- Load distribution across multiple containers
+- DDoS protection via AWS Shield
+
+**Technologies:** AWS Application Load Balancer (ALB), AWS Certificate Manager for SSL certificates, AWS WAF for web application firewall
+
+#### Backend API (Django Application)
+
+**Purpose:** Core business logic and API endpoints
+
+**Responsibilities:**
+- Authenticate and authorize all requests
+- Implement business logic for all features
+- Validate and process API requests
+- Interact with database and cache layers
+- Generate and send notifications
+- Create and manage audit logs
+- Handle file uploads to S3
+- Generate reports and analytics
+
+**Technologies:** Django 4.2 LTS, Django REST Framework, Python 3.11, Celery for asynchronous tasks, Django Channels for WebSocket support, Gunicorn as WSGI server, Boto3 for AWS service integration
 
 #### Authentication Service
 
-**Purpose:** Manage user login, MFA, and token issuance
+**Purpose:** Handle user authentication and session management
 
 **Responsibilities:**
-- Authenticate users
-- Issue JWT tokens
-- Support MFA
+- Validate user credentials
+- Generate and validate JWT tokens
+- Manage user sessions in Redis
+- Implement password reset flows
+- Handle account lockout logic
+- Log all authentication events
+- Support future 2FA implementation
 
-**Technologies:** OAuth2, JWT, FastAPI
+**Technologies:** Django authentication system, Django REST Framework JWT, Redis for session storage, Argon2 for password hashing
 
-#### User Management & Authorization Service
+#### Authorization Service
 
-**Purpose:** Manage roles, permissions, and user profiles
-
-**Responsibilities:**
-- Assign roles
-- Enforce access control
-
-**Technologies:** FastAPI, PostgreSQL
-
-#### Workflow & Project Management Service
-
-**Purpose:** Handle task creation, updates, and project workflows
+**Purpose:** Enforce role-based access control
 
 **Responsibilities:**
-- Create/update tasks
-- Track progress
-- Notify users
+- Check user permissions for requested resources
+- Implement RBAC logic for 5+ roles
+- Cache permission checks for performance
+- Log authorization decisions
+- Support hierarchical permissions
 
-**Technologies:** FastAPI, PostgreSQL
+**Technologies:** Django permissions framework, Django Guardian for object-level permissions, Redis for permission caching
 
-#### Data Security & Backup Module
+#### Project Management Module
 
-**Purpose:** Encrypt data, perform backups, and support recovery
+**Purpose:** Handle all project and task management functionality
 
 **Responsibilities:**
-- Encrypt data at rest and in transit
-- Automate backups
-- Restore data as needed
+- CRUD operations for projects and tasks
+- Calculate project status and health indicators
+- Track task dependencies and completion
+- Generate project dashboards and views
+- Send notifications for project events
+- Support filtering and search
 
-**Technologies:** TLS, AES encryption, AWS RDS automated backups
+**Technologies:** Django models and views, Django REST Framework serializers, PostgreSQL for data storage, Redis for caching dashboard data
+
+#### Document Management Module
+
+**Purpose:** Manage document storage, versioning, and access
+
+**Responsibilities:**
+- Handle document uploads to S3
+- Implement version control logic
+- Manage document metadata in database
+- Enforce access controls on documents
+- Support document search and filtering
+- Generate pre-signed URLs for secure access
+
+**Technologies:** Django models and views, Boto3 for S3 integration, PostgreSQL for metadata, S3 for file storage with versioning enabled
+
+#### Resource Management Module
+
+**Purpose:** Track resource allocation and capacity
+
+**Responsibilities:**
+- Calculate resource allocation percentages
+- Identify over-allocated resources
+- Generate capacity planning reports
+- Support weekly and monthly views
+- Track resource skills and availability
+
+**Technologies:** Django models and views, PostgreSQL for data storage, Pandas for data analysis, Redis for caching calculations
+
+#### Reporting and Analytics Module
+
+**Purpose:** Generate reports and analytics dashboards
+
+**Responsibilities:**
+- Execute report queries and aggregate data
+- Generate PDF and Excel exports
+- Create visual charts and graphs
+- Support scheduled report generation
+- Calculate KPIs for executive dashboard
+- Implement drill-down capabilities
+
+**Technologies:** Django views and Celery tasks, ReportLab for PDF generation, OpenPyXL for Excel generation, PostgreSQL for data queries, Redis for caching report data
+
+#### Audit Logging Service
+
+**Purpose:** Comprehensive logging of all system activities
+
+**Responsibilities:**
+- Log all user actions with context
+- Encrypt and store logs securely
+- Provide searchable audit interface
+- Generate compliance reports
+- Implement 7-year retention policy
+- Ensure tamper-proof logging
+
+**Technologies:** Django middleware for automatic logging, PostgreSQL for log storage, AWS CloudWatch Logs for system logs, Elasticsearch for log search (Phase 2)
+
+#### Notification Service
+
+**Purpose:** Send email and in-app notifications
+
+**Responsibilities:**
+- Queue notification messages
+- Send email notifications via SES
+- Store in-app notifications in database
+- Manage user notification preferences
+- Track notification delivery status
+- Implement notification templates
+
+**Technologies:** Celery for async processing, AWS SES for email delivery, Django templates for email formatting, PostgreSQL for notification storage, Django Channels for real-time push
+
+#### Background Task Processor
+
+**Purpose:** Handle asynchronous and scheduled tasks
+
+**Responsibilities:**
+- Process async tasks (reports, emails, backups)
+- Execute scheduled tasks (daily backups, cleanup)
+- Retry failed tasks with exponential backoff
+- Monitor task queue health
+- Scale workers based on queue depth
+
+**Technologies:** Celery, Redis as message broker, Celery Beat for scheduling, Flower for monitoring
+
+#### Database (PostgreSQL)
+
+**Purpose:** Primary data storage for all structured data
+
+**Responsibilities:**
+- Store all application data
+- Enforce data integrity and constraints
+- Support complex queries and joins
+- Provide ACID transaction guarantees
+- Enable point-in-time recovery
+- Replicate data for high availability
+
+**Technologies:** PostgreSQL 15, AWS RDS with Multi-AZ deployment, Automated backups with 30-day retention
+
+#### Cache Layer (Redis)
+
+**Purpose:** Improve performance through caching and session storage
+
+**Responsibilities:**
+- Store user sessions
+- Cache frequently accessed data
+- Serve as Celery message broker
+- Cache permission checks
+- Store real-time data for dashboards
+
+**Technologies:** Redis 7, AWS ElastiCache, Redis Cluster for high availability
+
+#### Object Storage (S3)
+
+**Purpose:** Store documents and generated files
+
+**Responsibilities:**
+- Store uploaded documents with versioning
+- Store generated reports and exports
+- Provide secure access via pre-signed URLs
+- Encrypt all files at rest
+- Implement lifecycle policies for old versions
+
+**Technologies:** AWS S3, S3 versioning enabled, S3 encryption at rest (AES-256), S3 lifecycle policies
+
+#### CDN (CloudFront)
+
+**Purpose:** Deliver frontend assets with low latency
+
+**Responsibilities:**
+- Cache and serve React application
+- Serve static assets (images, CSS, JS)
+- Provide SSL/TLS termination
+- Reduce load on origin servers
+- Improve global performance
+
+**Technologies:** AWS CloudFront, AWS Certificate Manager for SSL
 
 ### Data Flow
 
-#### User Authentication
+#### User Authentication Flow
 
-User submits credentials via frontend, which calls Authentication Service; upon success, JWT token is issued and stored in client.
+User authentication and session establishment
 
-1. User enters credentials
-2. Frontend sends request to Auth Service
-3. Auth Service verifies credentials
-4. JWT token issued and returned to frontend
-5. Frontend stores token and uses it for subsequent requests
+1. User enters credentials in React login form
+2. Frontend sends POST request to /api/auth/login endpoint
+3. Django authentication service validates credentials against PostgreSQL
+4. If valid, JWT token is generated and session created in Redis
+5. Authentication event logged to audit log in PostgreSQL
+6. JWT token and user profile returned to frontend
+7. Frontend stores JWT in memory and makes subsequent requests with Authorization header
+8. Django middleware validates JWT on each request and checks permissions
 
-#### Task Management
+#### Project Creation Flow
 
-Users create/update tasks via frontend, which calls Workflow Service; data stored in PostgreSQL, with cache updates in Redis.
+Creating a new project with tasks and team assignments
 
-1. User creates/updates task
-2. Frontend sends request with JWT token
-3. Workflow Service processes request
-4. Data stored in PostgreSQL
-5. Cache invalidated/updated in Redis
+1. User fills project creation form in React UI
+2. Frontend validates input and sends POST to /api/projects/
+3. Django view validates request and checks user permissions
+4. Project record created in PostgreSQL with unique ID
+5. Team member assignments created in database
+6. Notification tasks queued in Celery for assigned members
+7. Audit log entry created for project creation
+8. Response with project data returned to frontend
+9. Frontend updates dashboard with new project
+10. Celery workers send email notifications to team members
+
+#### Document Upload Flow
+
+Uploading and storing a document with version control
+
+1. User selects file in React document upload component
+2. Frontend requests pre-signed S3 URL from /api/documents/upload-url/
+3. Django generates pre-signed URL with expiration
+4. Frontend uploads file directly to S3 using pre-signed URL
+5. Upon successful upload, frontend sends metadata to /api/documents/
+6. Django creates document record in PostgreSQL with S3 key
+7. Document metadata indexed for search
+8. Access control rules applied based on user role
+9. Audit log entry created for document upload
+10. Notification sent to relevant users
+11. Frontend displays success message and updates document list
+
+#### Report Generation Flow
+
+Generating and delivering a project status report
+
+1. User selects report type and parameters in React UI
+2. Frontend sends POST to /api/reports/generate/
+3. Django queues report generation task in Celery
+4. Immediate response returned with task ID
+5. Celery worker picks up task and queries PostgreSQL
+6. Report data aggregated and formatted
+7. PDF/Excel file generated using ReportLab/OpenPyXL
+8. Generated file uploaded to S3
+9. Task completion status updated in Redis
+10. Notification sent to user with download link
+11. User clicks link and receives pre-signed S3 URL
+12. File downloaded directly from S3
+
+#### Real-time Dashboard Update Flow
+
+Pushing real-time updates to user dashboards
+
+1. User opens dashboard, React establishes WebSocket connection
+2. Django Channels maintains WebSocket connection
+3. When project status changes, Django emits event
+4. Event published to Redis pub/sub channel
+5. Django Channels consumer receives event
+6. Update pushed to connected clients via WebSocket
+7. React receives update and updates dashboard state
+8. UI re-renders with new data without page refresh
+
+#### Audit Log Query Flow
+
+Searching and retrieving audit logs for compliance
+
+1. Compliance officer enters search criteria in React UI
+2. Frontend sends GET to /api/audit-logs/ with filters
+3. Django validates user has compliance officer role
+4. Query executed against PostgreSQL audit log table
+5. Results filtered by date range, user, action type
+6. Paginated results returned to frontend
+7. React displays audit log entries in table
+8. User can export results to CSV/Excel
+9. Export task queued in Celery
+10. Generated file made available for download
 
 ## Technology Stack
 
 ### Frontend
 
-**Framework:** React.js
+**Framework:** React 18 with TypeScript
 
-*Justification:* Popular, flexible, supports responsive design, large community, and rapid development.
+*Justification:* React provides excellent performance, large ecosystem, and strong community support. TypeScript adds type safety reducing bugs and improving maintainability. Material-UI provides professional, accessible components out-of-the-box, accelerating development. React's component-based architecture aligns well with the modular nature of the application.
 
 **Libraries:**
 
 | Library | Purpose |
 |---------|---------|
-| Redux | State management |
-| Material-UI | UI components |
+| Material-UI (MUI) | Pre-built, accessible UI components following Material Design principles |
+| React Router v6 | Client-side routing and navigation |
+| React Query | Data fetching, caching, and state management for server state |
+| Axios | HTTP client for API requests with interceptors for auth |
+| Formik + Yup | Form management and validation |
+| Chart.js with react-chartjs-2 | Data visualization for dashboards and reports |
+| date-fns | Date manipulation and formatting |
+| React Dropzone | File upload component with drag-and-drop |
+| Socket.IO Client | WebSocket connection for real-time updates |
 
 ### Backend
 
-**Framework:** FastAPI
-**Language:** Python
+**Framework:** Django 4.2 LTS with Django REST Framework
+**Language:** Python 3.11
 
-*Justification:* High performance, asynchronous support, easy to develop REST APIs, and aligns with security and rapid iteration needs.
+*Justification:* Django provides rapid development with built-in security features (CSRF, XSS protection, SQL injection prevention), excellent ORM, and comprehensive admin interface. Django REST Framework offers powerful API development tools with authentication, serialization, and browsable API. Python 3.11 provides performance improvements and better type hints. Django's LTS version ensures 3+ years of security updates. The framework's 'batteries included' philosophy reduces development time and cost, critical for the budget constraint.
 
 **Libraries:**
 
 | Library | Purpose |
 |---------|---------|
-| PyJWT | JWT token handling |
-| SQLAlchemy | ORM for PostgreSQL |
+| Django REST Framework | Building RESTful APIs with authentication and serialization |
+| djangorestframework-simplejwt | JWT authentication for API |
+| django-guardian | Object-level permissions for fine-grained access control |
+| Celery | Asynchronous task processing for reports, emails, backups |
+| Django Channels | WebSocket support for real-time notifications |
+| Boto3 | AWS SDK for S3, SES, and other AWS service integration |
+| Pillow | Image processing for profile photos and document thumbnails |
+| ReportLab | PDF generation for reports |
+| OpenPyXL | Excel file generation for data exports |
+| python-dotenv | Environment variable management |
+| gunicorn | WSGI HTTP server for production |
+| psycopg2 | PostgreSQL adapter for Python |
+| redis | Redis client for caching and Celery broker |
+| django-cors-headers | CORS header management for API |
 
 ### Database
 
-**Primary Database:** PostgreSQL
-*Justification:* Robust relational database, supports complex queries, ACID compliance, industry standard.
+**Primary Database:** PostgreSQL 15 on AWS RDS
+*Justification:* PostgreSQL offers enterprise-grade reliability, ACID compliance, advanced features (JSON support, full-text search, complex queries), and excellent performance. AWS RDS provides managed service with automated backups, Multi-AZ deployment for high availability, automated patching, and point-in-time recovery. PostgreSQL's strong consistency guarantees are essential for aerospace/defense compliance requirements. The database's maturity and extensive documentation reduce risk.
 
-**Caching:** Redis
-*Justification:* Fast in-memory data store, supports session management and caching to improve performance.
+**Caching:** Redis 7 on AWS ElastiCache
+*Justification:* Redis provides high-performance in-memory caching, session storage, and message broker capabilities for Celery. ElastiCache offers managed Redis with automatic failover, backup, and monitoring. Redis's sub-millisecond latency improves application performance significantly. Using Redis for both caching and Celery broker reduces infrastructure complexity and cost.
 
-**Search:** Elasticsearch
-*Justification:* Optional, for advanced search capabilities if needed in future phases.
+**Search:** PostgreSQL Full-Text Search (MVP), Elasticsearch (Phase 2)
+*Justification:* PostgreSQL's built-in full-text search is sufficient for MVP document search needs, avoiding additional infrastructure costs. For Phase 2, Elasticsearch can be added for advanced search capabilities (fuzzy matching, relevance scoring, faceted search) if needed. This phased approach optimizes budget while maintaining upgrade path.
 
 ### Infrastructure
 
-**Cloud Provider:** AWS
-**Hosting:** EKS (Kubernetes managed service)
-**CDN:** CloudFront
-**Storage:** S3
+**Cloud Provider:** AWS (Amazon Web Services)
+**Hosting:** ECS Fargate with Application Load Balancer
+**CDN:** AWS CloudFront
+**Storage:** AWS S3 with versioning and encryption
 
 ### DevOps
 
 **CI/CD:** GitHub Actions
 **Containerization:** Docker
-**Orchestration:** Kubernetes (EKS)
+**Orchestration:** AWS ECS Fargate
 
-**Monitoring:** AWS CloudWatch, Prometheus/Grafana
+**Monitoring:** AWS CloudWatch for infrastructure and application monitoring, CloudWatch Logs for centralized logging, CloudWatch Alarms for alerting, AWS X-Ray for distributed tracing (optional)
 
-**Logging:** ELK Stack
+**Logging:** CloudWatch Logs for application logs, Django logging framework, Structured logging with JSON format, Log aggregation in CloudWatch Logs Insights
 
 ### Third-Party Integrations
 
 | Service | Purpose | API Type |
 |---------|---------|----------|
-| Auth0 (or AWS Cognito) | User authentication and MFA | OAuth2 |
+| AWS SES (Simple Email Service) | Transactional email delivery for notifications and password resets | SDK (Boto3) |
+| AWS Secrets Manager | Secure storage and rotation of database credentials and API keys | SDK (Boto3) |
+| AWS Certificate Manager | SSL/TLS certificate management for HTTPS | AWS Service |
+| ClickUp (Phase 2) | Bidirectional task and project synchronization | REST API |
 
 ## Security Architecture
 
 ### Authentication
 
-**Method:** OAuth2 with JWT
-**Provider:** AWS Cognito or Auth0
+**Method:** JWT (JSON Web Tokens) with refresh token rotation
+**Provider:** Custom implementation using djangorestframework-simplejwt
 
 ### Authorization
 
-**Model:** RBAC
-**Implementation:** Role-based permissions enforced via middleware and database checks
+**Model:** RBAC (Role-Based Access Control) with object-level permissions
+**Implementation:** Django permissions framework with django-guardian for object-level permissions. Five primary roles: System Administrator, Project Manager, Engineer, Executive, Compliance Officer. Permissions checked on every API request via Django middleware and view decorators. Permission caching in Redis for performance.
 
 ### Data Protection
-- Encryption at rest: AES-256 via RDS and S3
-- Encryption in transit: TLS 1.2+
-- Data masking: As applicable for sensitive data
+- Encryption at rest: AES-256 for S3 objects, RDS encryption enabled, encrypted EBS volumes
+- Encryption in transit: TLS 1.3 for all client-server communication, SSL for database connections
+- Data masking: Sensitive fields (passwords) hashed with Argon2, PII logged in encrypted format
+- Secure credential storage: AWS Secrets Manager for database passwords and API keys
+- Input validation: Django forms and DRF serializers validate all inputs
+- Output encoding: Django templates auto-escape HTML to prevent XSS
+- SQL injection prevention: Django ORM with parameterized queries
+- CSRF protection: Django CSRF middleware enabled for all state-changing operations
 
-**Compliance:** ISO 27001
+**Compliance:** Australian Privacy Principles (APP) - data handling and privacy controls, OWASP Top 10 - security best practices implemented, ISO 27001 alignment - security controls and audit logging, Audit trail retention - 7 years as per aerospace/defense standards
 
 ### Security Measures
-- Regular security audits
-- Secure coding practices
-- Least privilege access
+- Account lockout after 5 failed login attempts with exponential backoff
+- Session timeout after 8 hours of inactivity
+- Password complexity requirements: 12+ characters, mixed case, numbers, special characters
+- Password history: prevent reuse of last 5 passwords
+- Secure password reset with time-limited tokens (1 hour expiration)
+- Rate limiting on API endpoints to prevent abuse (1000 requests/hour per user)
+- AWS WAF rules to protect against common web exploits
+- Security headers: HSTS, X-Frame-Options, X-Content-Type-Options, CSP
+- Regular security scanning with AWS Inspector and third-party tools
+- Dependency vulnerability scanning in CI/CD pipeline
+- Principle of least privilege for AWS IAM roles and policies
+- Network isolation: private subnets for databases, public subnets only for load balancers
+- Security groups restricting traffic to necessary ports only
+- VPC Flow Logs for network traffic monitoring
+- CloudTrail enabled for AWS API call auditing
+- Multi-factor authentication support (ready for Phase 2 activation)
+- Automated backup encryption with separate encryption keys
 
 ## Scalability & Reliability
 
-**Scaling Strategy:** Auto-scaling with Kubernetes Horizontal Pod Autoscaler
-**Load Balancing:** AWS Application Load Balancer (ALB)
+**Scaling Strategy:** Horizontal auto-scaling for ECS tasks based on CPU and memory utilization. ECS Service Auto Scaling configured to maintain 2-10 tasks with target tracking scaling policies. Database uses RDS read replicas for read-heavy workloads. Redis ElastiCache cluster mode for distributed caching. S3 scales automatically. CloudFront CDN reduces origin load.
+**Load Balancing:** AWS Application Load Balancer (ALB) distributes traffic across ECS tasks with health checks every 30 seconds. ALB provides SSL termination, connection draining, and sticky sessions for WebSocket connections. Target groups configured with deregistration delay for graceful shutdowns.
 
 ### High Availability
 
-**Approach:** Multi-AZ deployment for database and services
-**Failover:** Automatic failover via AWS Multi-AZ RDS and Kubernetes readiness probes
+**Approach:** Multi-AZ deployment across 3 availability zones in AWS Sydney region (ap-southeast-2). RDS Multi-AZ for automatic failover. ElastiCache Multi-AZ with automatic failover. ECS tasks distributed across AZs. S3 provides 99.999999999% durability with cross-region replication option for Phase 2.
+**Failover:** RDS automatic failover to standby in different AZ within 60-120 seconds. ElastiCache automatic failover within 1-2 minutes. ECS tasks automatically replaced if health checks fail. ALB removes unhealthy targets from rotation. CloudWatch alarms trigger notifications for failover events.
 
 ### Disaster Recovery
 
-**RPO:** 24 hours
-**RTO:** 4 hours
-**Backup Strategy:** Daily automated backups with cross-region replication
+**RPO:** Recovery Point Objective: 1 hour (automated backups every hour, transaction logs backed up every 5 minutes)
+**RTO:** Recovery Time Objective: 4 hours for full system recovery from catastrophic failure
+**Backup Strategy:** Automated daily RDS snapshots retained for 30 days, weekly snapshots retained for 90 days. S3 versioning enabled with lifecycle policies. Database transaction logs backed up to S3 every 5 minutes. Infrastructure as Code (Terraform/CloudFormation) for rapid environment recreation. Quarterly disaster recovery drills to validate procedures.
 
 ## Integration Architecture
 
 ### API Design
 
-**Style:** REST
-**Versioning:** URL-based
-**Documentation:** Swagger/OpenAPI
+**Style:** REST (Representational State Transfer)
+**Versioning:** URL versioning (e.g., /api/v1/projects/)
+**Documentation:** Swagger/OpenAPI 3.0 with drf-spectacular for automatic API documentation generation from Django REST Framework code
 
 ### External Integrations
 
 | System | Type | Data Exchanged |
 |--------|------|----------------|
-| Client's existing systems | REST API | Project data, user info, workflows |
+| ClickUp (Phase 2) | REST API with webhooks | Projects, tasks, task status, assignees, due dates, comments |
+| AWS SES | SDK (Boto3) | Email messages, delivery status, bounce notifications |
+| AWS S3 | SDK (Boto3) | Document files, generated reports, backup files |
 
 ### Event Architecture
 
-**Pattern:** Request-response
-**Message Broker:** Kafka (future phase, optional)
+**Pattern:** Hybrid: Request-response for synchronous operations, Event-driven for asynchronous tasks
+**Message Broker:** Redis as Celery broker for asynchronous task queue. Django Channels with Redis for WebSocket pub/sub. SQS can be added in Phase 2 for more complex event-driven workflows.
 
 ## Development Approach
 
-**Methodology:** Agile
-**Sprint Duration:** 2 weeks
-**Branching Strategy:** GitFlow
+**Methodology:** Agile with 2-week sprints
+**Sprint Duration:** 2 weeks (10 business days)
+**Branching Strategy:** GitFlow: main branch for production, develop branch for integration, feature branches for new work, release branches for UAT, hotfix branches for production fixes
 
-**Environments:** development, staging, production
+**Environments:** development - Local developer machines with Docker Compose, staging - AWS environment mirroring production for UAT, production - AWS environment with full security and monitoring
 
 ### Testing Strategy
 
-**Unit Testing:** Pytest
-**Integration Testing:** Test suites for API endpoints
-**E2E Testing:** Cypress
-**Coverage Target:** 80%
+**Unit Testing:** pytest for Python backend (80%+ coverage), Jest for React frontend (80%+ coverage)
+**Integration Testing:** pytest with Django test client for API integration tests, Postman/Newman for API contract testing
+**E2E Testing:** Playwright for critical user journeys (login, project creation, document upload, report generation)
+**Coverage Target:** 80% minimum code coverage for both frontend and backend, measured in CI/CD pipeline
 
 ## Timeline Estimate
 
@@ -269,102 +549,189 @@ Users create/update tasks via frontend, which calls Workflow Service; data store
 
 ### Development Phases
 
-#### Phase 1: Planning & Design
+#### Phase 1: Project Initiation and Design
 
 **Duration:** 2 weeks
 
 **Features:**
-- Requirements clarification
+- Requirements validation and refinement
 - System architecture design
+- Database schema design
+- UI/UX wireframes and mockups
+- Development environment setup
+- CI/CD pipeline setup
 
 **Deliverables:**
-- Design Document
+- Approved technical architecture document
+- Database schema with entity relationships
+- UI/UX designs for all major screens
+- Development environment ready
+- GitHub repository with CI/CD configured
 
-#### Phase 2: Core Development
+#### Phase 2: Foundation and Infrastructure
 
-**Duration:** 6 weeks
+**Duration:** 2 weeks
 
 **Features:**
-- User Authentication
-- Data Security
-- Basic Workflow Management
+- AWS infrastructure provisioning
+- Database setup and migrations
+- Authentication and authorization system
+- Basic frontend scaffolding
+- API foundation and middleware
 
 **Deliverables:**
-- Prototype
-- Initial API & UI
+- AWS infrastructure operational (VPC, RDS, ElastiCache, S3, ECS)
+- User authentication working (login, logout, password reset)
+- RBAC system with 5 roles implemented
+- React application shell with routing
+- API authentication and authorization middleware
 
-#### Phase 3: Testing & Refinement
+#### Phase 3: Core Features Development - Part 1
 
 **Duration:** 3 weeks
 
 **Features:**
-- User acceptance testing
-- Performance tuning
-- Security hardening
+- Project Management module
+- Document Management module
+- User Profile Management
+- Notification system foundation
 
 **Deliverables:**
-- Test Reports
-- Finalized System
+- Project creation, task management, and dashboard functional
+- Document upload, versioning, and search working
+- User profile management complete
+- Email notifications sending
+- In-app notification center operational
 
-#### Phase 4: Deployment & Handover
+#### Phase 4: Core Features Development - Part 2
+
+**Duration:** 2 weeks
+
+**Features:**
+- Resource Management module
+- Reporting and Analytics module
+- Audit Logging and Compliance module
+- Data Export and Backup system
+
+**Deliverables:**
+- Resource allocation tracking functional
+- 10+ standard reports generating correctly
+- Executive dashboard with KPIs
+- Comprehensive audit logging operational
+- Data export in CSV/Excel working
+- Automated backup system running
+
+#### Phase 5: Integration, Testing, and Refinement
 
 **Duration:** 3 weeks
 
 **Features:**
-- Deployment
-- User training
-- Documentation
+- End-to-end integration testing
+- Performance optimization
+- Security hardening and testing
+- UI/UX refinements based on feedback
+- Bug fixes and polish
 
 **Deliverables:**
-- Deployed system
-- Training materials
+- All modules integrated and working together
+- Performance targets met (page load <3s, API <500ms)
+- Security testing passed
+- 80%+ test coverage achieved
+- User acceptance testing completed
+- All critical and high-priority bugs resolved
+
+#### Phase 6: Documentation, Training, and Deployment
+
+**Duration:** 2 weeks
+
+**Features:**
+- Technical documentation
+- User documentation and guides
+- Video tutorials creation
+- Production deployment
+- User onboarding and training support
+
+**Deliverables:**
+- Complete technical documentation
+- User guide and administrator guide
+- 10+ video tutorials
+- API documentation (Swagger)
+- System deployed to production
+- Initial users onboarded
+- 2 weeks post-launch support completed
 
 ### Milestones
 
 | Milestone | Week | Criteria |
 |-----------|------|----------|
-| Design Approval | 2 | Design document reviewed and approved |
-| MVP Release | 8 | Core features implemented and tested |
-| Final Deployment | 14 | System deployed and accepted by client |
+| Design Approval | 2 | Technical architecture approved by client, Database schema approved, UI/UX designs approved for all major screens, Development environment ready |
+| Foundation Complete | 4 | AWS infrastructure operational, Authentication system working, Users can log in and access system, Basic frontend navigation functional |
+| Core Features Alpha | 7 | Project management functional, Document management functional, Users can create projects and upload documents, Basic reporting available |
+| Feature Complete | 9 | All MVP features implemented, All modules integrated, System functional end-to-end, Ready for comprehensive testing |
+| UAT Ready | 11 | All testing completed, Performance targets met, Security testing passed, System stable and ready for user acceptance testing |
+| Production Go-Live | 13 | UAT completed successfully, All documentation delivered, System deployed to production, Users onboarded and trained |
+| Project Closure | 14 | 2 weeks post-launch support completed, All deliverables accepted by client, Final documentation delivered, Project formally closed with client sign-off |
 
 ### Timeline Risks
 
-- **Scope creep** (+2 weeks)
-  - Mitigation: Strict scope management and phased delivery
+- **Delayed client feedback or approvals on key deliverables** (+1 weeks)
+  - Mitigation: Establish clear SLAs for feedback (3 business days), schedule regular check-ins, escalate delays promptly
+- **Scope creep or requirement changes during development** (+2 weeks)
+  - Mitigation: Strict change control process, document all changes with impact analysis, defer non-critical changes to Phase 2
+- **Integration challenges with AWS services or third-party APIs** (+1 weeks)
+  - Mitigation: Proof-of-concept for critical integrations in Phase 1, allocate buffer time in integration phase, have fallback options
+- **Performance issues requiring optimization beyond planned effort** (+1 weeks)
+  - Mitigation: Performance testing throughout development, not just at end, design for performance from start, use caching strategically
+- **Security vulnerabilities discovered requiring remediation** (+1 weeks)
+  - Mitigation: Security best practices from day one, automated security scanning in CI/CD, dedicated security testing phase
+- **Key team member unavailability due to illness or other factors** (+1 weeks)
+  - Mitigation: Cross-training team members, comprehensive documentation, pair programming for knowledge sharing
 
 ## Pricing Estimate
 
-**Currency:** USD
-**Pricing Model:** time_and_materials
+**Currency:** AUD
+**Pricing Model:** fixed
 
 ### Development Costs
 
-**Total:** $48,000.00
+**Total:** $50,000.00
 
 | Phase | Cost | Details |
 |-------|------|---------|
-| Planning & Design | $6,000.00 | Requirements gathering, architecture design |
-| Core Development | $24,000.00 | Backend, frontend, core features |
-| Testing & Deployment | $9,000.00 | Testing, bug fixing, deployment |
-| Project Management & Misc | $3,000.00 | Coordination, documentation |
+| Phase 1: Project Initiation and Design | $8,000.00 | Requirements validation, system architecture design, database design, UI/UX design, development environment setup (2 weeks, 4 resources) |
+| Phase 2: Foundation and Infrastructure | $9,000.00 | AWS infrastructure setup, authentication system, RBAC implementation, frontend scaffolding (2 weeks, 5 resources) |
+| Phase 3: Core Features Development - Part 1 | $12,000.00 | Project management module, document management module, user profiles, notifications (3 weeks, 6 resources) |
+| Phase 4: Core Features Development - Part 2 | $8,000.00 | Resource management, reporting and analytics, audit logging, data export and backup (2 weeks, 5 resources) |
+| Phase 5: Integration, Testing, and Refinement | $9,000.00 | Integration testing, performance optimization, security testing, bug fixes, UAT support (3 weeks, 6 resources) |
+| Phase 6: Documentation, Training, and Deployment | $4,000.00 | Documentation, video tutorials, production deployment, user onboarding, post-launch support (2 weeks, 5 resources) |
 
 ### Infrastructure Costs
 
-**Monthly Estimate:** $400.00
-**Yearly Estimate:** $4,800.00
+**Monthly Estimate:** $450.00
+**Yearly Estimate:** $5,400.00
 
 | Service | Monthly Cost |
 |---------|--------------|
-| AWS EC2 | $150.00 |
-| RDS PostgreSQL | $100.00 |
-| S3 Storage | $50.00 |
-| CloudFront CDN | $50.00 |
+| AWS ECS Fargate (2-4 tasks, 0.5 vCPU, 1GB RAM each) | $100.00 |
+| AWS RDS PostgreSQL (db.t3.medium, Multi-AZ) | $120.00 |
+| AWS ElastiCache Redis (cache.t3.small) | $40.00 |
+| AWS S3 (100GB storage, 10,000 requests/month) | $25.00 |
+| AWS Application Load Balancer | $25.00 |
+| AWS CloudFront (100GB data transfer) | $15.00 |
+| AWS SES (10,000 emails/month) | $10.00 |
+| AWS CloudWatch (logs, metrics, alarms) | $30.00 |
+| AWS Secrets Manager (10 secrets) | $5.00 |
+| AWS Certificate Manager | $0.00 |
+| AWS Backup | $20.00 |
+| Data Transfer and Other Services | $60.00 |
 
 ### Third-Party Costs (Monthly)
 
 | Service | Tier | Monthly Cost |
 |---------|------|--------------|
-| Auth0 | Professional | $50.00 |
+| Domain Name Registration | Standard .com.au domain | $2.00 |
+| SSL Certificate (covered by AWS Certificate Manager) | Free with AWS | $0.00 |
+| GitHub (if not already available) | Free for private repositories | $0.00 |
 
 ### Payment Terms
 
@@ -372,14 +739,27 @@ Users create/update tasks via frontend, which calls Workflow Service; data store
 
 | Milestone | Percentage |
 |-----------|------------|
-| Design Approval | 20% |
-| MVP Completion | 50% |
-| Final Deployment | 30% |
+| Project Kickoff and Contract Signing | 30% |
+| Design Approval (Week 2) | 15% |
+| Core Features Alpha (Week 7) | 20% |
+| Feature Complete (Week 9) | 15% |
+| UAT Completion (Week 11) | 10% |
+| Production Go-Live and Final Delivery (Week 14) | 10% |
 
 ### Exclusions
 
-- Hardware procurement
-- Long-term maintenance beyond initial deployment
+- Ongoing maintenance and support beyond 2 weeks post-launch
+- Infrastructure costs (AWS services billed separately to client)
+- Third-party service costs (domain, email service if not using AWS SES)
+- ClickUp integration (Phase 2 feature)
+- Native mobile applications (future phase)
+- Advanced analytics and AI/ML features (future phase)
+- 24/7 support and monitoring (optional add-on)
+- Specialized compliance certifications (ITAR, EAR)
+- On-site training delivery (training materials provided)
+- Data migration from legacy systems (optional add-on)
+- Custom hardware integration
+- Multi-language support beyond English
 
 ---
 
