@@ -9,103 +9,99 @@
 
 **Project Name:** Solis
 
-**Description:** A software project for Hamza Boss in the Aerospace & Defense industry, with an initial budget of $50,000, hosted on AWS, currently in planning stage.
+**Description:** A software project for Hamza Boss in the Aerospace & Defense industry. Specific project details are not provided.
 
 ### Business Objectives
-- Develop a software solution aligned with client goals in Aerospace & Defense
-- Complete the project within the allocated budget and timeline
-- Establish a successful working relationship for future projects
+- Support Hamza Boss's operations within the Aerospace & Defense sector
+- Develop a solution aligned with client goals and budget constraints
 
 ### Success Criteria
-- Delivery of the project within the $50,000 budget
-- Completion by the planned end date (though dates are currently placeholder)
-- Client satisfaction and approval at project milestones
-- Functional software meeting initial requirements (to be clarified)
+- Delivery within the $50,000 budget
+- Achievement of client satisfaction and functional completeness
+- Project health remains GREEN during planning and execution
 
 ## 2. Stakeholders
 
 ### Hamza Farooq
-**Role:** Primary client contact, Software Engineer
+**Role:** Primary Software Engineer
 **Responsibilities:**
-- Provide project requirements and feedback
-- Approve deliverables
-- Coordinate with the project team
+- Provide technical requirements and feedback
+- Coordinate development and implementation
+- Ensure project aligns with client needs
 
-### Muhammad Hanan Asghar
-**Role:** Sales and Delivery Lead
+### Hamza Boss
+**Role:** Client/Project Sponsor
 **Responsibilities:**
-- Manage sales process
-- Lead project delivery
-- Coordinate between client and internal teams
+- Define high-level project goals
+- Approve project scope and deliverables
+- Allocate budget and resources
 
 ## 3. Functional Requirements
 
-### Project Management
+### General System Functionality
 
 | ID | Description | Priority | Source |
 |---|---|---|---|
-| FR-PROJ-001 | Establish project scope, timeline, and milestones | mvp | Client & project context |
-| FR-PROJ-002 | Track project budget and expenses | mvp | Client budget info |
+| FR-GEN-001 | The system shall support aerospace and defense industry-specific workflows. | mvp | Client industry context |
+| FR-GEN-002 | The system shall provide user authentication and authorization mechanisms. | mvp | Standard software requirements |
 
-### Hosting & Infrastructure
-
-| ID | Description | Priority | Source |
-|---|---|---|---|
-| FR-HOST-001 | Provision and configure AWS hosting environment | mvp | Hosting platform specified |
-
-### Client Communication & Reporting
+### User Interface
 
 | ID | Description | Priority | Source |
 |---|---|---|---|
-| FR-COMM-001 | Regular status updates to client | phase2 | Project management best practices |
+| FR-UI-001 | The system shall have a user-friendly interface accessible via web browsers. | mvp | Common usability standards |
+
+### Data Management
+
+| ID | Description | Priority | Source |
+|---|---|---|---|
+| FR-DATA-001 | The system shall store project data securely with backup capabilities. | mvp | Industry best practices |
 
 ## 4. Non-Functional Requirements
 
 ### Performance
-- System should handle expected user load without performance degradation
+- The system shall load pages within 3 seconds under typical load.
 
 ### Security
-- Ensure data security and compliance with industry standards
+- The system shall comply with industry security standards for data protection.
 
 ### Scalability
-- System should be scalable to accommodate future growth
+- The system shall support up to 100 concurrent users initially, with scalability options.
 
 ## 5. Constraints
 
-- **Budget:** Total project budget is $50,000
-- **Timeline:** Project start and end dates are placeholders (3333-03-31), need clarification
-- **Technical:** Hosting on AWS, specific technical stack and integrations are unspecified
-- **Regulatory:** Industry-specific security and compliance standards may apply (aerospace & defense)
+- **Budget:** Total project budget is capped at $50,000.
+- **Timeline:** Project is in planning stage; specific deadlines are not provided.
+- **Technical:** No specific technology stack or platform constraints are provided.
+- **Resource:** Limited team size (45 employees in client organization), resource availability for collaboration is assumed.
 
 ## 6. Assumptions
 
-- Project scope and requirements will be clarified post initial discussions
-- The placeholder dates (3333-03-31) are temporary and will be updated
-- Client requirements are primarily technical, with minimal business goals provided
+- Detailed project requirements and scope will be clarified during further discussions.
+- Client will provide necessary access and data for development.
 
 ## 7. Dependencies
 
-- AWS hosting environment setup and configuration
-- Client providing detailed requirements and feedback
+- Potential integration with client’s existing systems or infrastructure.
 
 ## 8. Identified Risks
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Unclear project scope and requirements due to lack of detailed documentation | high | Early requirements gathering sessions and clarification meetings |
-| Potential delays due to placeholder dates and undefined milestones | medium | Confirm and finalize project timeline with client |
-| Budget constraints may limit scope or quality | high | Prioritize features and manage scope carefully |
+| Unclear project scope and requirements due to lack of detailed documentation. | high | Conduct detailed requirement gathering sessions and define scope explicitly. |
+| Budget constraints may limit feature development or scope expansion. | high | Prioritize MVP features and plan phased releases. |
+| Potential delays due to limited client involvement or unclear timelines. | medium | Establish clear communication channels and regular check-ins. |
 
 ## 9. Open Questions
 
 *The following questions need to be answered to proceed:*
 
-- **[Q1]** (scope) What are the specific business goals and success criteria for the Solis project?
-- **[Q2]** (scope) What are the detailed functional requirements and features expected from the solution?
-- **[Q3]** (user_experience) What is the intended user base and user roles for the system?
-- **[Q4]** (technical) What are the detailed technical stack preferences or constraints beyond AWS hosting?
-- **[Q5]** (timeline) What are the detailed project milestones, deliverables, and timeline expectations?
-- **[Q6]** (regulatory) Are there any industry-specific compliance or security standards that must be adhered to?
+- **[Q1]** (scope) What are the specific high-level goals and functionalities expected from the Solis project?
+- **[Q2]** (technical) Are there existing systems or infrastructure that the new solution must integrate with?
+- **[Q3]** (functional) What are the detailed user roles and permissions needed?
+- **[Q4]** (non-functional) Are there any specific compliance or security standards that the system must adhere to?
+- **[Q5]** (timeline) What is the expected timeline for project completion?
+- **[Q6]** (technical) Are there any specific technology preferences or restrictions?
 
 ---
 
