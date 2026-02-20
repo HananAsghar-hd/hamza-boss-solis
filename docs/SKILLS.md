@@ -1,4 +1,4 @@
-# Project Skills Matrix
+# Hamza Boss - Solis Project Skills Matrix
 
 **Project:** Hamza Boss - Solis
 
@@ -8,11 +8,11 @@
 
 ## Project Overview
 
-**Technology Summary:** Full-stack aerospace workflow management system utilizing Python (FastAPI), React.js, AWS cloud infrastructure, and modern DevOps practices.
+**Technology Summary:** Full-stack enterprise application using Django REST Framework (Python 3.11) backend with PostgreSQL database, React 18 with TypeScript frontend, Redis for caching and Celery for async tasks, deployed on AWS ECS Fargate with S3, CloudFront, and RDS. Includes real-time features via WebSockets, document management with version control, and compliance tracking for aerospace/defense industry.
 
 **Complexity Level:** high
 
-**Recommended Team Size:** 5-8 developers
+**Recommended Team Size:** 5-7 developers (2 backend, 2 frontend, 1 full-stack, 1 DevOps, 1 QA) plus 1 project manager
 
 ## Required Skills
 
@@ -20,37 +20,71 @@
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| React.js | intermediate to advanced | critical | Core UI framework, Redux for state management, Material-UI for components |
+| React 18 | advanced | critical | Core frontend framework. Must understand hooks, context, performance optimization, and component lifecycle. |
+| TypeScript | intermediate | critical | Type safety is essential for maintainability. Must understand interfaces, generics, and type inference. |
+| Material-UI (MUI) | intermediate | important | Primary UI component library. Must understand theming, customization, and accessibility features. |
+| React Query | intermediate | important | Data fetching and state management. Must understand caching strategies and optimistic updates. |
+| React Router v6 | intermediate | important | Client-side routing. Must understand nested routes, protected routes, and navigation. |
+| WebSocket/Socket.IO | intermediate | important | Real-time notifications. Must understand connection management and event handling. |
+| Chart.js | intermediate | nice-to-have | Data visualization for dashboards. Understanding of different chart types and customization. |
+| Jest & React Testing Library | intermediate | important | Frontend testing. Must write unit and integration tests for components. |
+| Cypress | intermediate | important | E2E testing. Must understand test automation and best practices. |
+| CSS/SCSS | intermediate | important | Styling and responsive design. Must understand flexbox, grid, and CSS-in-JS. |
+| Web Accessibility (WCAG 2.1) | intermediate | important | Accessibility compliance. Must understand ARIA, keyboard navigation, and screen readers. |
 
 ### Backend
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| Python (FastAPI) | intermediate to advanced | critical | Asynchronous support, JWT auth, ORM with SQLAlchemy |
+| Python 3.11 | advanced | critical | Primary backend language. Must understand async/await, type hints, and modern Python features. |
+| Django 4.2 LTS | advanced | critical | Core backend framework. Must understand ORM, migrations, signals, middleware, and security features. |
+| Django REST Framework | advanced | critical | API development. Must understand serializers, viewsets, authentication, permissions, and API versioning. |
+| PostgreSQL | intermediate | critical | Primary database. Must understand query optimization, indexing, transactions, and full-text search. |
+| Redis | intermediate | important | Caching and message broker. Must understand data structures, caching strategies, and pub/sub. |
+| Celery | intermediate | important | Asynchronous task processing. Must understand task queues, scheduling, and error handling. |
+| Django Channels | intermediate | important | WebSocket support. Must understand ASGI, consumers, and channel layers. |
+| JWT Authentication | intermediate | critical | Token-based authentication. Must understand token lifecycle, refresh mechanisms, and security. |
+| RESTful API Design | advanced | critical | API architecture. Must understand REST principles, versioning, and best practices. |
+| pytest | intermediate | important | Backend testing. Must write unit, integration, and API tests with fixtures. |
+| SQL Query Optimization | intermediate | important | Database performance. Must understand query plans, indexes, and N+1 problem. |
+| Object-Level Permissions | intermediate | important | Fine-grained access control using django-guardian. Critical for compliance. |
 
 ### Database
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| PostgreSQL | intermediate | critical | Relational database, supports complex queries |
-| Redis | intermediate | important | Caching, session management |
-| Elasticsearch (optional) | basic to intermediate | nice-to-have | Advanced search capabilities in future phases |
+| PostgreSQL Administration | intermediate | important | Database management, backup/restore, performance tuning, and monitoring. |
+| Database Design & Normalization | intermediate | critical | Schema design, relationships, and data modeling for complex business logic. |
+| Database Migrations | intermediate | important | Django migrations, schema changes, and data migrations without downtime. |
+| Full-Text Search | intermediate | important | PostgreSQL full-text search for document search functionality. |
 
 ### DevOps
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| Docker | intermediate | important | Containerization for local and CI/CD environments |
-| Kubernetes (EKS) | basic to intermediate | critical | Orchestration of microservices |
-| GitHub Actions | intermediate | critical | CI/CD pipelines |
-| Monitoring & Logging | basic | important | AWS CloudWatch, ELK Stack, Prometheus/Grafana |
+| Docker | advanced | critical | Containerization. Must understand Dockerfile optimization, multi-stage builds, and docker-compose. |
+| AWS ECS Fargate | intermediate | critical | Container orchestration. Must understand task definitions, services, and auto-scaling. |
+| AWS RDS | intermediate | critical | Managed PostgreSQL. Must understand Multi-AZ, backups, and parameter groups. |
+| AWS S3 | intermediate | critical | Object storage. Must understand bucket policies, versioning, and lifecycle rules. |
+| AWS CloudFront | intermediate | important | CDN configuration. Must understand caching strategies and invalidation. |
+| AWS IAM | intermediate | critical | Access management. Must understand roles, policies, and least privilege principle. |
+| GitHub Actions | intermediate | critical | CI/CD pipelines. Must understand workflows, secrets, and deployment automation. |
+| Terraform | intermediate | important | Infrastructure as Code. Must understand modules, state management, and best practices. |
+| AWS CloudWatch | intermediate | important | Monitoring and logging. Must understand metrics, alarms, and log insights. |
+| SSL/TLS & Certificate Management | intermediate | important | Security. Must understand HTTPS, certificate rotation, and AWS Certificate Manager. |
+| Load Balancing | intermediate | important | AWS ALB configuration, health checks, and traffic distribution. |
 
 ### Soft Skills
 
 | Skill | Level | Importance | Notes |
 |-------|-------|------------|-------|
-| Communication | - | critical | Clear documentation and team collaboration |
-| Problem Solving | - | critical | Troubleshooting and debugging |
+| Communication | - | critical | Clear technical communication with team and stakeholders. Critical for aerospace/defense client interaction. |
+| Problem Solving | - | critical | Analytical thinking and debugging complex issues in distributed systems. |
+| Code Review | - | critical | Constructive feedback, security awareness, and knowledge sharing through reviews. |
+| Documentation | - | important | Writing clear technical documentation, API docs, and architecture decisions. |
+| Agile/Scrum | - | important | Experience with sprint planning, daily standups, and iterative development. |
+| Time Management | - | important | Meeting deadlines in 14-week timeline with multiple parallel workstreams. |
+| Collaboration | - | critical | Working effectively in cross-functional team (frontend, backend, DevOps, QA). |
 
 ## Team Composition
 
@@ -58,39 +92,79 @@
 
 | Role | Count | Key Skills | Seniority |
 |------|-------|------------|-----------|
-| Tech Lead | 1 | Architecture, Code review, Security best practices | Senior/Staff |
-| Backend Developer | 2 | FastAPI, Python, Database, Security | Mid/Senior |
-| Frontend Developer | 2 | React.js, Redux, UI/UX | Mid/Senior |
-| DevOps Engineer | 1 | Kubernetes, CI/CD, Monitoring | Mid/Senior |
-| QA Engineer | 1 | Test automation, Manual testing | Mid |
+| Tech Lead / Solution Architect | 1 | System architecture, Django & React expertise, AWS infrastructure, Security compliance, Code review, Technical decision making | Senior/Staff (8+ years) |
+| Senior Backend Developer | 1 | Django/DRF, PostgreSQL, Celery, API design, Security, Performance optimization | Senior (5-8 years) |
+| Mid-Level Backend Developer | 1 | Django/DRF, PostgreSQL, Python, Testing, API development | Mid (3-5 years) |
+| Senior Frontend Developer | 1 | React, TypeScript, Material-UI, State management, Performance, Accessibility | Senior (5-8 years) |
+| Mid-Level Frontend Developer | 1 | React, TypeScript, Material-UI, Testing, Responsive design | Mid (3-5 years) |
+| DevOps Engineer | 1 | AWS (ECS, RDS, S3, CloudFront), Docker, GitHub Actions, Terraform, Monitoring | Mid/Senior (4-7 years) |
+| QA Engineer | 1 | Test automation, Cypress, pytest, Security testing, Manual testing | Mid (3-5 years) |
 
 ### Optional Roles
 
-- **Security Specialist** (1) - For advanced security audits
-  - Key Skills: Security best practices, Vulnerability assessment
+- **Full Stack Developer** (1) - If team needs flexibility or to cover both frontend and backend tasks during peak periods
+  - Key Skills: Django, React, TypeScript, PostgreSQL, AWS basics
+- **Security Specialist** (1) - For aerospace/defense compliance requirements, security audits, and penetration testing
+  - Key Skills: Application security, Compliance, Penetration testing, Security audits
+- **UI/UX Designer** (1) - If design requirements are complex or user experience needs significant refinement
+  - Key Skills: UI design, UX research, Prototyping, Accessibility
+- **Database Administrator** (1) - For complex database optimization, large-scale data migrations, or performance issues
+  - Key Skills: PostgreSQL administration, Query optimization, Backup/restore, Replication
 
 ## Skill Development
 
 ### Learning Resources
 
-**React.js:**
+**Django REST Framework:**
+- Official DRF tutorial
+- Two Scoops of Django book
+- DRF best practices guide
+- TestDriven.io Django courses
+
+**React with TypeScript:**
 - Official React docs
-- React patterns course
+- TypeScript handbook
+- React TypeScript cheatsheet
+- Epic React course by Kent C. Dodds
 
-**FastAPI:**
-- FastAPI official docs
-- Async Python tutorials
+**AWS Services:**
+- AWS documentation
+- A Cloud Guru courses
+- AWS Well-Architected Framework
+- AWS Solutions Architect certification path
 
-**Kubernetes:**
-- Kubernetes official docs
-- EKS tutorials
+**PostgreSQL:**
+- PostgreSQL documentation
+- The Art of PostgreSQL book
+- PostgreSQL performance tuning guide
+- Use The Index, Luke
+
+**Docker & Containers:**
+- Docker documentation
+- Docker Deep Dive book
+- Docker Mastery course
+- Best practices for Dockerfile
+
+**Security Best Practices:**
+- OWASP Top 10
+- Django security documentation
+- Web Security Academy by PortSwigger
+- Security headers guide
+
+**Testing:**
+- pytest documentation
+- Testing React applications guide
+- Cypress documentation
+- Test-Driven Development with Python
 
 ### Recommended Certifications
 
 | Certification | Relevance |
 |---------------|-----------|
-| AWS Certified Solutions Architect | Cloud infrastructure and architecture |
-| Certified Kubernetes Administrator (CKA) | Kubernetes management |
+| AWS Certified Solutions Architect - Associate | Understanding AWS infrastructure and best practices for deployment |
+| AWS Certified Developer - Associate | AWS service integration and application development on AWS |
+| Certified Kubernetes Administrator (CKA) | Container orchestration if scaling beyond ECS Fargate in future |
+| CISSP or CEH | Security compliance for aerospace/defense requirements |
 
 ## Knowledge Transfer
 
@@ -98,16 +172,20 @@
 
 ### Key Areas
 
-- Codebase walkthrough
-- Architecture and infrastructure overview
-- Development and deployment workflows
-- Security practices
+- Week 1: Environment setup, codebase walkthrough, development workflow, coding standards
+- Week 2: Architecture deep-dive, domain knowledge (aerospace/defense requirements), security compliance
+- Week 3: Hands-on feature implementation with mentoring, code review process, deployment procedures
 
 ### Documentation to Review
 
-- Architecture diagrams
-- API documentation
-- Onboarding and setup guides
+- This onboarding guide (complete setup and workflow)
+- Architecture document (system design and component interactions)
+- API documentation (endpoint specifications and authentication)
+- Security guidelines (compliance requirements and best practices)
+- Database schema documentation (entity relationships and data models)
+- Deployment runbook (CI/CD process and production deployment)
+- ADRs - Architecture Decision Records (context for technical decisions)
+- User stories and requirements (business context and feature specifications)
 
 ---
 
