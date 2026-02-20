@@ -23,19 +23,22 @@
 
 ## Executive Summary
 
-This architecture provides a secure, scalable, and maintainable platform hosted on AWS, supporting project management, infrastructure provisioning, and reporting functionalities tailored for aerospace & defense industry needs. It emphasizes modularity, security compliance, and future scalability.
+The proposed architecture for Solis is a scalable, secure, and maintainable web-based platform leveraging cloud infrastructure. It adopts a microservices style to ensure flexibility, scalability, and isolated security boundaries, supporting aerospace-specific workflows with role-based access and data security.
 
 ### Key Decisions
-- Adopt a microservices architecture for flexibility and scalability
-- Use AWS as the cloud provider for its compliance standards and extensive service offerings
+- Use cloud-native services (AWS) for scalability and security
+- Implement microservices architecture for modularity and scalability
+- Choose React for frontend for responsiveness and developer productivity
+- Use Python with FastAPI for backend APIs for performance and rapid development
 
 ### Technology Highlights
-- React.js for frontend for rich, responsive UI
-- FastAPI (Python) for backend APIs due to rapid development and security features
-- PostgreSQL for relational data storage with strong compliance support
-- Redis for caching to improve performance
-- Terraform for infrastructure as code to ensure repeatability
-- Kubernetes (EKS) for container orchestration
+- React.js for frontend UI
+- FastAPI (Python) for backend API services
+- PostgreSQL for relational data storage
+- Redis for caching and session management
+- AWS cloud services (EC2, RDS, S3, CloudFront)
+- OAuth2 with JWT for authentication
+- Kubernetes for container orchestration
 
 ## System Architecture
 
@@ -43,82 +46,85 @@ This architecture provides a secure, scalable, and maintainable platform hosted 
 
 ### Architecture Overview
 
-The system comprises a React.js frontend communicating via REST APIs with a FastAPI backend, which interacts with PostgreSQL for persistent storage, Redis for caching, and AWS services for deployment. Kubernetes manages container orchestration, with CI/CD pipelines automating deployment and monitoring tools overseeing system health.
+The system comprises a frontend web application communicating via RESTful APIs with multiple backend microservices hosted on Kubernetes clusters. Data is stored in PostgreSQL, with Redis used for caching and session management. External integrations occur via secure REST APIs, and the system is deployed on AWS cloud infrastructure with CDN and storage services.
 
 ### System Components
 
 #### Frontend Web Application
 
-**Purpose:** User interface for project management, reporting, and system interaction
+**Purpose:** Provide user interface for end-users and administrators
 
 **Responsibilities:**
 - Render UI
-- Handle user input
+- Handle user interactions
 - Communicate with backend APIs
 
-**Technologies:** React.js, Axios for API calls
+**Technologies:** React.js, TypeScript, Redux
 
-#### Backend API Service
+#### Authentication Service
 
-**Purpose:** Business logic, data processing, and API endpoints
+**Purpose:** Manage user login, MFA, and token issuance
 
 **Responsibilities:**
-- Process client requests
 - Authenticate users
-- Manage project data
+- Issue JWT tokens
+- Support MFA
 
-**Technologies:** FastAPI, Python
+**Technologies:** OAuth2, JWT, FastAPI
 
-#### Database
+#### User Management & Authorization Service
 
-**Purpose:** Store project data, user info, and system configurations
-
-**Responsibilities:**
-- Data persistence
-- Data integrity
-
-**Technologies:** PostgreSQL
-
-#### Cache Layer
-
-**Purpose:** Improve system responsiveness and reduce database load
+**Purpose:** Manage roles, permissions, and user profiles
 
 **Responsibilities:**
-- Cache frequently accessed data
+- Assign roles
+- Enforce access control
 
-**Technologies:** Redis
+**Technologies:** FastAPI, PostgreSQL
 
-#### Infrastructure & Orchestration
+#### Workflow & Project Management Service
 
-**Purpose:** Provision, manage, and scale infrastructure
+**Purpose:** Handle task creation, updates, and project workflows
 
 **Responsibilities:**
-- Automate deployment
-- Ensure high availability
+- Create/update tasks
+- Track progress
+- Notify users
 
-**Technologies:** Terraform, AWS EKS (Kubernetes)
+**Technologies:** FastAPI, PostgreSQL
+
+#### Data Security & Backup Module
+
+**Purpose:** Encrypt data, perform backups, and support recovery
+
+**Responsibilities:**
+- Encrypt data at rest and in transit
+- Automate backups
+- Restore data as needed
+
+**Technologies:** TLS, AES encryption, AWS RDS automated backups
 
 ### Data Flow
 
-#### User Interaction
+#### User Authentication
 
-User interacts with React frontend, which sends requests to FastAPI backend
+User submits credentials via frontend, which calls Authentication Service; upon success, JWT token is issued and stored in client.
 
-1. User submits request via UI
-2. Frontend calls REST API
-3. Backend processes request, interacts with database/cache as needed
-4. Response sent back to frontend
-5. UI updates accordingly
+1. User enters credentials
+2. Frontend sends request to Auth Service
+3. Auth Service verifies credentials
+4. JWT token issued and returned to frontend
+5. Frontend stores token and uses it for subsequent requests
 
-#### Deployment & Infrastructure
+#### Task Management
 
-CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via Terraform
+Users create/update tasks via frontend, which calls Workflow Service; data stored in PostgreSQL, with cache updates in Redis.
 
-1. Code committed to repository
-2. CI/CD triggers build and tests
-3. Terraform applies infrastructure changes
-4. Containers are deployed to EKS
-5. System is monitored and scaled automatically
+1. User creates/updates task
+2. Frontend sends request with JWT token
+3. Workflow Service processes request
+4. Data stored in PostgreSQL
+5. Cache invalidated/updated in Redis
 
 ## Technology Stack
 
@@ -126,13 +132,13 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 **Framework:** React.js
 
-*Justification:* Popular, flexible, supports rich UI, large community, suitable for enterprise dashboards
+*Justification:* Popular, flexible, supports responsive design, large community, and rapid development.
 
 **Libraries:**
 
 | Library | Purpose |
 |---------|---------|
-| Axios | HTTP requests |
+| Redux | State management |
 | Material-UI | UI components |
 
 ### Backend
@@ -140,29 +146,32 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 **Framework:** FastAPI
 **Language:** Python
 
-*Justification:* Fast, secure, easy to develop REST APIs, supports async operations, good for rapid prototyping
+*Justification:* High performance, asynchronous support, easy to develop REST APIs, and aligns with security and rapid iteration needs.
 
 **Libraries:**
 
 | Library | Purpose |
 |---------|---------|
+| PyJWT | JWT token handling |
 | SQLAlchemy | ORM for PostgreSQL |
-| Pydantic | Data validation |
 
 ### Database
 
 **Primary Database:** PostgreSQL
-*Justification:* Strong compliance support, relational integrity, scalability options
+*Justification:* Robust relational database, supports complex queries, ACID compliance, industry standard.
 
 **Caching:** Redis
-*Justification:* High performance caching layer to reduce latency and database load
+*Justification:* Fast in-memory data store, supports session management and caching to improve performance.
+
+**Search:** Elasticsearch
+*Justification:* Optional, for advanced search capabilities if needed in future phases.
 
 ### Infrastructure
 
 **Cloud Provider:** AWS
 **Hosting:** EKS (Kubernetes managed service)
-**CDN:** CloudFront for static assets
-**Storage:** S3 for static files and backups
+**CDN:** CloudFront
+**Storage:** S3
 
 ### DevOps
 
@@ -178,47 +187,47 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 | Service | Purpose | API Type |
 |---------|---------|----------|
-| AWS APIs | Hosting, security, and resource management | - |
+| Auth0 (or AWS Cognito) | User authentication and MFA | OAuth2 |
 
 ## Security Architecture
 
 ### Authentication
 
-**Method:** OAuth2
-**Provider:** Custom or AWS Cognito
+**Method:** OAuth2 with JWT
+**Provider:** AWS Cognito or Auth0
 
 ### Authorization
 
 **Model:** RBAC
-**Implementation:** Role-based access control enforced via API gateway and backend logic
+**Implementation:** Role-based permissions enforced via middleware and database checks
 
 ### Data Protection
-- Encryption at rest with AWS KMS-managed keys
-- Encryption in transit via HTTPS/SSL
-- Data masking for sensitive info
+- Encryption at rest: AES-256 via RDS and S3
+- Encryption in transit: TLS 1.2+
+- Data masking: As applicable for sensitive data
 
-**Compliance:** Industry-specific aerospace & defense standards, GDPR (if applicable)
+**Compliance:** ISO 27001
 
 ### Security Measures
 - Regular security audits
 - Secure coding practices
-- Network segmentation and VPC isolation
+- Least privilege access
 
 ## Scalability & Reliability
 
-**Scaling Strategy:** Auto-scaling based on CPU and request load
+**Scaling Strategy:** Auto-scaling with Kubernetes Horizontal Pod Autoscaler
 **Load Balancing:** AWS Application Load Balancer (ALB)
 
 ### High Availability
 
-**Approach:** Multi-AZ deployments for database and services
-**Failover:** Automatic failover with AWS RDS Multi-AZ and Kubernetes readiness probes
+**Approach:** Multi-AZ deployment for database and services
+**Failover:** Automatic failover via AWS Multi-AZ RDS and Kubernetes readiness probes
 
 ### Disaster Recovery
 
 **RPO:** 24 hours
 **RTO:** 4 hours
-**Backup Strategy:** Daily snapshots, cross-region backups
+**Backup Strategy:** Daily automated backups with cross-region replication
 
 ## Integration Architecture
 
@@ -232,16 +241,16 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 | System | Type | Data Exchanged |
 |--------|------|----------------|
-| AWS services | API | Resource provisioning, monitoring, security |
+| Client's existing systems | REST API | Project data, user info, workflows |
 
 ### Event Architecture
 
-**Pattern:** Request-response with optional event-driven components
-**Message Broker:** None initially; Kafka or SQS can be added later if needed
+**Pattern:** Request-response
+**Message Broker:** Kafka (future phase, optional)
 
 ## Development Approach
 
-**Methodology:** Agile Scrum
+**Methodology:** Agile
 **Sprint Duration:** 2 weeks
 **Branching Strategy:** GitFlow
 
@@ -250,7 +259,7 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 ### Testing Strategy
 
 **Unit Testing:** Pytest
-**Integration Testing:** Test suites integrated into CI
+**Integration Testing:** Test suites for API endpoints
 **E2E Testing:** Cypress
 **Coverage Target:** 80%
 
@@ -260,57 +269,68 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 ### Development Phases
 
-#### Foundation & Requirements Clarification
+#### Phase 1: Planning & Design
 
-**Duration:** 3 weeks
+**Duration:** 2 weeks
 
 **Features:**
-- Requirements gathering
-- Initial AWS setup
+- Requirements clarification
+- System architecture design
 
 **Deliverables:**
-- Requirements document
-- Initial infrastructure setup
+- Design Document
 
-#### Design & Development
+#### Phase 2: Core Development
 
 **Duration:** 6 weeks
 
 **Features:**
-- Frontend UI
-- Backend APIs
-- Database setup
+- User Authentication
+- Data Security
+- Basic Workflow Management
 
 **Deliverables:**
 - Prototype
-- Core backend
-- Frontend MVP
+- Initial API & UI
 
-#### Testing & Deployment
+#### Phase 3: Testing & Refinement
 
 **Duration:** 3 weeks
 
 **Features:**
-- System testing
-- User acceptance
-- Deployment
+- User acceptance testing
+- Performance tuning
+- Security hardening
 
 **Deliverables:**
-- Test reports
+- Test Reports
+- Finalized System
+
+#### Phase 4: Deployment & Handover
+
+**Duration:** 3 weeks
+
+**Features:**
+- Deployment
+- User training
+- Documentation
+
+**Deliverables:**
 - Deployed system
+- Training materials
 
 ### Milestones
 
 | Milestone | Week | Criteria |
 |-----------|------|----------|
-| Requirements Finalization | 3 | Confirmed scope, Initial AWS environment |
-| Prototype Completion | 9 | Basic frontend and backend functional |
-| System Go-Live | 14 | All features tested and approved |
+| Design Approval | 2 | Design document reviewed and approved |
+| MVP Release | 8 | Core features implemented and tested |
+| Final Deployment | 14 | System deployed and accepted by client |
 
 ### Timeline Risks
 
-- **Requirement delays** (+2 weeks)
-  - Mitigation: Early engagement and clarifications
+- **Scope creep** (+2 weeks)
+  - Mitigation: Strict scope management and phased delivery
 
 ## Pricing Estimate
 
@@ -319,31 +339,32 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 ### Development Costs
 
-**Total:** $95,000.00
+**Total:** $48,000.00
 
 | Phase | Cost | Details |
 |-------|------|---------|
-| Design & Development | $60,000.00 | Frontend, backend, database, integration |
-| Testing & Deployment | $20,000.00 | QA, staging, deployment |
-| Requirements & Planning | $15,000.00 | Analysis, meetings, initial setup |
+| Planning & Design | $6,000.00 | Requirements gathering, architecture design |
+| Core Development | $24,000.00 | Backend, frontend, core features |
+| Testing & Deployment | $9,000.00 | Testing, bug fixing, deployment |
+| Project Management & Misc | $3,000.00 | Coordination, documentation |
 
 ### Infrastructure Costs
 
-**Monthly Estimate:** $800.00
-**Yearly Estimate:** $9,600.00
+**Monthly Estimate:** $400.00
+**Yearly Estimate:** $4,800.00
 
 | Service | Monthly Cost |
 |---------|--------------|
-| AWS EC2 | $300.00 |
-| RDS PostgreSQL | $250.00 |
-| S3 storage | $50.00 |
-| CloudFront CDN | $100.00 |
+| AWS EC2 | $150.00 |
+| RDS PostgreSQL | $100.00 |
+| S3 Storage | $50.00 |
+| CloudFront CDN | $50.00 |
 
 ### Third-Party Costs (Monthly)
 
 | Service | Tier | Monthly Cost |
 |---------|------|--------------|
-| AWS Cognito | - | $50.00 |
+| Auth0 | Professional | $50.00 |
 
 ### Payment Terms
 
@@ -351,13 +372,14 @@ CI/CD pipelines automate deployment to AWS EKS, with infrastructure managed via 
 
 | Milestone | Percentage |
 |-----------|------------|
-| Project Kickoff | 30% |
-| Prototype Delivery | 30% |
-| System Go-Live | 40% |
+| Design Approval | 20% |
+| MVP Completion | 50% |
+| Final Deployment | 30% |
 
 ### Exclusions
 
-- Long-term support and maintenance beyond initial deployment
+- Hardware procurement
+- Long-term maintenance beyond initial deployment
 
 ---
 
