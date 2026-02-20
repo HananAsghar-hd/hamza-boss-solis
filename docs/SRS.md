@@ -10,175 +10,173 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This document provides a detailed technical specification for the development of the Hamza Boss - Solis project, outlining functional and non-functional requirements to guide the development team.
+This document provides a detailed technical specification for the development of the Solis project, ensuring clear understanding of functional and non-functional requirements for the development team.
 
 ### 1.2 Scope
-The scope includes establishing project management processes, setting up AWS hosting infrastructure, and delivering core features as defined by stakeholder requirements. The project aims to develop a secure, scalable software solution tailored for the aerospace & defense industry.
+The scope includes the development of a secure, scalable software system tailored for the aerospace and defense industry, supporting core workflows, user management, data security, and performance features within a budget of $50,000.
 
 ### 1.3 Definitions, Acronyms, and Abbreviations
 
 | Term | Definition |
 |------|------------|
 | MVP | Minimum Viable Product, the initial version with core functionalities. |
-| AWS | Amazon Web Services, cloud hosting platform. |
-| Stakeholders | Individuals or groups with vested interest in the project, including clients and internal teams. |
+| Stakeholder | Any individual or organization with an interest in the project, including clients, users, and sponsors. |
 
 ### 1.4 References
 
-- Project requirements analysis document
-- Industry standards for aerospace & defense security
+- Project Requirements Analysis Document
+- Industry Best Practices for Aerospace Software Development
 
 ### 1.5 Overview
-This SRS details the technical requirements, system architecture, interfaces, and constraints necessary for successful project delivery.
+This specification outlines the system's overall architecture, detailed functional requirements, external interfaces, and non-functional constraints to guide development and ensure alignment with project goals.
 
 ## 2. Overall Description
 
 ### 2.1 Product Perspective
-The system will be hosted on AWS, integrating with existing client infrastructure where applicable. It will serve as a secure, scalable platform tailored to aerospace & defense needs, with a focus on compliance and high performance.
+The system will be a standalone web-based application designed to integrate with existing client infrastructure if needed, supporting aerospace and defense workflows with secure data management.
 
 ### 2.2 Product Functions
 
-- Project management and tracking
-- AWS infrastructure provisioning
-- Basic user authentication and access control
-- Reporting and status updates
+- User authentication and authorization
+- Role-based access control
+- Secure data storage and backup
+- Workflow management tailored for aerospace projects
+- Reporting and audit trail capabilities
 
 ### 2.3 User Classes and Characteristics
 
-**Project Manager**
-- Description: Oversees project progress, manages scope and timeline
+**End Users**
+- Description: Personnel within the client organization who will use the system for daily operations.
 - Characteristics:
-  - Uses dashboards
-  - Requires reporting tools
+  - Tech-savvy
+  - Requires secure access
 
-**Developer**
-- Description: Builds and maintains the system
+**Administrators**
+- Description: Personnel responsible for system configuration, user management, and maintenance.
 - Characteristics:
-  - Requires technical documentation
-  - Access to AWS environment
-
-**Client Stakeholder**
-- Description: Reviews progress, provides feedback
-- Characteristics:
-  - Limited technical access
-  - Focus on deliverables
+  - Technical expertise
+  - Access to all system features
 
 ### 2.4 Operating Environment
-The system will operate on AWS cloud infrastructure, accessible via secure web interfaces, with compliance to aerospace and defense security standards.
+The system will operate as a web application accessible via modern browsers on desktops and tablets. Backend services will run on cloud infrastructure supporting scalability and security.
 
 ### 2.5 Design and Implementation Constraints
 
-- Budget limited to $50,000
-- Placeholder project timeline (3333-03-31) requires clarification
-- Must adhere to industry security standards for aerospace & defense
-- Hosting on AWS with unspecified technical stack constraints
+- No specific technology stack constraints are mandated
+- Must support up to 100 concurrent users initially
 
 ### 2.6 Assumptions and Dependencies
 
-- Project scope and requirements will be clarified after initial discussions
-- AWS environment will be available and configured as needed
-- Client will provide detailed requirements and feedback in a timely manner
+- Client will provide necessary access and data for development
+- Potential integration with existing client systems will be minimal or as specified
 
 ## 3. System Features
 
-### 3.1 SF-001: Project Management & Tracking
+### 3.1 SF-001: User Authentication and Role Management
 
-**Description:** Establish and monitor project scope, milestones, and budget
+**Description:** Implement secure login, user registration, and role-based permissions.
 **Priority:** high
 
 **Functional Requirements:**
 
-**FR-001**: System shall allow creation and management of project scope, milestones, and timelines
-- *Inputs:* Project scope details, milestone dates
-- *Processing:* Data validation, timeline calculations, scope updates
-- *Outputs:* Updated project plan, progress reports
+**FR-001**: The system shall authenticate users via username and password, supporting multi-factor authentication.
+- *Inputs:* User credentials
+- *Processing:* Verify credentials against stored user data, enforce MFA if enabled
+- *Outputs:* Access granted or denied message
 - *Acceptance Criteria:*
-  - Project scope can be defined and modified
-  - Milestones are tracked and status is updated
+  - Users can log in with valid credentials
+  - Invalid login attempts are limited and logged
 
-**FR-002**: System shall track project budget and expenses
-- *Inputs:* Budget allocations, expense entries
-- *Processing:* Expense validation, budget monitoring
-- *Outputs:* Budget reports, alerts for overruns
+**FR-002**: The system shall assign roles to users with specific permissions.
+- *Inputs:* User role assignment data
+- *Processing:* Assign permissions based on role definitions
+- *Outputs:* User role and permission set
 - *Acceptance Criteria:*
-  - Expenses are accurately recorded
-  - Budget status is visible and alerts trigger on thresholds
+  - Roles can be created, modified, and assigned
+  - Permissions restrict access appropriately
 
-### 3.2 SF-002: Hosting & Infrastructure Setup
+### 3.2 SF-002: Data Security and Backup
 
-**Description:** Provision and configure AWS environment for deployment
+**Description:** Ensure data is stored securely with regular backups and recovery options.
 **Priority:** high
 
 **Functional Requirements:**
 
-**FR-HOST-001**: Provision AWS EC2 instances, configure security groups, and set up necessary services
-- *Inputs:* Hosting specifications, security standards
-- *Processing:* Infrastructure as code deployment, security configuration
-- *Outputs:* Operational AWS environment ready for deployment
+**FR-003**: All sensitive data shall be encrypted at rest and in transit.
+- *Inputs:* User data, system data
+- *Processing:* Apply encryption protocols (e.g., TLS, AES)
+- *Outputs:* Encrypted data storage and transmission
 - *Acceptance Criteria:*
-  - AWS environment is accessible and secure
-  - Documentation of setup process is complete
+  - Encryption standards comply with industry best practices
+  - Data breaches are mitigated
 
-### 3.3 SF-003: Client Communication & Reporting
+**FR-004**: The system shall perform daily backups and support data recovery.
+- *Inputs:* Backup schedule and data snapshots
+- *Processing:* Automate backup process, store backups securely
+- *Outputs:* Restored data upon request
+- *Acceptance Criteria:*
+  - Backups are completed successfully daily
+  - Data can be restored within acceptable timeframes
 
-**Description:** Provide regular project status updates and reports
-**Priority:** phase2
+### 3.3 SF-003: Workflow Management
+
+**Description:** Support aerospace-specific workflows for project management and task tracking.
+**Priority:** medium
 
 **Functional Requirements:**
 
-**FR-COMM-001**: System shall generate and send periodic status reports to client
-- *Inputs:* Project data, progress metrics
-- *Processing:* Report generation, email notifications
-- *Outputs:* Status reports, meeting summaries
+**FR-005**: Users shall be able to create, assign, and track tasks within projects.
+- *Inputs:* Task details, user assignments
+- *Processing:* Create task records, notify assignees, update status
+- *Outputs:* Updated task status and notifications
 - *Acceptance Criteria:*
-  - Reports are generated on schedule
-  - Client receives reports without errors
+  - Tasks can be created with required fields
+  - Status updates are reflected in real-time
 
 ## 4. External Interface Requirements
 
 ### 4.1 User Interfaces
 
-- Secure web dashboard for project management and reporting
+- Responsive web interface accessible via modern browsers
 
 ### 4.2 Hardware Interfaces
 
-- AWS cloud infrastructure
+- No specific hardware interfaces; cloud-based backend
 
 ### 4.3 Software Interfaces
 
-- **AWS APIs**: Integration with AWS services for hosting and management
+- **Client's existing systems**: Potential integration points with client infrastructure, details to be clarified
 
 ### 4.4 Communications Interfaces
 
-- HTTPS/SSL for secure communication
+- HTTPS for secure communication
+- REST API for integrations
 
 ## 5. Non-Functional Requirements
 
 ### 5.1 Performance
 
-- Response time under 2 seconds for key operations
+- Page load time shall be under 3 seconds under typical load
 
 ### 5.2 Security
 
-- Compliance with aerospace & defense security standards
-- Data encryption at rest and in transit
+- System shall comply with ISO 27001 standards
 
 ### 5.3 Reliability
 
-- System uptime of 99.9%
+- System shall have 99.9% uptime
 
 ### 5.4 Availability
 
-- System available 24/7 with scheduled maintenance windows
+- System shall be accessible 24/7 with minimal downtime
 
 ### 5.5 Maintainability
 
-- Codebase structured for easy updates and bug fixes
-- Documentation for deployment and maintenance
+- Codebase shall follow best practices for maintainability and be well-documented
 
 ### 5.6 Portability
 
-- Deployment on AWS ensures portability across regions
+- The system shall support deployment on cloud infrastructure with minimal configuration changes
 
 ---
 
