@@ -1,4 +1,4 @@
-# Developer Onboarding Guide
+# Hamza Boss - Solis Developer Onboarding Guide
 
 **Project:** Hamza Boss - Solis
 
@@ -8,14 +8,18 @@
 
 ## Welcome
 
-Welcome to the Hamza Boss - Solis project. This platform integrates a React frontend with a Python FastAPI backend, deployed on AWS EKS with CI/CD via GitHub Actions. It supports project management, infrastructure provisioning, user authentication, and reporting.
+Hamza Boss - Solis is an enterprise-grade project management system designed specifically for aerospace and defense operations. The platform provides secure document management with version control, resource allocation, compliance tracking, and real-time collaboration features. Built with Django REST Framework backend and React TypeScript frontend, deployed on AWS infrastructure with ECS Fargate. The system handles sensitive data and must comply with aerospace/defense industry standards.
 
 ### Key Contacts
 
 | Role | Responsibilities |
 |------|------------------|
-| Tech Lead | Technical decisions, code reviews, architecture guidance |
-| Project Manager | Sprint planning, stakeholder communication |
+| Tech Lead / Solution Architect | Technical architecture decisions, code reviews, infrastructure design, security compliance |
+| Backend Lead | Django backend development, API design, database optimization, Celery task management |
+| Frontend Lead | React frontend development, UI/UX implementation, state management, performance optimization |
+| DevOps Engineer | AWS infrastructure, CI/CD pipelines, monitoring, deployment automation |
+| Project Manager | Sprint planning, stakeholder communication, timeline management, requirement clarification |
+| QA Lead | Test strategy, quality assurance, security testing, compliance verification |
 
 ## Getting Started
 
@@ -23,38 +27,82 @@ Welcome to the Hamza Boss - Solis project. This platform integrates a React fron
 
 | Tool | Version | Installation |
 |------|---------|--------------|
-| Node.js | 18+ | `Download from nodejs.org or use package managers` |
-| Docker | Latest | `Download from docker.com` |
-| Git | Latest | `Download from git-scm.com` |
+| Python | 3.11+ | `brew install python@3.11 (macOS) or download from python.org` |
+| Node.js | 18 LTS | `brew install node@18 (macOS) or download from nodejs.org` |
+| Docker Desktop | Latest | `Download from docker.com - required for local PostgreSQL and Redis` |
+| Git | 2.40+ | `brew install git (macOS) or download from git-scm.com` |
+| AWS CLI | 2.x | `brew install awscli (macOS) or follow AWS documentation` |
+| PostgreSQL Client | 15 | `brew install postgresql@15 (macOS) - for database management` |
+| Redis CLI | 7.x | `brew install redis (macOS) - for cache debugging` |
+| VS Code or PyCharm | Latest | `Recommended IDEs with Python and TypeScript support` |
 
 ### Environment Setup
 
-1. Clone the repository: git clone <repo-url>
-2. Copy .env.example to .env and update environment variables
-3. Build and run backend: cd backend && pip install -r requirements.txt
-4. Build and run frontend: cd frontend && npm install
-5. Start local development: use docker-compose or respective start commands
+1. 1. Clone the repository: git clone <repo-url> && cd hamza-boss-solis
+2. 2. Copy environment files: cp .env.example .env
+3. 3. Update .env with your local configuration (database credentials, AWS keys for development)
+4. 4. Start Docker containers: docker-compose up -d (starts PostgreSQL and Redis)
+5. 5. Backend setup: cd backend && python -m venv venv && source venv/bin/activate && pip install -r requirements/local.txt
+6. 6. Run Django migrations: python manage.py migrate
+7. 7. Create superuser: python manage.py createsuperuser
+8. 8. Load seed data: python manage.py loaddata fixtures/dev_data.json
+9. 9. Start backend server: python manage.py runserver
+10. 10. Frontend setup (new terminal): cd frontend && npm install
+11. 11. Start frontend dev server: npm run dev
+12. 12. Start Celery worker (new terminal): cd backend && celery -A config worker -l info
+13. 13. Start Celery beat (new terminal): cd backend && celery -A config beat -l info
+14. 14. Access application: http://localhost:3000 (frontend) and http://localhost:8000/admin (Django admin)
 
 ### Quick Start Commands
 
 ```bash
 # clone
-git clone <repo-url>
+git clone <repo-url> && cd hamza-boss-solis
 
-# install_backend
-pip install -r backend/requirements.txt
+# docker_start
+docker-compose up -d
 
-# install_frontend
-npm install (inside frontend directory)
+# backend_install
+cd backend && python -m venv venv && source venv/bin/activate && pip install -r requirements/local.txt
 
-# start_backend
-uvicorn backend.app:app --reload
+# backend_migrate
+python manage.py migrate
 
-# start_frontend
-npm run start (inside frontend directory)
+# backend_seed
+python manage.py loaddata fixtures/dev_data.json
 
-# run_tests
-pytest (for backend), npm test (for frontend)
+# backend_start
+python manage.py runserver
+
+# frontend_install
+cd frontend && npm install
+
+# frontend_start
+npm run dev
+
+# celery_worker
+celery -A config worker -l info
+
+# celery_beat
+celery -A config beat -l info
+
+# run_tests_backend
+pytest
+
+# run_tests_frontend
+npm test
+
+# lint_backend
+flake8 && black --check . && isort --check-only .
+
+# lint_frontend
+npm run lint
+
+# format_backend
+black . && isort .
+
+# format_frontend
+npm run format
 
 ```
 
@@ -64,107 +112,191 @@ pytest (for backend), npm test (for frontend)
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Production-ready code |
-| `develop` | Integration branch for ongoing development |
-| `feature/*` | Feature branches off develop |
-| `bugfix/*` | Bug fix branches off develop |
-| `hotfix/*` | Hotfixes directly on main |
+| `main` | Production-ready code - protected, requires 2 approvals, all tests must pass |
+| `develop` | Development integration branch - protected, requires 1 approval |
+| `feature/*` | Feature branches - created from develop (e.g., feature/user-authentication) |
+| `bugfix/*` | Bug fix branches - created from develop (e.g., bugfix/login-validation) |
+| `hotfix/*` | Production hotfixes - created from main, merged to both main and develop |
+| `release/*` | Release preparation branches - created from develop (e.g., release/v1.2.0) |
+| `docs/*` | Documentation updates - can be created from develop |
 
 ### Commit Conventions
 
 **Format:** `type(scope): message`
 
-**Types:** feat, fix, docs, style, refactor, test, chore
+**Types:** feat, fix, docs, style, refactor, test, chore, perf, ci, build, security
 
 **Examples:**
 ```
-feat(api): add new endpoint
-fix(auth): resolve login bug
-docs(readme): update setup instructions
+feat(auth): implement JWT token refresh mechanism
+fix(documents): resolve version control conflict on concurrent edits
+docs(api): update authentication endpoint documentation
+refactor(projects): extract workflow logic into separate service
+test(resources): add unit tests for capacity calculation
+security(auth): implement rate limiting on login endpoint
+perf(reports): optimize database queries for analytics dashboard
+ci(github): add automated security scanning workflow
 ```
 
 ### Pull Request Process
 
-1. Create branch from develop
-2. Make commits following conventions
-3. Push branch and open PR against develop
-4. Request review from team members
-5. Address feedback and merge after approval
+1. 1. Create feature branch from develop: git checkout -b feature/your-feature-name develop
+2. 2. Make changes following coding standards and write tests
+3. 3. Commit changes with conventional commit messages
+4. 4. Push branch: git push origin feature/your-feature-name
+5. 5. Create pull request on GitHub with detailed description
+6. 6. Fill out PR template checklist (tests, documentation, security considerations)
+7. 7. Request review from at least one backend and one frontend developer (if full-stack change)
+8. 8. Address review comments and push updates
+9. 9. Ensure all CI checks pass (tests, linting, security scans)
+10. 10. Obtain required approvals (2 for main, 1 for develop)
+11. 11. Squash and merge after approval
+12. 12. Delete feature branch after merge
 
 ### Code Review Guidelines
 
-- Review within 24 hours
-- Check code quality, standards, and security
-- Verify tests are included and passing
-- Update documentation as needed
+- Review within 24 hours during business days
+- Check for security vulnerabilities (SQL injection, XSS, authentication bypass)
+- Verify compliance with aerospace/defense data handling requirements
+- Ensure proper error handling and logging
+- Check for performance implications (N+1 queries, unnecessary API calls)
+- Verify tests are included and provide adequate coverage
+- Ensure documentation is updated (API docs, README, inline comments)
+- Check for proper type hints (Python) and TypeScript types
+- Verify accessibility standards (WCAG 2.1 AA) for frontend changes
+- Ensure environment variables are used for configuration (no hardcoded secrets)
+- Check for proper database migrations and rollback capability
+- Verify API versioning and backward compatibility
 
 ## Coding Standards
 
 ### Style Guide
 
-Follow PEP8 for Python, ESLint + Prettier for JS
+Backend: PEP 8 for Python, enforced by Black formatter and Flake8 linter. Frontend: Airbnb TypeScript style guide, enforced by ESLint and Prettier. Use meaningful variable names, write self-documenting code, and add comments for complex business logic.
 
 ### Linting
 
-Configured via ESLint and Flake8
+Backend: Black (formatter), Flake8 (linter), isort (import sorting), mypy (type checking). Frontend: ESLint with TypeScript plugin, Prettier (formatter), stylelint (CSS linting). Run 'make lint' before committing. Pre-commit hooks are configured to run linters automatically.
 
 ### Testing Requirements
 
-- **Unit Tests:** Mandatory for all new functions/classes
-- **Integration Tests:** Cover API endpoints and critical workflows
-- **Coverage Minimum:** 80%
+- **Unit Tests:** Required for all new functions, models, serializers, and components. Use pytest for backend, Jest/React Testing Library for frontend.
+- **Integration Tests:** Required for all API endpoints. Test authentication, authorization, and business logic flows.
+- **Coverage Minimum:** 80% overall, 90% for critical modules (authentication, document management, compliance tracking)
 
 ### Documentation Requirements
 
-- JSDoc for frontend functions
-- Docstrings for Python functions
-- Update README with new features
-- API documentation for backend endpoints
+- Python: Docstrings for all public functions, classes, and modules following Google style
+- TypeScript: JSDoc comments for complex functions and exported utilities
+- API: OpenAPI/Swagger documentation for all endpoints with request/response examples
+- README: Update README.md when adding new features or changing setup process
+- Architecture: Document significant architectural decisions in docs/adr/
+- Security: Document security considerations for sensitive features
+- Inline comments: Explain 'why' not 'what' - focus on business logic and non-obvious decisions
 
 ## Architecture Overview
 
-React frontend communicates with FastAPI backend via REST API, hosted on AWS EKS. Data stored in PostgreSQL, with Redis for caching. Infrastructure managed via Terraform and Kubernetes manifests.
+Three-tier architecture: React TypeScript frontend (SPA) communicates with Django REST Framework backend via RESTful APIs. Backend uses PostgreSQL for persistent storage, Redis for caching and Celery message broker. Celery workers handle asynchronous tasks (report generation, email notifications, document processing). Django Channels provides WebSocket support for real-time notifications. All components are containerized with Docker and deployed on AWS ECS Fargate behind Application Load Balancer. Static assets served via CloudFront CDN, user uploads stored in S3.
 
 ### Key Components
 
 | Component | Description |
 |-----------|-------------|
-| Frontend | React.js SPA with Material-UI |
-| Backend | FastAPI with SQLAlchemy ORM |
-| Database | PostgreSQL for primary data |
-| Cache | Redis for caching |
-| Infrastructure | AWS EKS, Terraform, Kubernetes |
+| Frontend (React + TypeScript) | Single-page application with Material-UI components, React Query for data fetching, React Router for navigation, Socket.IO for real-time updates |
+| Backend API (Django REST Framework) | RESTful API with JWT authentication, role-based access control, object-level permissions via django-guardian, API versioning |
+| Database (PostgreSQL 15) | Primary data store on AWS RDS with Multi-AZ deployment, automated backups, full-text search capability |
+| Cache Layer (Redis 7) | AWS ElastiCache for session storage, API response caching, Celery message broker |
+| Task Queue (Celery) | Asynchronous task processing for reports, emails, document processing, scheduled jobs |
+| WebSocket Server (Django Channels) | Real-time notifications and updates using WebSocket protocol |
+| File Storage (AWS S3) | Secure document storage with versioning, encryption at rest, lifecycle policies |
+| CDN (CloudFront) | Content delivery network for static assets and frontend application |
+| Load Balancer (ALB) | Application Load Balancer for traffic distribution and SSL termination |
+| Container Orchestration (ECS Fargate) | Serverless container management for backend services |
 
 ### Important Patterns
 
-- API-driven architecture
-- Containerization with Docker
-- IaC with Terraform
+- Repository Pattern: Data access logic abstracted into repository classes for testability
+- Service Layer: Business logic separated from views/serializers into service classes
+- Factory Pattern: Object creation using factory_boy for tests and fixtures
+- Observer Pattern: Django signals for decoupled event handling (e.g., user creation triggers email)
+- Strategy Pattern: Different authentication strategies (JWT, session) based on client type
+- Decorator Pattern: Custom decorators for permission checks and logging
+- Singleton Pattern: Database connections and cache clients
+- API Versioning: URL-based versioning (/api/v1/) for backward compatibility
+- Optimistic Locking: Version fields on documents to prevent concurrent edit conflicts
+- Circuit Breaker: Graceful degradation when external services (S3, SES) are unavailable
 
 ## Troubleshooting
 
 ### Common Issues
 
-**Port conflicts or container not starting**
+**Port 8000 already in use**
 
-Solution: Check Docker and Kubernetes logs, verify ports are free
+Solution: Kill existing Django process: lsof -ti:8000 | xargs kill -9, or change port in .env: DJANGO_PORT=8001
 
-**Database connection errors**
+**Port 3000 already in use**
 
-Solution: Ensure PostgreSQL and Redis containers/services are running, verify environment variables
+Solution: Kill existing React process: lsof -ti:3000 | xargs kill -9, or set PORT=3001 in frontend/.env
+
+**Database connection failed**
+
+Solution: Ensure Docker is running: docker ps. Check PostgreSQL container: docker-compose logs postgres. Verify DATABASE_URL in .env matches docker-compose.yml
+
+**Redis connection failed**
+
+Solution: Check Redis container: docker-compose logs redis. Verify REDIS_URL in .env. Test connection: redis-cli -h localhost -p 6379 ping
+
+**Celery tasks not executing**
+
+Solution: Ensure Celery worker is running: celery -A config worker -l info. Check Redis connection. Verify task is registered: celery -A config inspect registered
+
+**Django migrations conflict**
+
+Solution: Pull latest develop branch. Delete migration files causing conflict. Run: python manage.py makemigrations --merge. Resolve conflicts manually if needed.
+
+**Frontend build fails with TypeScript errors**
+
+Solution: Delete node_modules and package-lock.json. Run: npm install. Check TypeScript version matches package.json. Run: npm run type-check for detailed errors.
+
+**AWS credentials not found**
+
+Solution: Configure AWS CLI: aws configure. Or set environment variables: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in .env. For local development, use LocalStack for S3 simulation.
+
+**CORS errors in browser console**
+
+Solution: Verify CORS_ALLOWED_ORIGINS in backend settings includes http://localhost:3000. Check django-cors-headers is installed and configured.
+
+**Tests failing with database errors**
+
+Solution: Use separate test database. Django creates test_<dbname> automatically. Ensure TEST database settings in config/settings/test.py. Run: pytest --create-db
 
 ### Getting Help
 
-- Consult the documentation sections
-- Ask questions in #dev channel on Slack or Teams
-- Tag the Tech Lead for urgent issues
+- 1. Check this onboarding guide and project documentation in docs/ folder
+- 2. Search existing GitHub issues for similar problems
+- 3. Review relevant Architecture Decision Records (ADRs) in docs/adr/
+- 4. Ask in #solis-development Slack channel for general questions
+- 5. Tag @backend-team or @frontend-team for specific technical questions
+- 6. Schedule pairing session with team lead for complex issues
+- 7. Create GitHub issue with 'help wanted' label for persistent problems
+- 8. For security concerns, contact security team directly (do not post in public channels)
 
 ## Useful Resources
 
-- [Project Wiki](Internal wiki link)
-- [API Documentation](API docs link)
-- [Kubernetes Guides](K8s documentation link)
-- [AWS Infrastructure](AWS setup and best practices)
+- [Project Wiki](https://github.com/org/hamza-boss-solis/wiki)
+- [API Documentation](http://localhost:8000/api/docs/ (local) or https://api.solis.example.com/docs/ (staging))
+- [Django Documentation](https://docs.djangoproject.com/en/4.2/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [React Documentation](https://react.dev/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [Material-UI Components](https://mui.com/material-ui/getting-started/)
+- [AWS Documentation](https://docs.aws.amazon.com/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/15/)
+- [Redis Documentation](https://redis.io/docs/)
+- [Celery Documentation](https://docs.celeryq.dev/)
+- [Architecture Diagrams](https://github.com/org/hamza-boss-solis/tree/main/docs/architecture)
+- [Security Guidelines](https://github.com/org/hamza-boss-solis/tree/main/docs/security)
+- [Deployment Runbook](https://github.com/org/hamza-boss-solis/tree/main/docs/deployment)
 
 ---
 
