@@ -1,4 +1,4 @@
-# Software Development Agreement
+# Software Development Agreement - Solis Platform
 
 **Project:** Hamza Boss - Solis
 **Version:** 1.0
@@ -13,9 +13,9 @@ This Software Development Agreement ("Agreement") is entered into by and between
 
 **SERVICE PROVIDER:**
 
-**To be specified based on selected development team or vendor**
-Address: To be specified
-Represented by: To be specified
+**[Provider Legal Name]**
+Address: [Provider Business Address]
+Represented by: [Authorized Representative Name and Title]
 
 (hereinafter referred to as "Provider")
 
@@ -24,8 +24,8 @@ Represented by: To be specified
 **CLIENT:**
 
 **Hamza Boss**
-Address: To be specified
-Represented by: Hamza Farooq
+Address: [Client Business Address]
+Represented by: Hamza Farooq, Software Engineer
 
 (hereinafter referred to as "Client")
 
@@ -35,12 +35,15 @@ Represented by: Hamza Farooq
 
 **WHEREAS:**
 
-This Agreement is entered into for the development of the Solis software project for Hamza Boss, an aerospace and defense industry client, with the objective of delivering a secure, scalable, and functional system within the agreed budget and timeline.
+Client is an aerospace and defense organization with 45 employees operating in Australia, seeking to improve operational efficiency through a centralized software platform. Provider is a professional software development firm with expertise in developing secure, compliant web-based applications for regulated industries. Client has engaged Provider to design, develop, and deploy 'Solis', a comprehensive web-based platform for project management, document management, resource allocation, reporting, and compliance tracking.
 
 **OBJECTIVES:**
-- Develop a secure, functional web-based system supporting aerospace workflows
-- Ensure compliance with security standards
-- Complete the project within the $50,000 budget and agreed timeline
+- Deliver a secure, compliant web-based platform that centralizes project management, document management, and resource allocation for aerospace and defense workflows
+- Improve operational efficiency by reducing manual processes and providing real-time visibility into projects and resources
+- Ensure compliance with aerospace and defense industry standards through comprehensive audit logging and security controls
+- Provide a scalable foundation supporting current operations (45 users) with capacity to scale to 90+ users
+- Complete MVP delivery within 14 weeks and within the agreed budget of $50,000 AUD
+- Enable rapid user adoption through intuitive design, comprehensive documentation, and training materials
 
 **NOW, THEREFORE**, in consideration of the mutual covenants and agreements set forth herein, the parties agree as follows:
 
@@ -48,11 +51,25 @@ This Agreement is entered into for the development of the Solis software project
 
 ## 1. DEFINITIONS
 
-**1.1 "Deliverables"** means The tangible or intangible items to be provided to the Client by the Provider as specified in the Scope of Work.
+**1.1 "Deliverables"** means All software components, documentation, training materials, and services specified in Schedule A (Statement of Work), including but not limited to: source code, compiled applications, database schemas, system architecture documentation, user guides, administrator guides, API documentation, video tutorials, and deployment to production environment.
 
-**1.2 "Acceptance Criteria"** means The conditions under which the Deliverables are considered accepted by the Client, including review and approval processes.
+**1.2 "Acceptance Criteria"** means The specific, measurable standards and requirements that each Deliverable must meet to be considered complete and acceptable, as detailed in Schedule A. Acceptance occurs when Client confirms in writing that a Deliverable meets all specified Acceptance Criteria, or when the Review Period expires without rejection (deemed acceptance).
 
-**1.3 "Change Request"** means A formal proposal to modify the scope, schedule, or cost of the project, which must be documented and approved by both Parties.
+**1.3 "Change Request"** means A formal written request to modify the Scope of Work, requirements, specifications, timeline, or Deliverables, submitted using the Change Request Form specified in Section 6 (Change Management). Change Requests must include description of change, business justification, priority, and acknowledgment that timeline and budget may be impacted.
+
+**1.4 "Milestone"** means A significant point in the project timeline marking completion of a defined set of Deliverables or achievement of specific project objectives, as detailed in Schedule C (Payment Schedule). Milestone completion triggers payment obligations and may require formal Client acceptance.
+
+**1.5 "MVP"** means Minimum Viable Product - the initial version of the Solis platform including all features and functionality specified in Schedule A as 'mvp' phase, sufficient to meet Client's core business objectives and provide value to end users.
+
+**1.6 "Business Day"** means Monday through Friday, excluding Australian public holidays, between the hours of 9:00 AM and 5:00 PM Australian Eastern Standard Time (AEST).
+
+**1.7 "Confidential Information"** means Any information disclosed by one party to the other, whether orally, in writing, or in electronic form, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure, including but not limited to: business plans, technical data, source code, customer information, financial information, and trade secrets.
+
+**1.8 "Work Product"** means All materials, deliverables, inventions, discoveries, improvements, works of authorship, and other results created, developed, or reduced to practice by Provider in the course of performing Services under this Agreement, including all intellectual property rights therein.
+
+**1.9 "Effective Date"** means The date on which this Agreement is executed by both parties, marking the commencement of the contractual relationship and obligations.
+
+**1.10 "Services"** means All software development, design, testing, documentation, deployment, training, and support services to be provided by Provider as specified in Schedule A (Statement of Work).
 
 ---
 
@@ -60,57 +77,131 @@ This Agreement is entered into for the development of the Solis software project
 
 ### 2.1 Description
 
-Development of the Solis project including design, core development, testing, deployment, and training, as detailed in the SOW.
+Provider shall design, develop, test, document, and deploy Solis, a comprehensive web-based platform for Client's aerospace and defense operations. The platform will be delivered as a cloud-native SaaS application hosted on AWS infrastructure, featuring secure project management, document management with version control, resource allocation and capacity planning, reporting and analytics, comprehensive audit logging, and role-based access control. The system will support 45 concurrent users with scalability to 90+ users, comply with Australian data protection laws and aerospace/defense security standards, and include 10 core feature modules as detailed in Schedule A. The solution will be built using modern technology stack (React 18 + TypeScript frontend, Django 4.2 + Python backend, PostgreSQL database) with enterprise-grade security including encryption at rest and in transit, comprehensive audit logging, and multi-layered access controls.
 
 ### 2.2 Deliverables
 
 | ID | Deliverable | Description | Phase |
 |----|-------------|-------------|-------|
-| D-001 | System Design Document | Detailed architecture and technical specifications | mvp |
-| D-002 | Developed System | Fully functional web application with core features | mvp |
-| D-003 | Deployment & User Training | System deployment and user onboarding | deployment |
+| D-001 | Requirements Specification Package | Comprehensive requirements documentation including Software Requirements Specification (SRS), Product Requirements Document (PRD), and Statement of Work (SOW) with all functional and non-functional requirements, user stories, acceptance criteria, assumptions, and constraints documented and approved by Client | mvp |
+| D-002 | System Architecture and Design Documentation | Complete technical architecture documentation including system architecture diagram, database schema with entity relationships, API specifications, security architecture, data flow diagrams, and UI/UX wireframes and mockups for all major screens and user workflows | mvp |
+| D-003 | Authentication and Authorization Module | Fully functional user authentication system with secure login, password management (reset, change), role-based access control (RBAC) with 5+ predefined roles, session management with configurable timeout, account lockout after failed login attempts, and comprehensive authentication event logging | mvp |
+| D-004 | Project Management Module | Complete project management functionality including project creation and configuration, task creation and assignment, project dashboard with real-time status indicators, task dependencies and scheduling, project timeline visualization, search and filter capabilities, and automated notifications for project events | mvp |
+| D-005 | Document Management Module | Secure document repository with upload functionality for multiple file types, automatic version control tracking all changes, full-text search across documents, metadata tagging and categorization, role-based access controls, version history with rollback capability, and document encryption at rest | mvp |
+| D-006 | Resource Management Module | Resource allocation tracking and capacity planning tools showing resource assignments across projects, over-allocation identification and alerts, capacity planning views (weekly, monthly, quarterly), resource utilization metrics and reporting, and workload balancing recommendations | mvp |
+| D-007 | Reporting and Analytics Module | Automated reporting system with 10+ standard report templates (project status, resource utilization, document activity, audit compliance, task completion, budget tracking, timeline analysis, team performance, risk assessment, executive summary), executive dashboard with key performance indicators (KPIs), export capabilities to PDF and Excel formats, scheduled report generation and delivery, visual charts and graphs, and drill-down capabilities for detailed analysis | mvp |
+| D-008 | Audit Logging and Compliance Module | Comprehensive audit logging system capturing all user actions and system events, encrypted and tamper-proof log storage, searchable audit log interface with advanced filtering, compliance report generation for regulatory requirements, configurable log retention policy (7-year default), and audit log export capability for external auditors | mvp |
+| D-009 | Notification System | Email and in-app notification system with automated notifications for key events (task assignments, due dates, project updates, document changes, system alerts), in-app notification center with unread indicators, user preference management for notification types and delivery methods, notification history retention for 90 days, and notification templates for consistent messaging | mvp |
+| D-010 | User Profile Management | Self-service user profile management functionality allowing users to update personal information (name, email, phone), change password with current password verification, update email address with verification process, upload and manage profile photo, configure notification preferences, and view account activity history | mvp |
+| D-011 | Data Export and Backup System | Data export capabilities for all major data types (projects, tasks, documents, resources, reports) in CSV and Excel formats, automated daily backup system for all databases and file storage, encrypted backup storage with geographic redundancy, configurable backup retention policy (30-day rolling, 90-day monthly snapshots), backup verification and integrity checking, and disaster recovery procedures documentation | mvp |
+| D-012 | Cloud Infrastructure | Fully configured and secured AWS cloud hosting environment including VPC with public and private subnets, ECS Fargate for container orchestration, RDS PostgreSQL Multi-AZ database, ElastiCache Redis cluster, S3 buckets for file storage, Application Load Balancer, CloudFront CDN, SSL/TLS certificates, CloudWatch monitoring and alerting, automated scaling policies, and security hardening following AWS best practices | mvp |
+| D-013 | Testing and Quality Assurance Report | Comprehensive testing documentation including unit test coverage report (minimum 80% code coverage), integration test results covering all API endpoints and module interactions, security penetration test results, performance test results demonstrating system meets specified performance requirements, user acceptance test results and sign-off, bug tracking log showing all identified issues and resolutions, and test environment documentation | mvp |
+| D-014 | Documentation Package | Complete documentation suite including technical architecture documentation, API documentation using Swagger/OpenAPI specification, comprehensive user guide covering all features with screenshots, administrator guide for system configuration and management, deployment and configuration documentation, database schema documentation, troubleshooting guide with common issues and solutions, and security documentation covering authentication, authorization, and data protection | mvp |
+| D-015 | Training Materials | Comprehensive training materials including minimum 10 video tutorials covering key features and workflows (5-10 minutes each), quick start guide for new users (getting started in 15 minutes), administrator quick start guide for system setup and configuration, FAQ document with answers to common questions, training materials accessible within the system through help menu, and printable training guides in PDF format | mvp |
+| D-016 | Production Deployment and Go-Live Support | Deployment of Solis application to production AWS environment, data migration from existing systems (if applicable), creation and configuration of initial user accounts, execution of go-live checklist, activation of system monitoring and alerting, provision of 2 weeks of intensive post-launch support including bug fixes and user assistance, and Client sign-off on successful deployment and system acceptance | mvp |
 
 ### 2.3 In Scope
 
-- User authentication and role management
-- Data security and backup
-- Workflow management
+- Requirements gathering, analysis, and documentation with Client collaboration
+- System architecture design and technical specification documentation
+- Database schema design with entity relationships and data model
+- UI/UX design including wireframes and high-fidelity mockups for all screens
+- User authentication and authorization system with role-based access control (5+ roles)
+- Project management dashboard with task management and real-time status tracking
+- Document management system with version control, search, and access controls
+- Resource allocation and capacity planning tools with utilization tracking
+- Reporting and analytics with 10+ standard reports and executive dashboard
+- Comprehensive audit logging and compliance tracking with 7-year retention
+- Email and in-app notification system with user preference management
+- User profile management with self-service capabilities
+- Data export in CSV and Excel formats with permission-based access
+- Automated daily backup system with encrypted storage and 30/90-day retention
+- AWS cloud infrastructure setup, configuration, and security hardening
+- Responsive web design supporting desktop, tablet, and mobile browsers
+- Comprehensive testing including unit, integration, security, and performance testing
+- Complete documentation including technical, user, and administrator guides
+- API documentation using Swagger/OpenAPI specification
+- Training materials including 10+ video tutorials, quick start guides, and FAQs
+- Production deployment to AWS infrastructure
+- Data migration support for existing project and document data (if applicable)
+- Two weeks of intensive post-launch support including bug fixes and user assistance
+- Knowledge transfer sessions with Client IT team
+- Source code delivery with repository access and deployment documentation
 
 ### 2.4 Out of Scope
 
-- Hardware procurement
-- Long-term maintenance and support outside current scope
+- Specialized aerospace/defense certifications (ITAR, EAR, AS9100) - can be addressed in future phases
+- Integration with ClickUp or other third-party project management tools - planned for Phase 2
+- Native mobile applications for iOS and Android - planned for future phase, responsive web design included
+- 24/7 support and monitoring - MVP includes business hours support only (9 AM - 5 PM AEST, Monday-Friday)
+- On-premise deployment option - solution is cloud-based only for cost-effectiveness
+- Custom hardware integration or specialized equipment interfaces
+- Advanced AI/ML features including predictive analytics and machine learning insights - planned for Phase 2
+- Multi-language support beyond English - can be added in future phases
+- Delivery of end-user training sessions - Provider delivers training materials, Client conducts training
+- Ongoing maintenance and support beyond 2-week post-launch period - requires separate maintenance agreement
+- Custom report builder allowing users to create ad-hoc reports - planned for Phase 2
+- Advanced workflow automation and business process management - planned for Phase 2
+- Single Sign-On (SSO) integration with enterprise identity providers - planned for Phase 2
+- Multi-factor authentication (MFA) - planned as optional add-on
+- Real-time collaboration features (simultaneous editing, presence indicators) - planned for Phase 2
+- Advanced data analytics and business intelligence dashboards - planned for Phase 2
+- Customization of user interface themes and branding beyond logo - planned for Phase 2
+- Integration with accounting or ERP systems - planned for future phases
+- Automated compliance reporting for specific regulatory frameworks - planned for future phases
+- Video conferencing or communication tools integration - planned for Phase 2
 
 ### 2.5 Assumptions
 
-- Client will provide necessary access and data
-- Requirements will be clarified during planning
+- Hamza Farooq has full decision-making authority for requirements approval, design approval, and project acceptance on behalf of Client
+- Client will provide timely feedback on all deliverables requiring approval within 3 Business Days of submission
+- Client has adequate internet infrastructure and bandwidth to support cloud-based application for 45 concurrent users
+- Client will provide test data, use cases, and participate actively in user acceptance testing
+- No specialized aerospace/defense certifications (ITAR, EAR, AS9100) are required for MVP deployment
+- Client will handle end-user training using provided training materials, documentation, and video tutorials
+- Client has internal IT resources available for basic user support and system administration post-deployment
+- Standard business hours support (9 AM - 5 PM AEST, Monday-Friday) is sufficient for MVP operations
+- Client will provide access to existing systems and data if integration or migration is required
+- AWS infrastructure costs will be billed directly to Client's AWS account separate from development costs
+- Client organization structure and user roles are relatively stable and will not change significantly during development
+- Client has necessary licenses for any third-party software or services required for system operation
+- Project timeline assumes no major scope changes; changes will be managed through formal Change Request process
+- Client stakeholders will be available for weekly status meetings, bi-weekly sprint demos, and design review sessions
+- Development team will have uninterrupted access to required development tools, services, and environments
+- No dependencies on external systems beyond standard AWS services and email delivery
+- Client will designate appropriate users for UAT participation and provide feedback in timely manner
+- English language support is sufficient for all users; no multi-language support required for MVP
 
 ---
 
 ## 3. TIMELINE
 
-**3.1 Commencement Date:** To be determined upon signing
+**3.1 Commencement Date:** To be determined upon signing of this Agreement. Project will commence within 5 Business Days of Effective Date and receipt of initial payment.
 
-**3.2 Estimated Duration:** 14 weeks
+**3.2 Estimated Duration:** 14 weeks from commencement date to final delivery and completion of post-launch support period
 
 ### 3.3 Milestones
 
 | ID | Milestone | Target | Deliverables |
 |----|-----------|--------|--------------|
-| M-001 | Design Approval | Week 2 from commencement | D-001 |
-| M-002 | Development Completion | Week 8 from commencement | D-002 |
-| M-003 | Deployment and Acceptance | Week 14 from commencement | D-003 |
+| M-001 | Project Kickoff and Requirements Approval | Week 1 from commencement | D-001 |
+| M-002 | Design Approval | Week 2 from commencement | D-002 |
+| M-003 | Foundation Complete | Week 4 from commencement | D-003, D-012 |
+| M-004 | Core Features Alpha | Week 7 from commencement | D-004, D-005, D-009, D-010 |
+| M-005 | Feature Complete | Week 9 from commencement | D-006, D-007, D-008, D-011 |
+| M-006 | UAT Ready | Week 11 from commencement | D-013 |
+| M-007 | Production Go-Live | Week 13 from commencement | D-014, D-015, D-016 |
+| M-008 | Project Closure | Week 14 from commencement | All deliverables |
 
 ### 3.4 Delays
 
-Delays caused by scope changes, unforeseen circumstances, or client delays will be communicated promptly. The Parties will agree on adjustments to schedule or scope as necessary.
+If Provider is delayed in performance due to Client's failure to provide timely feedback, approvals, test data, or access to resources as required under this Agreement, Provider shall be entitled to a reasonable extension of time for performance. Provider will notify Client in writing within 2 Business Days of any delay caused by Client action or inaction. If delay exceeds 10 Business Days, Provider may suspend work until Client fulfills obligations, and timeline will be adjusted accordingly. If Provider is delayed due to Force Majeure events (as defined in Section 12), Provider shall be entitled to reasonable extension of time and shall not be liable for such delays. Provider will make reasonable efforts to mitigate impact of any delays and will communicate revised timeline to Client promptly.
 
 ---
 
 ## 4. PAYMENT TERMS
 
-**4.1 Total Contract Value:** USD 50,000.00
+**4.1 Total Contract Value:** AUD 50,000.00
 
 **4.2 Payment Structure:** Milestone-based
 
@@ -118,125 +209,134 @@ Delays caused by scope changes, unforeseen circumstances, or client delays will 
 
 | Milestone | Percentage | Amount | Trigger |
 |-----------|------------|--------|---------|
-| Design Approval | 20% | USD 10,000.00 | Upon client approval of design document |
-| Development Completion | 50% | USD 25,000.00 | Upon successful completion and acceptance of core system |
-| Deployment & Acceptance | 30% | USD 15,000.00 | Upon deployment and client acceptance |
+| Contract Signing and Project Kickoff (M-001) | 30% | AUD 15,000.00 | Upon execution of this Agreement by both parties and project commencement. Payment due within 5 Business Days of invoice date. |
+| Design Approval (M-002) | 15% | AUD 7,500.00 | Upon Client's written approval of system architecture, database schema, and UI/UX designs as specified in Deliverable D-002. Payment due within 5 Business Days of invoice date. |
+| Core Features Alpha (M-004) | 20% | AUD 10,000.00 | Upon delivery and demonstration of functional project management and document management modules as specified in Deliverables D-004 and D-005, with Client confirmation of milestone completion. Payment due within 5 Business Days of invoice date. |
+| Feature Complete (M-005) | 15% | AUD 7,500.00 | Upon completion of all MVP features and successful integration as specified in Deliverables D-006, D-007, D-008, and D-011, with Client confirmation of milestone completion. Payment due within 5 Business Days of invoice date. |
+| UAT Completion (M-006) | 10% | AUD 5,000.00 | Upon successful completion of user acceptance testing with Client sign-off, delivery of testing documentation (D-013), and confirmation that system is ready for production deployment. Payment due within 5 Business Days of invoice date. |
+| Production Go-Live and Final Delivery (M-008) | 10% | AUD 5,000.00 | Upon successful production deployment (D-016), delivery of all documentation (D-014) and training materials (D-015), completion of 2-week post-launch support period, and Client's final acceptance and sign-off on project completion. Payment due within 5 Business Days of invoice date. |
 
-**4.4 Payment Terms:** Net 30 days from invoice date
+**4.4 Payment Terms:** Net 5 Business Days from invoice date. Invoices will be sent via email to Client's designated billing contact (Hamza Farooq, hamza@horizondigital.au) upon achievement of each milestone. Payment shall be made by electronic funds transfer (EFT) to Provider's designated bank account. Client shall provide written confirmation of milestone completion within 3 Business Days of milestone achievement to trigger invoice issuance.
 
-**4.5 Late Payment:** Interest at 1.5% per month on overdue amounts
+**4.5 Late Payment:** If any payment is not received within 5 Business Days of the due date, Provider may, at its sole discretion: (a) charge interest on overdue amounts at the rate of 1.5% per month (18% per annum) or the maximum rate permitted by law, whichever is less, calculated daily from the due date until payment is received in full; (b) suspend performance of Services until payment is received; and/or (c) terminate this Agreement in accordance with Section 10 (Termination). Late payment does not waive Provider's right to receive full payment plus accrued interest. If Provider suspends Services due to late payment, timeline will be extended by the duration of suspension plus reasonable ramp-up time.
 
 ---
 
 ## 5. ACCEPTANCE PROCEDURE
 
-**5.1 Submission:** Deliverables will be submitted via agreed project management platform or email.
+**5.1 Submission:** Provider will submit each Deliverable to Client via email to Hamza Farooq (hamza@horizondigital.au) with detailed description of deliverable, reference to applicable Acceptance Criteria, instructions for review and testing, and request for acceptance or feedback. For software deliverables, Provider will provide access to staging environment with demo credentials and user guide. For documentation deliverables, Provider will provide documents in PDF and/or editable format as appropriate. Provider will schedule demonstration or walkthrough session for major deliverables if requested by Client.
 
-**5.2 Review Period:** 5 business days for review
+**5.2 Review Period:** Client shall have 5 Business Days from receipt of each Deliverable (the 'Review Period') to review, test, and evaluate the Deliverable against the specified Acceptance Criteria. Client may extend Review Period by up to 3 additional Business Days by providing written notice to Provider before expiration of initial Review Period, provided such extension is for legitimate business reasons and not used to unreasonably delay acceptance.
 
-**5.3 Acceptance Criteria:** Deliverables meet specifications and acceptance criteria; no critical issues remain.
+**5.3 Acceptance Criteria:** Each Deliverable will be deemed accepted if it meets all Acceptance Criteria specified in Schedule A (Statement of Work) for that Deliverable. Client will evaluate Deliverable against each Acceptance Criterion and confirm whether criterion is met, not met, or partially met. Acceptance occurs when: (a) Client provides written acceptance confirming Deliverable meets all Acceptance Criteria; or (b) Review Period expires without Client providing written rejection (deemed acceptance). Minor defects or cosmetic issues that do not materially impact functionality or prevent Deliverable from meeting Acceptance Criteria shall not be grounds for rejection.
 
-**5.4 Rejection Procedure:** Rejections must be documented with reasons; Provider will rectify issues within a mutually agreed timeframe.
+**5.4 Rejection Procedure:** If Client determines that a Deliverable does not meet one or more Acceptance Criteria, Client must provide written rejection notice to Provider before expiration of Review Period. Rejection notice must: (a) specifically identify which Acceptance Criteria are not met; (b) provide detailed description of deficiencies with supporting evidence (screenshots, error messages, test results); (c) specify severity of each deficiency (critical, high, medium, low); and (d) be reasonable and made in good faith. Upon receipt of valid rejection notice, Provider shall have 5 Business Days to remediate critical and high-severity deficiencies and resubmit Deliverable for acceptance. Medium and low-severity deficiencies may be addressed in subsequent release or as part of warranty support. Client shall have 3 Business Days to review resubmitted Deliverable. This process may repeat until Deliverable meets Acceptance Criteria, provided both parties are acting in good faith.
 
-**5.5 Deemed Acceptance:** If no response is provided within review period, deliverables shall be deemed accepted.
+**5.5 Deemed Acceptance:** If Client fails to provide either written acceptance or written rejection within the Review Period (including any approved extensions), the Deliverable shall be deemed accepted as of the expiration of the Review Period. Deemed acceptance has same effect as written acceptance for purposes of milestone completion, payment obligations, and warranty commencement. Provider will send reminder notice to Client 2 Business Days before Review Period expiration. Deemed acceptance does not apply if: (a) Deliverable was not actually delivered or made available to Client; (b) Client was unable to access or review Deliverable due to technical issues caused by Provider; or (c) Provider failed to provide necessary information, credentials, or documentation required for Client to evaluate Deliverable.
 
 ---
 
 ## 6. CHANGE MANAGEMENT
 
-**6.1 Change Request Process:** All change requests must be documented in writing and approved by authorized representatives of both Parties before implementation.
+**6.1 Change Request Process:** Any changes to the Scope of Work, requirements, specifications, Deliverables, timeline, or other material terms of this Agreement must be requested through formal Change Request process. Either party may initiate Change Request by completing Change Request Form (to be provided by Provider) including: (a) detailed description of proposed change; (b) business justification and rationale for change; (c) impact on existing functionality and dependencies; (d) priority level (critical, high, medium, low); (e) requested implementation timeline; and (f) acknowledgment that change may impact project timeline and budget. Change Requests must be submitted in writing via email to designated project contacts. Minor clarifications, bug fixes within existing functionality, and adjustments that do not materially alter Deliverables or timeline do not require formal Change Request.
 
-**6.2 Impact Assessment:** Provider will assess impact on scope, schedule, and cost and communicate to the Client for approval.
+**6.2 Impact Assessment:** Upon receipt of Change Request, Provider shall conduct impact assessment within 3 Business Days and provide written response including: (a) technical feasibility analysis; (b) estimated effort in hours/days; (c) impact on project timeline and milestones; (d) impact on project budget with cost estimate for additional work; (e) impact on existing functionality, architecture, and dependencies; (f) impact on testing, documentation, and training requirements; (g) recommended approach for implementation; and (h) risks and considerations. For complex changes requiring more than 3 days to assess, Provider will provide preliminary assessment within 3 Business Days and detailed assessment within 7 Business Days. Impact assessment is provided at no additional cost to Client.
 
-**6.3 Approval Process:** Changes are approved when both Parties sign a Change Order.
+**6.3 Approval Process:** Following impact assessment, Client shall review and decide whether to: (a) approve Change Request and proceed with implementation; (b) reject Change Request and maintain original scope; (c) defer Change Request to future phase; or (d) request modifications to proposed change. Client must provide decision in writing within 5 Business Days of receiving impact assessment. If Change Request requires additional budget beyond Total Contract Value or extends timeline by more than 2 weeks, both parties' authorized representatives must sign written Change Order amendment to this Agreement before implementation begins. Change Order shall specify: revised Scope of Work, revised timeline and milestones, additional costs and payment terms, and any other modified terms. Minor changes not materially affecting timeline or budget may be approved via email by Client's designated representative (Hamza Farooq). Provider will not begin work on approved Change Request until: (a) Change Order is fully executed (for material changes); or (b) written approval is received (for minor changes). Approved changes will be incorporated into project plan and tracked separately from original scope.
 
-**6.4 Pricing for Changes:** Additional work outside scope will be billed at agreed rates or as per separate Change Order.
+**6.4 Pricing for Changes:** N/A
 
 ---
 
 ## 7. INTELLECTUAL PROPERTY
 
-**7.1 Ownership:** All intellectual property rights in the work product shall be owned by the Client upon full payment, subject to pre-existing rights.
+**7.1 Ownership:** Upon Client's payment in full of all amounts due under this Agreement, Client shall own all right, title, and interest in and to the Work Product, including all intellectual property rights therein. 'Work Product' includes all custom software code, database schemas, configurations, documentation, designs, and other materials created specifically for Client under this Agreement. This assignment of ownership is effective upon final payment and includes the right to use, modify, distribute, sublicense, and create derivative works.
 
-**7.2 Work Product:** Provider grants Client a perpetual, non-exclusive license to use the work product.
+**7.2 Work Product:** Provider hereby assigns to Client all right, title, and interest in and to the Work Product, including all copyrights, patents, trade secrets, and other intellectual property rights, effective upon Client's payment in full. Provider will execute any additional documents reasonably necessary to perfect Client's ownership rights. Work Product includes: (a) all custom source code written for the Solis application; (b) database schemas and data models designed for Client; (c) custom UI/UX designs and visual assets created for Client; (d) technical documentation, user guides, and training materials; (e) configuration files and deployment scripts; and (f) any other materials created specifically for Client as part of the Services. Provider retains no rights to Work Product except as specified in License Grants below.
 
-**7.3 Pre-existing IP:** Provider retains rights to any pre-existing IP used in the project; Client receives a license to use such IP solely for the project purpose.
+**7.3 Pre-existing IP:** Provider retains all right, title, and interest in and to any pre-existing intellectual property, tools, frameworks, libraries, utilities, code snippets, and methodologies that: (a) were developed by Provider prior to this Agreement; (b) are Provider's general-purpose tools or frameworks; or (c) are Provider's proprietary methodologies or processes ('Provider IP'). Provider IP includes but is not limited to: development frameworks, code libraries, testing tools, deployment scripts, and general software development methodologies. Provider grants Client a perpetual, irrevocable, worldwide, non-exclusive, royalty-free license to use Provider IP to the extent it is incorporated into or necessary for use of the Work Product. Provider may continue to use Provider IP for other clients and projects.
 
-**7.4 Third-Party IP:** Provider warrants that third-party components used are properly licensed.
+**7.4 Third-Party IP:** The Solis application incorporates certain third-party open-source software components and libraries ('Third-Party Components') including but not limited to: React, Django, PostgreSQL, Redis, and various npm and Python packages. All Third-Party Components are licensed under their respective open-source licenses (MIT, Apache 2.0, BSD, etc.). Provider represents that all Third-Party Components used in the Work Product are properly licensed and compatible with Client's intended use. Provider will provide Client with complete list of Third-Party Components and their licenses as part of technical documentation. Client is responsible for complying with all Third-Party Component license terms. Provider makes no warranties regarding Third-Party Components beyond those provided by their respective licensors.
 
-**7.5 License Grants:** Provider grants Client necessary licenses for the use of deliverables.
+**7.5 License Grants:** Provider grants Client a perpetual, irrevocable, worldwide, non-exclusive, royalty-free, fully paid-up license (with right to sublicense) to use, reproduce, modify, distribute, and create derivative works of any Provider IP incorporated into the Work Product, solely to the extent necessary for Client's use, maintenance, and enhancement of the Solis application. This license includes the right to: (a) modify and enhance the application; (b) engage third-party developers to maintain or enhance the application; (c) deploy the application for Client's internal business purposes; and (d) create backup copies. Client may not: (a) use Provider IP independently of the Solis application; (b) provide Provider IP to third parties as standalone product; or (c) use Provider IP to compete with Provider's business.
 
 ---
 
 ## 8. CONFIDENTIALITY
 
-**8.1 Definition:** Confidential Information includes all non-public information disclosed by either Party.
+**8.1 Definition:** Confidential Information means any information disclosed by one party ('Disclosing Party') to the other party ('Receiving Party'), whether orally, in writing, or in electronic form, that: (a) is designated as 'Confidential' or with similar marking; (b) would reasonably be understood to be confidential given the nature of the information and circumstances of disclosure; or (c) includes but is not limited to: business plans, strategies, financial information, customer data, user information, technical data, source code, algorithms, designs, specifications, product roadmaps, pricing information, marketing plans, and trade secrets. For Provider, Confidential Information includes all Work Product prior to Client's payment in full. For Client, Confidential Information includes all business information, user data, and proprietary information about Client's operations.
 
-**8.2 Obligations:** Parties shall keep Confidential Information confidential and not disclose to third parties without prior consent.
+**8.2 Obligations:** Receiving Party shall: (a) hold Confidential Information in strict confidence using at least the same degree of care it uses to protect its own confidential information, but in no event less than reasonable care; (b) not disclose Confidential Information to any third party except as permitted under this Agreement; (c) use Confidential Information solely for purposes of performing or receiving Services under this Agreement; (d) limit access to Confidential Information to employees, contractors, and advisors who have legitimate need to know and who are bound by confidentiality obligations at least as protective as this Agreement; (e) not reverse engineer, disassemble, or decompile any Confidential Information; and (f) promptly notify Disclosing Party of any unauthorized disclosure or use of Confidential Information. Receiving Party may disclose Confidential Information to the extent required by law, court order, or government regulation, provided Receiving Party: (i) gives Disclosing Party prompt written notice of such requirement; (ii) cooperates with Disclosing Party's efforts to seek protective order or other appropriate remedy; and (iii) discloses only the minimum Confidential Information required.
 
-**8.3 Exceptions:** ['Information already known publicly', 'Information independently developed', 'Information disclosed with prior approval']
+**8.3 Exceptions:** Confidential Information does not include information that: (a) is or becomes publicly available through no breach of this Agreement by Receiving Party; (b) was rightfully in Receiving Party's possession prior to disclosure by Disclosing Party, as evidenced by written records; (c) is rightfully received by Receiving Party from a third party without breach of confidentiality obligation; (d) is independently developed by Receiving Party without use of or reference to Confidential Information, as evidenced by written records; or (e) is approved for release by written authorization of Disclosing Party. Receiving Party bears burden of proving that information falls within one of these exceptions.
 
-**8.4 Duration:** Confidentiality obligations shall survive for 3 years after termination.
+**8.4 Duration:** Confidentiality obligations shall survive for 5 years from the date of disclosure of each item of Confidential Information, except that: (a) obligations regarding trade secrets shall continue for as long as information remains a trade secret under applicable law; (b) obligations regarding source code shall continue perpetually; and (c) obligations regarding personal data and user information shall continue perpetually or as required by applicable privacy laws. Upon termination of this Agreement or upon Disclosing Party's written request, Receiving Party shall promptly return or destroy (at Disclosing Party's option) all Confidential Information in tangible form and permanently delete all electronic copies, except that Receiving Party may retain one archival copy for legal compliance purposes, subject to continuing confidentiality obligations.
 
 ---
 
 ## 9. WARRANTIES
 
 **9.1 Provider Warranties:**
-- Work will conform to specifications and accepted standards
-- Provider has the right to license the work and grant rights herein
+- Provider warrants that it has the right and authority to enter into this Agreement and to grant the rights granted herein, and that performance of Services will not violate any agreement with third parties
+- Provider warrants that the Work Product will be original work of Provider or its employees/contractors (except for Third-Party Components), will not infringe any third-party intellectual property rights, and will be free from any liens, encumbrances, or claims
+- Provider warrants that Services will be performed in professional and workmanlike manner consistent with industry standards and best practices for software development
+- Provider warrants that Work Product will materially conform to specifications and Acceptance Criteria set forth in Schedule A (Statement of Work) as of the date of acceptance
+- Provider warrants that it will comply with all applicable laws and regulations in performance of Services, including data protection and privacy laws
+- Provider warrants that all Provider personnel performing Services have necessary skills, qualifications, and experience to perform their assigned tasks
+- Provider warrants that Work Product will be free from viruses, malware, backdoors, and other malicious code at time of delivery
+- Provider warrants that it has implemented reasonable security measures to protect Client's Confidential Information during development process
 
-**9.2 Warranty Period:** 12 months from acceptance of final deliverable
+**9.2 Warranty Period:** Provider provides a warranty period of 90 days from the date of final acceptance of each Deliverable (the 'Warranty Period'). During the Warranty Period, Provider will, at no additional cost to Client, correct any defects, errors, or failures of the Work Product to materially conform to the specifications and Acceptance Criteria. 'Defect' means reproducible failure of Work Product to perform substantially in accordance with specifications, excluding issues caused by: (a) Client modifications to Work Product; (b) Client's failure to implement Provider's updates or patches; (c) use of Work Product in manner not contemplated by specifications; (d) third-party software or hardware failures; (e) Client's operating environment; or (f) Force Majeure events.
 
-**9.3 Warranty Remedies:** Provider shall correct defects or non-conformities at no additional cost during warranty period.
+**9.3 Warranty Remedies:** Client's exclusive remedy for breach of warranty is Provider's obligation to use commercially reasonable efforts to correct Defects during Warranty Period. Client must report Defects to Provider in writing with detailed description, steps to reproduce, and supporting evidence (screenshots, logs, error messages) within Warranty Period. Provider will acknowledge receipt within 1 Business Day and provide initial assessment within 3 Business Days. Provider will prioritize Defects as follows: (a) Critical (system down, data loss, security breach): response within 4 hours, resolution target 24 hours; (b) High (major feature not working, significant performance degradation): response within 1 Business Day, resolution target 5 Business Days; (c) Medium (minor feature issue, workaround available): response within 2 Business Days, resolution target 10 Business Days; (d) Low (cosmetic issue, minor inconvenience): response within 3 Business Days, resolution as time permits. If Provider is unable to correct material Defect within reasonable time after good faith efforts, Client may elect to: (i) accept Work Product with Defect and receive equitable reduction in price; or (ii) terminate this Agreement and receive refund of fees paid for non-conforming Deliverable, less reasonable value of any benefit received.
 
-**9.4 Disclaimer:** Except as expressly provided, no other warranties are made, including implied warranties of merchantability or fitness for a particular purpose.
+**9.4 Disclaimer:** EXCEPT AS EXPRESSLY SET FORTH IN THIS SECTION 8, PROVIDER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR PARTICULAR PURPOSE, TITLE, OR NON-INFRINGEMENT. PROVIDER DOES NOT WARRANT THAT WORK PRODUCT WILL BE ERROR-FREE, UNINTERRUPTED, OR MEET CLIENT'S SPECIFIC REQUIREMENTS BEYOND SPECIFICATIONS IN SCHEDULE A. PROVIDER DOES NOT WARRANT PERFORMANCE, RELIABILITY, OR AVAILABILITY OF THIRD-PARTY COMPONENTS, AWS INFRASTRUCTURE, OR INTERNET CONNECTIVITY. PROVIDER IS NOT RESPONSIBLE FOR DATA LOSS, SECURITY BREACHES, OR OTHER ISSUES RESULTING FROM CLIENT'S FAILURE TO IMPLEMENT REASONABLE SECURITY MEASURES, BACKUP PROCEDURES, OR FOLLOW PROVIDER'S RECOMMENDATIONS. CLIENT ACKNOWLEDGES THAT SOFTWARE DEVELOPMENT INVOLVES INHERENT RISKS AND UNCERTAINTIES, AND THAT PROVIDER CANNOT GUARANTEE SPECIFIC RESULTS OR OUTCOMES. CLIENT IS RESPONSIBLE FOR EVALUATING WORK PRODUCT FOR CLIENT'S INTENDED USE AND FOR IMPLEMENTING APPROPRIATE TESTING, BACKUP, AND DISASTER RECOVERY PROCEDURES.
 
 ---
 
 ## 10. SUPPORT AND MAINTENANCE
 
-**10.1 Warranty Support:** Support during warranty period as specified.
+**10.1 Warranty Support:** During the 90-day Warranty Period following final acceptance, Provider will provide warranty support at no additional cost as described in Section 8 (Warranties). Warranty support includes: (a) correction of Defects as defined in warranty section; (b) response to Client inquiries regarding Work Product functionality; (c) assistance with issues related to deployment or configuration; (d) provision of patches or updates to correct Defects; and (e) email and phone support during Business Hours (9 AM - 5 PM AEST, Monday-Friday, excluding Australian public holidays). Warranty support does not include: (i) new feature development; (ii) modifications to requirements or specifications; (iii) training or consulting services; (iv) support for Third-Party Components beyond Provider's reasonable efforts; (v) support for Client modifications to Work Product; or (vi) issues caused by Client's operating environment or third-party systems.
 
-**10.2 Post-Warranty Support:** Support options available at additional cost.
+**10.2 Post-Warranty Support:** After expiration of Warranty Period, Client may engage Provider for ongoing support and maintenance services under separate agreement. Provider offers flexible support packages including: (a) Basic Support: email support during Business Hours, bug fixes for critical issues, security patches, response time 2 Business Days, estimated cost $2,000 AUD per month; (b) Standard Support: email and phone support during Business Hours, bug fixes for all severity levels, security patches, minor enhancements, response time 1 Business Day for critical issues, estimated cost $3,500 AUD per month; (c) Premium Support: 24/7 email and phone support, priority bug fixes, security patches, minor enhancements, proactive monitoring, response time 4 hours for critical issues, estimated cost $6,000 AUD per month; (d) Time and Materials: ad-hoc support billed at Provider's standard hourly rates, no monthly commitment. All support packages include AWS infrastructure monitoring and optimization recommendations. Detailed support terms, service level agreements, and pricing will be documented in separate Maintenance and Support Agreement.
 
-**10.3 Service Levels:** Service levels and response times to be defined in separate support agreement.
+**10.3 Service Levels:** During the 2-week post-launch support period included in this Agreement, Provider commits to following service levels: (a) Critical issues (system down, data loss, security breach): 4-hour response time, 24-hour resolution target, available 24/7 via emergency contact; (b) High-priority issues (major feature not working, significant performance degradation): 1 Business Day response time, 3 Business Day resolution target; (c) Medium-priority issues (minor feature issue, workaround available): 2 Business Day response time, 5 Business Day resolution target; (d) Low-priority issues (cosmetic issue, minor inconvenience): 3 Business Day response time, resolution as time permits. Response time means Provider's acknowledgment of issue and initial assessment. Resolution target means Provider's good faith effort to resolve issue, not guaranteed resolution time. Service levels apply during Business Hours except for critical issues which have 24/7 coverage during post-launch period.
 
-**10.4 Maintenance Options:** Available upon mutual agreement post-deployment.
+**10.4 Maintenance Options:** Provider offers following maintenance and enhancement options for consideration after Warranty Period: (a) Security Updates: quarterly security patches and updates to address vulnerabilities, estimated $1,500 AUD per quarter; (b) Feature Enhancements: development of new features or enhancements to existing features, quoted on time and materials basis at standard rates; (c) Performance Optimization: analysis and optimization of system performance, database tuning, code optimization, estimated $5,000 AUD per engagement; (d) Infrastructure Management: ongoing management of AWS infrastructure including monitoring, scaling, cost optimization, estimated $1,500 AUD per month; (e) Compliance Updates: updates required for new regulatory requirements or compliance standards, quoted based on scope; (f) Third-Party Integration: integration with additional third-party systems or services, quoted based on complexity. All maintenance and enhancement work will be documented in separate Statement of Work with defined scope, timeline, and pricing.
 
 ---
 
 ## 11. LIMITATION OF LIABILITY
 
-**11.1 Liability Cap:** Total liability shall not exceed the total contract value of $50,000.
+**11.1 Liability Cap:** EXCEPT FOR BREACHES OF SECTION 7 (CONFIDENTIALITY) OR SECTION 9 (INTELLECTUAL PROPERTY), OR FOR GROSS NEGLIGENCE OR WILLFUL MISCONDUCT, EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT, WHETHER IN CONTRACT, TORT, OR OTHERWISE, SHALL NOT EXCEED THE TOTAL AMOUNT PAID OR PAYABLE BY CLIENT TO PROVIDER UNDER THIS AGREEMENT (I.E., $50,000 AUD). THIS LIMITATION APPLIES TO ALL CLAIMS COLLECTIVELY, NOT TO EACH CLAIM INDIVIDUALLY. FOR BREACHES OF CONFIDENTIALITY OR INTELLECTUAL PROPERTY PROVISIONS, LIABILITY SHALL NOT EXCEED THREE TIMES THE TOTAL CONTRACT VALUE ($150,000 AUD).
 
-**11.2 Exclusions:** ['Indirect, incidental, consequential damages', 'Loss of profits, data, or business opportunities']
+**11.2 Exclusions:** THE LIABILITY CAP IN THIS SECTION DOES NOT APPLY TO: (A) EITHER PARTY'S INDEMNIFICATION OBLIGATIONS UNDER THIS AGREEMENT; (B) CLIENT'S PAYMENT OBLIGATIONS FOR SERVICES RENDERED; (C) CLAIMS FOR BODILY INJURY OR DEATH CAUSED BY A PARTY'S NEGLIGENCE; (D) CLAIMS ARISING FROM FRAUD, CRIMINAL ACTS, OR WILLFUL MISCONDUCT; (E) BREACHES OF CONFIDENTIALITY OBLIGATIONS REGARDING TRADE SECRETS; (F) PROVIDER'S INFRINGEMENT OF THIRD-PARTY INTELLECTUAL PROPERTY RIGHTS; OR (G) VIOLATIONS OF APPLICABLE DATA PROTECTION OR PRIVACY LAWS. THESE EXCLUSIONS ENSURE THAT PARTIES REMAIN FULLY LIABLE FOR THEIR MOST SERIOUS BREACHES AND OBLIGATIONS.
 
-**11.3 Consequential Damages:** Parties shall not be liable for consequential damages.
+**11.3 Consequential Damages:** EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INTELLECTUAL PROPERTY PROVISIONS, OR FOR GROSS NEGLIGENCE OR WILLFUL MISCONDUCT, IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO: LOSS OF PROFITS, LOSS OF REVENUE, LOSS OF BUSINESS OPPORTUNITIES, LOSS OF DATA, LOSS OF GOODWILL, BUSINESS INTERRUPTION, OR COST OF SUBSTITUTE SERVICES, EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION APPLIES REGARDLESS OF THE FORM OF ACTION, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, OR OTHERWISE. CLIENT ACKNOWLEDGES THAT THE FEES CHARGED BY PROVIDER REFLECT THIS ALLOCATION OF RISK AND LIMITATION OF LIABILITY, AND THAT PROVIDER WOULD NOT ENTER INTO THIS AGREEMENT WITHOUT THESE LIMITATIONS.
 
 ---
 
 ## 12. TERMINATION
 
-**12.1 Termination for Convenience:** Either Party may terminate upon 30 days written notice.
+**12.1 Termination for Convenience:** Either party may terminate this Agreement for convenience upon 30 days' prior written notice to the other party, provided that: (a) Client shall pay Provider for all Services performed and expenses incurred up to the effective date of termination, including work-in-progress valued at the percentage of completion for the current milestone; (b) if Client terminates for convenience, Client shall pay Provider a termination fee equal to 20% of the remaining unpaid contract value to compensate Provider for lost opportunity and demobilization costs; (c) if Provider terminates for convenience, Provider shall refund to Client any prepaid fees for Services not yet performed, and shall not be entitled to any termination fee. Termination for convenience is not available: (i) after commencement of final milestone (Production Go-Live); (ii) during active user acceptance testing; or (iii) if terminating party is in material breach of this Agreement.
 
-**12.2 Termination for Cause:** Immediate termination if the other Party breaches material obligations and fails to cure within 15 days.
+**12.2 Termination for Cause:** Either party may terminate this Agreement for cause immediately upon written notice if: (a) the other party materially breaches this Agreement and fails to cure such breach within 15 days after receiving written notice specifying the breach; (b) the other party becomes insolvent, makes an assignment for benefit of creditors, files for bankruptcy, or has bankruptcy proceedings instituted against it; (c) the other party ceases to conduct business in normal course; or (d) the other party engages in fraud, gross negligence, or willful misconduct. Material breaches by Client include: (i) failure to pay undisputed invoices within 30 days of due date; (ii) failure to provide required approvals, feedback, or access to resources causing delays exceeding 30 days; (iii) breach of confidentiality obligations; or (iv) unauthorized use or distribution of Work Product. Material breaches by Provider include: (i) failure to deliver Deliverables within 30 days of scheduled milestone dates without valid reason; (ii) delivery of Work Product that materially fails to meet specifications after reasonable opportunity to cure; (iii) breach of confidentiality obligations; (iv) infringement of third-party intellectual property rights; or (v) abandonment of project without notice.
 
-**12.3 Effects of Termination:** Provider shall deliver all completed work, and Client shall pay for all work performed up to termination.
+**12.3 Effects of Termination:** Upon termination of this Agreement for any reason: (a) Provider shall immediately cease all work on the project except as necessary to transition work to Client or third party; (b) Client shall pay Provider for all Services performed and expenses incurred through the effective date of termination, including work-in-progress valued at percentage of completion; (c) Provider shall deliver to Client all Work Product completed as of termination date, including source code, documentation, and work-in-progress, in whatever state of completion; (d) Provider shall return or destroy all Client Confidential Information in Provider's possession; (e) Client shall return or destroy all Provider Confidential Information in Client's possession; (f) if termination is by Client for cause due to Provider's material breach, Client shall be entitled to refund of fees paid for non-delivered or non-conforming Deliverables; (g) if termination is by Provider for cause due to Client's material breach (including non-payment), Provider shall be entitled to payment of all unpaid fees plus interest and collection costs; (h) intellectual property rights shall vest as follows: (i) if Client has paid in full for completed Deliverables, Client owns those Deliverables; (ii) if Client has not paid in full, Provider retains ownership until payment received; (iii) work-in-progress remains Provider's property until paid for.
 
-**12.4 Survival:** ['Confidentiality', 'Intellectual Property Rights', 'Dispute Resolution']
+**12.4 Survival:** The following provisions shall survive termination or expiration of this Agreement: Section 7 (Confidentiality), Section 9 (Intellectual Property) to the extent necessary to protect each party's rights, Section 8 (Warranties) for the applicable Warranty Period, Section 11 (Limitation of Liability), Section 12 (Indemnification), Section 13 (Dispute Resolution), Section 14 (General Provisions), and any payment obligations accrued prior to termination. Survival of these provisions is necessary to protect the parties' rights and ensure orderly conclusion of the relationship.
 
 ---
 
 ## 13. DISPUTE RESOLUTION
 
-**13.1 Governing Law:** This Agreement shall be governed by the laws of [Jurisdiction].
+**13.1 Governing Law:** This Agreement shall be governed by and construed in accordance with the laws of the State of New South Wales, Australia, without regard to its conflicts of law principles. The parties hereby submit to the exclusive jurisdiction of the courts located in Sydney, New South Wales, Australia for resolution of any disputes arising under this Agreement. The United Nations Convention on Contracts for the International Sale of Goods shall not apply to this Agreement.
 
-**13.2 Negotiation:** Parties shall attempt to resolve disputes amicably within 15 days.
+**13.2 Negotiation:** In the event of any dispute, controversy, or claim arising out of or relating to this Agreement or the breach, termination, or validity thereof ('Dispute'), the parties agree to first attempt to resolve the Dispute through good faith negotiations. Either party may initiate negotiations by providing written notice to the other party describing the Dispute in reasonable detail. Within 5 Business Days of such notice, senior representatives of both parties with authority to settle the Dispute shall meet (in person or via video conference) and attempt in good faith to negotiate a resolution. The parties shall negotiate for a period of at least 15 Business Days before pursuing other remedies. All negotiations shall be confidential and treated as compromise and settlement negotiations for purposes of applicable rules of evidence.
 
-**13.3 Mediation:** If unresolved, disputes shall be submitted to mediation.
+**13.3 Mediation:** If the parties are unable to resolve the Dispute through negotiation within 15 Business Days (or such longer period as the parties may agree), either party may refer the Dispute to mediation by providing written notice to the other party. The parties shall jointly select a mediator within 10 Business Days of the mediation notice. If the parties cannot agree on a mediator, either party may request appointment of a mediator by the Australian Disputes Centre (ADC) or similar mediation service. Mediation shall be conducted in Sydney, New South Wales, Australia (or via video conference if parties agree). The parties shall share the costs of mediation equally. Each party shall participate in mediation in good faith with representatives having settlement authority. Mediation shall be confidential, and all communications during mediation shall be treated as settlement negotiations. If the Dispute is not resolved within 30 days after commencement of mediation (or such longer period as the parties may agree), either party may proceed to litigation.
 
-**13.4 Arbitration/Litigation:** If mediation fails, disputes shall be finally resolved by binding arbitration or litigation in [Jurisdiction].
+**13.4 Arbitration/Litigation:** If the Dispute is not resolved through negotiation and mediation as described above, either party may commence litigation in the courts of New South Wales, Australia as specified in the Governing Law section. The parties expressly waive any right to jury trial. Notwithstanding the foregoing, either party may seek injunctive or equitable relief in any court of competent jurisdiction to prevent irreparable harm, including but not limited to breaches of confidentiality or intellectual property provisions. The prevailing party in any litigation shall be entitled to recover its reasonable attorneys' fees and costs from the non-prevailing party.
 
 ---
 
@@ -244,39 +344,63 @@ Delays caused by scope changes, unforeseen circumstances, or client delays will 
 
 **14.1 Entire Agreement**
 
-This Agreement, including all schedules and attachments, constitutes the entire understanding between the Parties.
+This Agreement, including all Schedules and attachments hereto, constitutes the entire agreement between the parties regarding the subject matter hereof and supersedes all prior or contemporaneous agreements, understandings, negotiations, representations, and proposals, whether written or oral, between the parties regarding such subject matter. No amendment, modification, or waiver of any provision of this Agreement shall be effective unless in writing and signed by authorized representatives of both parties. The parties acknowledge that they have not relied on any representations, warranties, or agreements not expressly set forth in this Agreement.
 
 **14.2 Amendment**
 
-Any amendments must be in writing and signed by authorized representatives of both Parties.
+This Agreement may be amended or modified only by written instrument signed by authorized representatives of both parties. Minor administrative changes (such as updates to contact information, billing addresses, or project contacts) may be made by email notice to the other party without requiring formal amendment. Material changes to Scope of Work, timeline, pricing, or other substantive terms require formal Change Order executed by both parties as described in Section 6 (Change Management). Any purported amendment or modification not made in accordance with this section shall be null and void.
 
 **14.3 Assignment**
 
-Neither Party shall assign this Agreement without prior written consent of the other.
+Neither party may assign, transfer, or delegate this Agreement or any of its rights or obligations hereunder without the prior written consent of the other party, which consent shall not be unreasonably withheld. Notwithstanding the foregoing, either party may assign this Agreement without consent: (a) to an affiliate or subsidiary; (b) in connection with a merger, acquisition, corporate reorganization, or sale of all or substantially all of its assets; or (c) to a successor entity. Any attempted assignment in violation of this section shall be null and void. This Agreement shall be binding upon and inure to the benefit of the parties and their permitted successors and assigns. Provider may engage subcontractors to perform Services provided that: (i) Provider remains fully responsible for performance of all Services; (ii) subcontractors are bound by confidentiality and intellectual property obligations at least as protective as this Agreement; and (iii) Provider provides Client with notice of any subcontractors engaged on the project.
 
 **14.4 Force Majeure**
 
-Neither Party shall be liable for delays or failure to perform due to causes beyond their reasonable control.
+Neither party shall be liable for any failure or delay in performance of its obligations under this Agreement (except payment obligations) to the extent such failure or delay is caused by events beyond its reasonable control, including but not limited to: acts of God, natural disasters, war, terrorism, civil unrest, labor disputes, epidemics, pandemics, government actions, power failures, internet or telecommunications failures, or failures of third-party hosting providers ('Force Majeure Event'). The party affected by a Force Majeure Event shall: (a) promptly notify the other party in writing of the Force Majeure Event and its expected duration; (b) use commercially reasonable efforts to mitigate the effects of the Force Majeure Event and resume performance as soon as practicable; and (c) provide regular updates on status and expected resolution. If a Force Majeure Event continues for more than 30 days, either party may terminate this Agreement upon written notice without liability, except that Client shall pay for Services performed prior to termination.
 
 **14.5 Notices**
 
-All notices shall be in writing and delivered via email or courier to the addresses specified.
+All notices, requests, demands, and other communications required or permitted under this Agreement shall be in writing and shall be deemed to have been duly given: (a) when delivered personally; (b) when sent by confirmed email transmission; (c) one Business Day after being sent by reputable overnight courier service; or (d) three Business Days after being mailed by registered or certified mail, return receipt requested, postage prepaid. Notices shall be sent to the addresses set forth in the preamble of this Agreement or to such other address as either party may designate by written notice to the other party. For routine project communications, email to the designated project contacts shall be sufficient. For legal notices (including termination, breach, or dispute notices), notices must be sent to the parties' legal representatives at the addresses specified.
+
+**14.6 Severability**
+
+If any provision of this Agreement is held to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such provision shall be modified to the minimum extent necessary to make it valid and enforceable while preserving the parties' original intent, or if such modification is not possible, such provision shall be severed from this Agreement. The remaining provisions of this Agreement shall continue in full force and effect and shall not be affected by the invalid, illegal, or unenforceable provision or by its severance. The parties agree to negotiate in good faith to replace any invalid, illegal, or unenforceable provision with a valid, legal, and enforceable provision that achieves the original intent of the parties to the greatest extent possible.
+
+**14.7 Waiver**
+
+No waiver of any provision of this Agreement shall be effective unless in writing and signed by the party against whom the waiver is sought to be enforced. No waiver of any breach or default shall be deemed a waiver of any subsequent breach or default of the same or any other provision. The failure of either party to enforce any provision of this Agreement shall not be construed as a waiver of such provision or the right to enforce it at a later time. The rights and remedies provided in this Agreement are cumulative and not exclusive of any rights or remedies provided by law or equity.
+
+**14.8 Independent Contractor**
+
+Provider is an independent contractor and not an employee, agent, partner, or joint venturer of Client. Provider shall have sole control over the manner and means of performing the Services, subject to the specifications and requirements of this Agreement. Provider is responsible for all taxes, insurance, and benefits for Provider's personnel. Nothing in this Agreement shall be construed to create an employment relationship, partnership, joint venture, or agency relationship between the parties. Provider's personnel are not entitled to any employee benefits from Client. Provider shall be solely responsible for compliance with all applicable employment, tax, and labor laws regarding Provider's personnel.
+
+**14.9 Publicity**
+
+Neither party shall issue any press release or make any public announcement regarding this Agreement or the relationship between the parties without the prior written consent of the other party, except as required by law or regulation. Provider may include Client's name and logo in Provider's client list and marketing materials, and may create a case study describing the project at a high level (subject to Client's prior review and approval), provided that such use does not disclose any Confidential Information. Client may disclose the existence of this Agreement and Provider's role as necessary for Client's business purposes, including to investors, auditors, and regulatory authorities.
+
+**14.10 Counterparts**
+
+This Agreement may be executed in one or more counterparts, each of which shall be deemed an original and all of which together shall constitute one and the same instrument. Execution and delivery of this Agreement by electronic means (including PDF or electronic signature services such as DocuSign) shall have the same force and effect as delivery of manually executed originals. The parties agree that electronic signatures shall be legally binding and enforceable to the same extent as handwritten signatures.
 
 ---
 
 ## SCHEDULES
 
-**Schedule A: Detailed Scope of Work**
+**Schedule A: Statement of Work (SOW)**
 
-_See Scope of Work section above_
+_The complete Statement of Work document provided separately, including: (1) Introduction and Background; (2) Project Objectives; (3) Detailed Scope of Work with In-Scope and Out-of-Scope items; (4) Complete list of 16 Deliverables with detailed descriptions and Acceptance Criteria; (5) Assumptions and Constraints; (6) Roles and Responsibilities for both parties; (7) Communication Plan including meeting schedule and reporting requirements; (8) Change Management procedures; and (9) Risk Management approach. The SOW is incorporated by reference and forms an integral part of this Agreement._
 
 **Schedule B: Technical Specifications**
 
-_See Architecture & Technical Summary_
+_Technical architecture and specifications including: (1) System Architecture Diagram showing all major components and their interactions; (2) Technology Stack specification (React 18 + TypeScript, Django 4.2 + Python 3.11, PostgreSQL 15, Redis 7, AWS services); (3) Database Schema with entity relationships and data model; (4) API Specifications with endpoint definitions and data formats; (5) Security Architecture including authentication, authorization, encryption, and audit logging; (6) Infrastructure Architecture showing AWS services configuration (ECS Fargate, RDS, ElastiCache, S3, CloudFront, etc.); (7) Performance Requirements (page load <3 seconds, API response <500ms, support for 45 concurrent users); (8) Security Requirements (encryption at rest and in transit, RBAC, audit logging, compliance with Australian data protection laws); and (9) Scalability considerations for growth to 90+ users. Technical specifications are incorporated by reference._
 
-**Schedule C: Payment Schedule**
+**Schedule C: Payment Schedule and Timeline**
 
-_See Payment Terms section above_
+_Detailed payment schedule and project timeline including: (1) Payment Schedule showing 6 milestone-based payments totaling $50,000 AUD: 30% ($15,000) at kickoff, 15% ($7,500) at design approval, 20% ($10,000) at core features alpha, 15% ($7,500) at feature complete, 10% ($5,000) at UAT completion, and 10% ($5,000) at final delivery; (2) Project Timeline showing 14-week duration broken into 6 phases with specific deliverables and milestones for each phase; (3) Milestone Definitions with completion criteria for each of 8 project milestones; (4) Timeline Assumptions and Risk Factors that may impact schedule; (5) Dependencies and Critical Path items; and (6) Resource Allocation showing team composition for each phase. Payment schedule and timeline are incorporated by reference and form the basis for project execution and payment obligations._
+
+**Schedule D: Infrastructure Costs and Third-Party Services**
+
+_Detailed breakdown of infrastructure and third-party costs (not included in $50,000 development fee): (1) AWS Infrastructure Costs estimated at $450 AUD per month including: ECS Fargate ($100), RDS PostgreSQL Multi-AZ ($120), ElastiCache Redis ($40), S3 storage ($25), Application Load Balancer ($25), CloudFront CDN ($15), SES email ($10), CloudWatch monitoring ($30), Secrets Manager ($5), and Backup services ($20), plus data transfer and miscellaneous ($60); (2) Scaling Projections showing estimated costs of $650-750 AUD per month at 90 users; (3) Cost Optimization Recommendations including Reserved Instances for 30-40% savings after 6-12 months; (4) Third-Party Services including domain registration (~$2 AUD/month) and any additional services Client may choose; (5) Billing Arrangements confirming AWS costs billed directly to Client's AWS account; and (6) Annual Cost Estimates for budgeting purposes. Client acknowledges responsibility for all infrastructure and third-party service costs separate from development fees._
 
 ---
 
