@@ -1,4 +1,4 @@
-# Statement of Work
+# Statement of Work - Solis Platform Development
 
 **Project:** Hamza Boss - Solis
 **Version:** 1.0
@@ -10,16 +10,19 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Statement of Work (SOW) defines the scope, deliverables, milestones, responsibilities, and processes for the development of the Solis project for Hamza Boss.
+This Statement of Work (SOW) defines the scope, deliverables, timeline, and responsibilities for the development and deployment of Solis, a custom web-based platform for Hamza Boss. This document serves as the formal agreement between Hamza Boss and the Service Provider regarding the project scope and expectations.
 
 ### 1.2 Background
-The project aims to develop a secure, scalable aerospace industry platform within a budget of $50,000, addressing core operational needs.
+Hamza Boss is a 45-person aerospace and defense organization seeking to improve operational efficiency through a centralized platform for project management, document control, resource allocation, and compliance tracking. The organization currently faces challenges with fragmented information across multiple tools, manual processes, and limited visibility into project and resource status. Solis will address these challenges through a purpose-built, cloud-based solution designed specifically for aerospace and defense workflows.
 
 ### 1.3 Objectives
 
-- Deliver a secure, functional web-based system supporting aerospace workflows
-- Ensure compliance with security standards
-- Complete within the agreed budget
+- Deliver a secure, compliant web-based platform that centralizes project management, document management, and resource allocation
+- Improve operational efficiency by reducing manual processes and providing real-time visibility into projects and resources
+- Ensure compliance with aerospace and defense industry standards through comprehensive audit logging and security controls
+- Provide scalable foundation that supports current operations (45 users) and future growth (up to 90 users)
+- Complete MVP delivery within budget constraint of $50,000 AUD
+- Enable user adoption through intuitive design and comprehensive documentation
 
 ## 2. Scope of Work
 
@@ -27,78 +30,313 @@ The project aims to develop a secure, scalable aerospace industry platform withi
 
 | Item | Description |
 |------|-------------|
-| User authentication and role management | Implement secure login and role-based permissions |
-| Data security and backup | Encrypt data and perform daily backups |
-| Workflow management | Enable task creation, assignment, and tracking |
+| Requirements Analysis and Documentation | Comprehensive requirements gathering, analysis, and documentation including functional requirements, non-functional requirements, user stories, and acceptance criteria |
+| System Architecture and Design | Technical architecture design, database schema design, API design, security architecture, and UI/UX design for all MVP features |
+| User Authentication and Authorization System | Secure login, password management, role-based access control (RBAC) with 5+ predefined roles, session management, and authentication audit logging |
+| Project Management Dashboard | Project creation and configuration, task management, project status tracking, real-time dashboard with visual indicators, and project filtering/search capabilities |
+| Document Management System | Secure document upload and storage, automatic version control, document search and filtering, access controls, and support for common file types (PDF, DOCX, XLSX, images) |
+| Resource Allocation and Capacity Planning | Resource allocation tracking, capacity planning tools, over-allocation identification, and weekly/monthly allocation views |
+| Reporting and Analytics | 10+ standard report templates, executive dashboard with KPIs, report export (PDF/Excel), scheduled report generation, and visual charts/graphs |
+| Audit Logging and Compliance Tracking | Comprehensive activity logging, tamper-proof encrypted logs, searchable audit interface, compliance report generation, and 7-year log retention |
+| Notification System | Email notifications for key events, in-app notification center, configurable user preferences, and 90-day notification history |
+| User Profile Management | Self-service profile updates, password change functionality, profile photo upload, and notification preference configuration |
+| Data Export and Backup | Data export in CSV and Excel formats, automated daily backups, encrypted backup storage, and 30/90-day backup retention |
+| Cloud Infrastructure Setup | Cloud hosting configuration (AWS or Azure), database setup, security configuration, SSL/TLS setup, and monitoring configuration |
+| Testing and Quality Assurance | Unit testing (80%+ code coverage), integration testing, security testing, performance testing, and user acceptance testing support |
+| Documentation | Technical documentation, API documentation, user guides, administrator guides, and deployment documentation |
+| Training Materials | Video tutorials for key features, quick start guides, and FAQ documentation |
+| Deployment and Go-Live Support | Production deployment, data migration support (if applicable), go-live monitoring, and immediate post-launch support (2 weeks) |
 
 ### 2.2 Out of Scope
 
 | Item | Reason |
 |------|--------|
-| Hardware procurement | Client provides existing infrastructure |
-| Long-term maintenance and support | Post-deployment support is outside current scope |
+| Specialized Aerospace/Defense Certifications | ITAR, EAR, or other specialized certifications are not included in MVP scope due to budget constraints. Can be addressed in future phases if required. |
+| ClickUp Integration | Third-party integrations are planned for Phase 2 to focus MVP budget on core functionality |
+| Native Mobile Applications | MVP includes responsive web design for mobile browsers; native iOS/Android apps are future phase features |
+| 24/7 Support and Monitoring | MVP includes business hours support only (9 AM - 5 PM AEST, Monday-Friday). 24/7 support can be added post-launch if required. |
+| On-Premise Deployment | Solution is cloud-based only for cost-effectiveness. On-premise deployment would require significant additional investment. |
+| Custom Hardware Integration | No specialized hardware or equipment integration is included in scope |
+| Advanced AI/ML Features | Predictive analytics and machine learning features are planned for future phases |
+| Multi-Language Support | MVP supports English only. Additional languages can be added in future phases. |
+| End-User Training Delivery | Provider will deliver training materials and documentation; client is responsible for conducting end-user training sessions |
+| Ongoing Maintenance and Support Beyond 2 Weeks Post-Launch | Post-launch support beyond initial 2-week period requires separate maintenance agreement |
 
 ### 2.3 Assumptions
 
-- Client will provide necessary access and data
-- Requirements will be clarified during planning
+- Hamza Farooq has decision-making authority for requirements approval and project acceptance
+- Client will provide timely feedback (within 3 business days) on deliverables requiring approval
+- Client has adequate internet infrastructure to support cloud-based application
+- Client will provide test data and participate in user acceptance testing
+- No specialized aerospace/defense certifications are required for MVP
+- Client will handle end-user training using provided materials
+- Client has internal IT resources for basic user support post-deployment
+- Standard business hours support is sufficient for MVP
+- Client will provide access to existing systems if integration is required in future phases
 
 ## 3. Deliverables
 
 | ID | Deliverable | Description | Phase |
 |----|-------------|-------------|-------|
-| D-001 | System Design Document | Detailed architecture and technical specifications | mvp |
-| D-002 | Developed System | Fully functional web application with core features | mvp |
-| D-003 | Deployment & User Training | System deployment and user onboarding | - |
+| D-001 | Requirements Specification Package | Comprehensive requirements documentation including Software Requirements Specification (SRS), Product Requirements Document (PRD), and this Statement of Work (SOW) | mvp |
+| D-002 | System Architecture and Design Documentation | Technical architecture documentation including system architecture diagram, database schema, API specifications, security architecture, and UI/UX designs | mvp |
+| D-003 | Authentication and Authorization Module | Fully functional user authentication system with login, password management, role-based access control, and session management | mvp |
+| D-004 | Project Management Module | Complete project management functionality including project creation, task management, dashboard, and status tracking | mvp |
+| D-005 | Document Management Module | Secure document repository with upload, version control, search, and access control capabilities | mvp |
+| D-006 | Resource Management Module | Resource allocation tracking and capacity planning tools | mvp |
+| D-007 | Reporting and Analytics Module | Automated reporting system with standard reports, executive dashboard, and export capabilities | mvp |
+| D-008 | Audit Logging and Compliance Module | Comprehensive audit logging system with compliance reporting capabilities | mvp |
+| D-009 | Notification System | Email and in-app notification system with user preference management | mvp |
+| D-010 | User Profile Management | Self-service user profile management functionality | mvp |
+| D-011 | Data Export and Backup System | Data export capabilities and automated backup system | mvp |
+| D-012 | Cloud Infrastructure | Fully configured and secured cloud hosting environment | mvp |
+| D-013 | Testing and Quality Assurance Report | Comprehensive testing documentation and results | mvp |
+| D-014 | Documentation Package | Complete documentation including technical, user, and administrator guides | mvp |
+| D-015 | Training Materials | Video tutorials, quick start guides, and FAQ documentation | mvp |
+| D-016 | Production Deployment and Go-Live | Deployment to production environment and go-live support | mvp |
 
 ### 3.1 Acceptance Criteria
 
-**D-001: System Design Document**
-- Reviewed and approved by client
+**D-001: Requirements Specification Package**
+- All functional requirements documented with acceptance criteria
+- All non-functional requirements specified with measurable metrics
+- User stories documented for all MVP features
+- Risks, assumptions, and constraints clearly identified
+- Client approval of requirements documentation
 
-**D-002: Developed System**
-- Successful testing and client acceptance
+**D-002: System Architecture and Design Documentation**
+- System architecture diagram showing all major components
+- Database schema with entity relationships
+- API endpoint specifications
+- Security architecture and data flow diagrams
+- UI/UX wireframes and mockups for all major screens
+- Client approval of architecture and design
 
-**D-003: Deployment & User Training**
-- Deployment completed
-- Training sessions conducted
+**D-003: Authentication and Authorization Module**
+- Users can log in with email and password
+- Password reset functionality working
+- 5+ user roles implemented with distinct permissions
+- Session management with timeout
+- Account lockout after failed attempts
+- All authentication events logged
+- Passes security testing
+
+**D-004: Project Management Module**
+- Project creation and configuration working
+- Task creation and assignment functional
+- Dashboard displays projects with status indicators
+- Real-time updates functioning
+- Search and filter capabilities working
+- Notifications sent for relevant events
+- Passes user acceptance testing
+
+**D-005: Document Management Module**
+- Document upload functioning for supported file types
+- Version control automatically tracking changes
+- Search and filter working across documents
+- Access controls enforced based on user roles
+- Version history accessible
+- Documents encrypted at rest
+- Passes security and functional testing
+
+**D-006: Resource Management Module**
+- Resource allocation displayed across projects
+- Over-allocation identification working
+- Capacity planning views functional
+- Weekly and monthly views available
+- Resource utilization metrics calculated correctly
+- Passes user acceptance testing
+
+**D-007: Reporting and Analytics Module**
+- 10+ standard reports available and generating correctly
+- Executive dashboard displaying KPIs
+- Export to PDF and Excel working
+- Scheduled reports functioning
+- Visual charts and graphs rendering properly
+- Drill-down capabilities working
+- Passes functional testing
+
+**D-008: Audit Logging and Compliance Module**
+- All user actions being logged
+- Logs encrypted and tamper-proof
+- Audit log search interface working
+- Compliance reports generating correctly
+- Log retention policy implemented
+- Export capability for auditors functional
+- Passes security and compliance testing
+
+**D-009: Notification System**
+- Email notifications sending for key events
+- In-app notification center functional
+- User preferences configurable
+- Notification history retained for 90 days
+- Unread count displaying correctly
+- Passes functional testing
+
+**D-010: User Profile Management**
+- Users can update profile information
+- Password change working with verification
+- Email change requiring verification
+- Profile photo upload functional
+- Notification preferences configurable
+- Changes reflecting immediately
+- Passes functional testing
+
+**D-011: Data Export and Backup System**
+- Export to CSV and Excel working
+- Automated daily backups running
+- Backups encrypted and stored redundantly
+- Backup retention policy implemented
+- Export respecting user permissions
+- Backup verification successful
+- Passes testing
+
+**D-012: Cloud Infrastructure**
+- Cloud infrastructure provisioned (AWS or Azure)
+- Database configured and secured
+- SSL/TLS certificates installed
+- Monitoring and alerting configured
+- Backup systems operational
+- Security hardening completed
+- Passes security audit
+
+**D-013: Testing and Quality Assurance Report**
+- Unit test coverage report (80%+ coverage)
+- Integration test results
+- Security test results
+- Performance test results
+- User acceptance test results
+- Bug tracking and resolution log
+- All critical and high-priority bugs resolved
+
+**D-014: Documentation Package**
+- Technical documentation complete
+- API documentation (Swagger/OpenAPI)
+- User guide covering all features
+- Administrator guide for system management
+- Deployment and configuration documentation
+- Troubleshooting guide
+- Client approval of documentation
+
+**D-015: Training Materials**
+- Video tutorials for key features (minimum 10 videos)
+- Quick start guide for new users
+- Administrator quick start guide
+- FAQ document with common questions
+- Training materials accessible within system
+- Client approval of training materials
+
+**D-016: Production Deployment and Go-Live**
+- Application deployed to production environment
+- Data migration completed (if applicable)
+- User accounts created and configured
+- Go-live checklist completed
+- System monitoring active
+- 2 weeks of post-launch support provided
+- Client sign-off on successful deployment
 
 ## 4. Milestones
 
-### M-001: Design Approval
+### M-001: Project Kickoff and Requirements Approval
 
-**Description:** Client reviews and approves system design document
+**Description:** Project officially initiated, requirements gathered, documented, and approved by client
 
 **Associated Deliverables:**
 - D-001
 
-### M-002: Development Completion
+### M-002: Design Approval
 
-**Description:** Core system features developed and internally tested
+**Description:** System architecture, database design, and UI/UX designs completed and approved by client
 
 **Associated Deliverables:**
 - D-002
 
-### M-003: Deployment and Acceptance
+### M-003: Core Infrastructure Complete
 
-**Description:** System deployed in production and accepted by client
+**Description:** Cloud infrastructure provisioned, authentication system implemented, and foundation established
 
 **Associated Deliverables:**
 - D-003
+- D-012
+
+### M-004: Core Features Complete
+
+**Description:** Project management, document management, and resource management modules fully implemented and tested
+
+**Associated Deliverables:**
+- D-004
+- D-005
+- D-006
+
+### M-005: Supporting Features Complete
+
+**Description:** Reporting, audit logging, notifications, and user profile management implemented and tested
+
+**Associated Deliverables:**
+- D-007
+- D-008
+- D-009
+- D-010
+- D-011
+
+### M-006: Testing and Documentation Complete
+
+**Description:** All testing completed, documentation finalized, and training materials delivered
+
+**Associated Deliverables:**
+- D-013
+- D-014
+- D-015
+
+### M-007: Production Go-Live
+
+**Description:** System deployed to production, users onboarded, and go-live support completed
+
+**Associated Deliverables:**
+- D-016
+
+### M-008: Project Closure
+
+**Description:** Post-launch support period completed, final documentation delivered, and project formally closed with client sign-off
+
+**Associated Deliverables:**
+- All deliverables
 
 ## 5. Roles and Responsibilities
 
 ### 5.1 Provider Responsibilities
 
-- Design system architecture
-- Develop core functionalities
-- Conduct testing and deployment
+- Conduct requirements gathering sessions and document all requirements
+- Design system architecture, database schema, and user interfaces
+- Develop all software components according to specifications
+- Perform comprehensive testing including unit, integration, security, and performance testing
+- Set up and configure cloud infrastructure
+- Create all technical and user documentation
+- Develop training materials including video tutorials
+- Deploy application to production environment
+- Provide 2 weeks of post-launch support
+- Conduct knowledge transfer sessions with client IT team
+- Address bugs and issues identified during development and testing
+- Maintain project schedule and communicate status regularly
+- Ensure code quality and security best practices
+- Provide regular progress updates and demos
 
 ### 5.2 Client Responsibilities
 
-- Provide access and data
-- Review deliverables
-- Approve milestones
+- Designate Hamza Farooq or authorized representative as primary point of contact
+- Participate in requirements gathering sessions
+- Provide timely feedback on deliverables (within 3 business days)
+- Review and approve requirements, designs, and deliverables
+- Participate in user acceptance testing
+- Provide test data and use cases
+- Provide access to existing systems if integration is required
+- Review and approve documentation and training materials
+- Coordinate end-user training using provided materials
+- Provide feedback on system functionality and usability
+- Designate users for UAT and training
+- Ensure availability of key stakeholders for demos and reviews
+- Provide final sign-off on project completion
+- Arrange for ongoing support and maintenance post-launch (separate agreement)
 
 ## 6. Communication Plan
 
@@ -106,22 +344,26 @@ The project aims to develop a secure, scalable aerospace industry platform withi
 
 | Type | Frequency | Participants |
 |------|-----------|--------------|
-| Status Update | Bi-weekly | Hamza Farooq, Hamza Boss |
-| Design Review | At milestone completion | Client, Development team |
+| Project Kickoff Meeting | Once at project start | Project Manager, Technical Lead, Hamza Farooq, Key Stakeholders |
+| Weekly Status Meeting | Weekly throughout project | Project Manager, Hamza Farooq |
+| Sprint Demo/Review | Bi-weekly during development | Development Team, Hamza Farooq, Key Users |
+| Design Review Sessions | As needed during design phase | Technical Lead, UI/UX Designer, Hamza Farooq |
+| UAT Sessions | As scheduled during testing phase | QA Team, Hamza Farooq, End Users |
+| Go-Live Planning Meeting | 2 weeks before deployment | Project Manager, Technical Lead, Hamza Farooq, IT Team |
 
 ### 6.2 Reporting
-Progress reports via email and project management tools
+Provider will deliver weekly status reports via email covering progress, completed tasks, upcoming tasks, risks/issues, and blockers. Monthly executive summaries will be provided for high-level stakeholders. All project documentation will be maintained in shared repository accessible to client.
 
 ### 6.3 Escalation Process
-Issues escalated to project sponsor if unresolved within 3 days
+Issues will be escalated according to the following process: (1) Day-to-day issues handled by Project Manager, (2) Technical issues escalated to Technical Lead, (3) Scope or budget issues escalated to both parties' management within 24 hours, (4) Critical issues affecting timeline or deliverables escalated immediately via phone/email to Hamza Farooq and Provider Project Manager.
 
 ## 7. Change Management
 
 ### 7.1 Change Request Process
-All change requests must be documented and approved by both parties before implementation
+Any changes to scope, requirements, or deliverables must be submitted via formal Change Request form including: description of change, business justification, impact on timeline, impact on budget, and priority. Change requests will be reviewed within 3 business days. Approved changes will be documented with updated timeline and budget estimates. Both parties must sign off on approved changes before implementation. Minor clarifications or bug fixes do not require formal change requests.
 
 ### 7.2 Impact Assessment
-Assess impact on scope, schedule, and budget before approval
+All change requests will be assessed for impact on: (1) Project timeline and milestones, (2) Project budget and resource allocation, (3) Existing functionality and dependencies, (4) Testing and quality assurance requirements, (5) Documentation and training materials. Impact assessment will be provided within 3 business days of change request submission. Changes requiring additional budget or significant timeline extension will require executive approval from both parties.
 
 ---
 
